@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import TitleBar from '../../TitleBar'
 import { DataContext } from '../../../context/AppData'
 import { NavLink } from 'react-router-dom'
+import { Form } from 'react-bootstrap'
 
 const AddWRform = () => {
     const icon = <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -72,27 +73,42 @@ const AddWRform = () => {
                             <div className="row">
                                 <div className="mb-3 col-md-4">
                                     <label className="form-label">Customer</label>
-                                    <select class="me-sm-2 default-select form-control wide" id="inlineFormCustomSelect">
+                                    <Form.Select aria-label="Default select example" className='bg-white' size="md">
                                         <option>Select Custmer...</option>
                                         <option>Hillandale Ave</option>
                                         <option>Crest DeVille</option>
-                                    </select>
+                                    </Form.Select>
+                                    {/* <select class="me-sm-2 default-select form-control wide" id="inlineFormCustomSelect">
+                                        <option>Select Custmer...</option>
+                                        <option>Hillandale Ave</option>
+                                        <option>Crest DeVille</option>
+                                    </select> */}
                                 </div>
                                 <div className="mb-3 col-md-4">
                                     <label className="form-label">Service Location</label>
-                                    <select class="me-sm-2 default-select form-control wide" id="inlineFormCustomSelect">
+                                    <Form.Select aria-label="Default select example" className='bg-white' size="md">
                                         <option>Select Service Location...</option>
                                         <option>Keystone Pacific</option>
                                         <option>Brian Jacobs</option>
-                                    </select>
+                                    </Form.Select>
+                                    {/* <select class="me-sm-2 default-select form-control wide" id="inlineFormCustomSelect">
+                                        <option>Select Service Location...</option>
+                                        <option>Keystone Pacific</option>
+                                        <option>Brian Jacobs</option>
+                                    </select> */}
                                 </div>
                                 <div className="mb-3 col-md-4">
                                     <label>Contact</label>
-                                    <select class="me-sm-2 default-select form-control wide" id="inlineFormCustomSelect">
+                                    <Form.Select aria-label="Default select example" className='bg-white' size="md">
                                         <option>Select Contact...</option>
                                         <option>mark334@gmail.com</option>
                                         <option>Jchavis@keystonepacific.com</option>
-                                    </select>
+                                    </Form.Select>
+                                    {/* <select class="me-sm-2 default-select form-control wide" id="inlineFormCustomSelect">
+                                        <option>Select Contact...</option>
+                                        <option>mark334@gmail.com</option>
+                                        <option>Jchavis@keystonepacific.com</option>
+                                    </select> */}
                                 </div>
                             </div>
                         </form>
@@ -130,12 +146,18 @@ const AddWRform = () => {
                                                 <h5 className="form-label">Assign / Apointment :</h5>
                                                 <div className="row">
                                                     <div className="col-md-12">
-                                                        <select id="inputState" className="default-select form-control wide">
+                                                        <Form.Select aria-label="Default select example" size="md">
                                                             <option selected>Choose...</option>
                                                             <option>Option 1</option>
                                                             <option>Option 2</option>
                                                             <option>Option 3</option>
-                                                        </select>
+                                                        </Form.Select>
+                                                        {/* <select id="inputState" className="default-select form-control wide">
+                                                            <option selected>Choose...</option>
+                                                            <option>Option 1</option>
+                                                            <option>Option 2</option>
+                                                            <option>Option 3</option>
+                                                        </select> */}
                                                     </div>
                                                     <div className="col-md-12 mt-3 text-end">
                                                         <button type="button" class="btn btn-outline-dark btn-md scheduleBTN">Schedule</button>
@@ -414,7 +436,7 @@ const AddWRform = () => {
 
                     <div class="row text-end">
                         <div>
-                            <NavLink><button type='button' class="btn btn-primary me-1">Submit</button></NavLink>
+                            <NavLink to='/Dashboard/Weekly-Reports'><button type='button' class="btn btn-primary me-1">Submit</button></NavLink>
                             <button class="btn btn-danger light ms-1">Cancel</button>
                         </div>
                     </div>

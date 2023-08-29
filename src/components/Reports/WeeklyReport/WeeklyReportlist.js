@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { useContext } from 'react';
 import TitleBar from '../../TitleBar'
 import { DataContext } from '../../../context/AppData'
+import { Form } from 'react-bootstrap';
 
 
 const WeeklyReportlist = () => {
@@ -61,11 +62,11 @@ const WeeklyReportlist = () => {
                                             </div>
                                             <div class="col-md-6" style={{ display: 'flex', justifyContent: 'flex-end' }}>
                                                 <div className="col-md-3">
-                                                    <select class="default-select form-control wide" id="inlineFormCustomSelect">
-                                                        <option selected>All</option>
+                                                    <Form.Select aria-label="Default select example" size="md">
+                                                        <option>All</option>
                                                         <option value="1">Current Month</option>
                                                         <option value="2">Previous Month</option>
-                                                    </select>
+                                                    </Form.Select>
                                                 </div>
                                             </div>
                                         </div>

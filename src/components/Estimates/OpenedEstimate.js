@@ -172,7 +172,7 @@ const OpenedEstimate = ({ oneEstimate, customer }) => {
                         <div className="itemtitleBar">
                             <h4>Items</h4>
                         </div>
-                        <a className="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal" style={{ margin: '12px 20px' }}>+ Add Items</a>
+                        <a href='/' className="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal" style={{ margin: '12px 20px' }}>+ Add Items</a>
                         <div className="table-responsive active-projects style-1">
                             <table id="empoloyees-tblwrapper" className="table">
                                 <thead>
@@ -202,7 +202,7 @@ const OpenedEstimate = ({ oneEstimate, customer }) => {
                         <div className="itemtitleBar">
                             <h4>Files</h4>
                         </div>
-                        <a className="btn btn-primary btn-sm" style={{ margin: '12px 20px' }}>+ Add</a>
+                        <a href='/' className="btn btn-primary btn-sm" style={{ margin: '12px 20px' }}>+ Add</a>
                         <div className="table-responsive active-projects style-1">
                             <table id="empoloyees-tblwrapper" className="table">
                                 <thead>

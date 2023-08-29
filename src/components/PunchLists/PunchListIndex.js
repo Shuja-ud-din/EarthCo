@@ -204,9 +204,9 @@ const PunchListIndex = () => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-                                    <NavLink to='/PunchlistPreview'>
-                                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Save</button>
-                                    </NavLink>
+                                    {/* <NavLink to='/PunchlistPreview'> */}
+                                    <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Save</button>
+                                    {/* </NavLink> */}
                                 </div>
                             </form>
                         </div>

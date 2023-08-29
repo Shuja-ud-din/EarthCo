@@ -5,7 +5,7 @@ const RoutingContext = createContext();
 
 const RoutesContext = ({ children }) => {
     const [estimateRoute, setEstimateRoute] = useState();
-    const [SRroute, setSRroute] = useState();
+    const [SRroute, setSRroute] = useState('');
 
     return (
         <RoutingContext.Provider value={{ estimateRoute, setEstimateRoute, SRroute, setSRroute }}>

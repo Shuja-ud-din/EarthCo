@@ -22,7 +22,7 @@ const Estimates = () => {
             if (id === object.estimateID) {
                 return object;
             }
-            return object
+            return null
         });
         setSingleObj(updatedArr);
     }
@@ -77,8 +77,8 @@ const Estimates = () => {
     })
 
 
-    const renderedRecords = estimates.map((object) => {
-        return <EstimateTR key={object.estimateID} onClick={() => handleCatClick(`Estimate${object.estimateID}`, object.estimateID)} estimate={object} />
+    const renderedRecords = estimates.map((object, index) => {
+        return <EstimateTR key={object.estimateID} index={index} onClick={() => handleCatClick(`Estimate${object.estimateID}`, object.estimateID)} estimate={object} />
     });
 
     return (
@@ -114,10 +114,7 @@ const Estimates = () => {
                                     <thead>
                                         <tr>
                                             <th>
-                                                <div className="form-check custom-checkbox ms-2">
-                                                    <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
-                                                    <label className="form-check-label" htmlFor="customCheckBox2"></label>
-                                                </div>
+                                                #
                                             </th>
                                             <th>Customer Name</th>
                                             <th>Assign to</th>
@@ -188,7 +185,6 @@ const Estimates = () => {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

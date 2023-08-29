@@ -91,9 +91,12 @@ const SideBar = () => {
         )
     })
 
+    const [showSubMenu, setShowSM] = useState(false);
+
     const toggleShowMenu = () => {
-        document.getElementById('collapseMenu').classList.toggle('mm-show');
+        // document.getElementById('collapseMenu').classList.toggle('mm-show');
         document.getElementById('bottomChev').classList.toggle('rotatezero')
+        setShowSM(!showSubMenu)
     }
 
     return (
@@ -116,11 +119,15 @@ const SideBar = () => {
                                 expand_more
                             </span>
                         </a>
-                        <ul className="mm-collapse left" id='collapseMenu' >
-                            <li><NavLink to="/Dashboard/SummaryReport">Service Request</NavLink></li>
-                            <li><NavLink to="/Dashboard/ProposalSummary">Proposal Summary</NavLink></li>
-                            <li><NavLink to="/Dashboard/Weekly-Reports">Weekly </NavLink></li>
-                            <li><NavLink to="/Dashboard/Landscape">Landsacpe</NavLink></li>
+                        <ul className="left" >
+                            {showSubMenu &&
+                                <>
+                                    <li><NavLink to="/Dashboard/SummaryReport">Service Request</NavLink></li>
+                                    <li><NavLink to="/Dashboard/ProposalSummary">Proposal Summary</NavLink></li>
+                                    <li><NavLink to="/Dashboard/Weekly-Reports">Weekly </NavLink></li>
+                                    <li><NavLink to="/Dashboard/Landscape">Landsacpe</NavLink></li>
+                                </>
+                            }
                         </ul>
                     </li>
                     {/* <li>

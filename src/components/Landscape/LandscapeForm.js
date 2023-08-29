@@ -360,7 +360,7 @@ const LandscapeForm = () => {
                 </div>
                 <div class="row text-end">
                     <div>
-                        <NavLink to='/Landscape'><button type='button' class="btn btn-primary me-1">Submit</button></NavLink>
+                        <NavLink to='/Dashboard/Landscape'><button type='button' class="btn btn-primary me-1">Submit</button></NavLink>
                         <button class="btn btn-danger light ms-1">Cancel</button>
                     </div>
                 </div>

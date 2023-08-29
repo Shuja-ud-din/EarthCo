@@ -27,8 +27,16 @@ import LandscapeIndex from './components/Landscape/LandscapeIndex';
 import Landscapelist from './components/Landscape/Landscapelist';
 import LandscapeForm from './components/Landscape/LandscapeForm';
 import Landscape from './components/Landscape/Landscape';
+import { useContext } from 'react';
+import { RoutingContext } from './context/RoutesContext';
+import ServiceRequest from './components/ServiceRequest/ServiceRequest';
+import SRlist from './components/ServiceRequest/SRlist';
+import EstimateList from './components/Estimates/EstimateList';
+import EstimateIDopen from './components/Estimates/EstimateIDopen';
 
 function App() {
+
+  const { SRroute, estimateRoute } = useContext(RoutingContext);
 
   return (
     <>
@@ -45,8 +53,14 @@ function App() {
               <Route path='' element={<CustomersTable />} />
               <Route path='Add-Customer' element={<AddCutomer />} />
             </Route>
-            <Route path='Estimates' element={<EstimateIndex />} />
-            <Route path='Service-Requests' element={<ServiceIndex />} />
+            <Route path='Estimates' element={<EstimateIndex />} >
+              <Route path='' element={<EstimateList />} />
+              <Route path={estimateRoute} element={<EstimateIDopen />} />
+            </Route>
+            <Route path='Service-Requests' element={<ServiceIndex />}>
+              <Route path='' element={<SRlist />} />
+              <Route path={SRroute} element={<ServiceRequest />} />
+            </Route>
             <Route path='Irrigation' element={<IrrigationIndex />} >
               <Route path='' element={<Irrigationlist />} />
               <Route path='Add-Irrigation' element={<IrrigationForm />} />
