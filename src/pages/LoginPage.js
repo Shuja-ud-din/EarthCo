@@ -4,9 +4,22 @@ import { Link } from 'react-router-dom';
 
 
 const LoginPage = () => {
-    // const navigate = useNavigate();
+
     const [email, setEmail] = useState("hello@example.com");
     const [password, setPassword] = useState('Password');
+
+    const [fName, setFName] = useState('');
+    const [userName, setUserName] = useState('');
+    const [emailSIn, setEmailSI] = useState('');
+    const [passSignIn, setPassSignIn] = useState('');
+    const [reTypePass, setReTypePass] = useState('')
+
+    const [signInData, setSignInData] = useState({});
+
+    const handleChangePass2 = (event) => {
+        setReTypePass(event.target.value)
+    }
+
     const handleChangeEmail = (e) => {
         setEmail(e.target.value);
     }
@@ -14,10 +27,23 @@ const LoginPage = () => {
         setPassword(e.target.value);
     }
 
-    const handleSubmitSignUp = (e) => {
+    const handleSubmitLogin = (e) => {
         e.preventDefault();
-        // navigate('/Dashboard');
     }
+
+    const handleSubmitSignIn = (e) => {
+        e.preventDefault();
+        if (passSignIn === reTypePass) {
+            setSignInData({
+                fullName: fName,
+                userName: userName,
+                email: emailSIn,
+                password: passSignIn
+            })
+        }
+    }
+    console.log(signInData);
+
     return (
         <>
             <div className="page-wraper">
@@ -41,7 +67,7 @@ const LoginPage = () => {
 
                                         <div className="tab-content w-100" id="nav-tabContent">
                                             <div className="tab-pane fade show active" id="nav-personal" role="tabpanel" aria-labelledby="nav-personal-tab">
-                                                <form onSubmit={handleSubmitSignUp} action="" className=" dz-form pb-3">
+                                                <form onSubmit={handleSubmitLogin} action="" className=" dz-form pb-3">
                                                     <h3 className="form-title m-t0">Personal Information</h3>
                                                     <div className="dz-separator-outer m-b5">
                                                         <div className="dz-separator bg-primary style-liner"></div>
@@ -100,36 +126,35 @@ const LoginPage = () => {
                                                 </form>
                                             </div>
                                             <div className="tab-pane fade" id="nav-sign" role="tabpanel" aria-labelledby="nav-sign-tab">
-                                                <form className="dz-form py-2">
+                                                <form className="dz-form py-2" onSubmit={handleSubmitSignIn}>
                                                     <h3 className="form-title">Sign Up</h3>
                                                     <div className="dz-separator-outer m-b5">
                                                         <div className="dz-separator bg-primary style-liner"></div>
                                                     </div>
                                                     <p>Enter your personal details below: </p>
                                                     <div className="form-group mt-3">
-                                                        <input name="dzName" required="" className="form-control" placeholder="Full Name" type="text" />
+                                                        <input name="fullName" required="" value={fName} onChange={(e) => setFName(e.target.value)} className="form-control" placeholder="Full Name" type="text" />
                                                     </div>
                                                     <div className="form-group mt-3">
-                                                        <input name="dzName" required="" className="form-control" placeholder="User Name" type="text" />
+                                                        <input name="userName" required="" value={userName} onChange={(e) => setUserName(e.target.value)} className="form-control" placeholder="User Name" type="text" />
                                                     </div>
                                                     <div className="form-group mt-3">
-                                                        <input name="dzName" required="" className="form-control" placeholder="Email Address" type="text" />
+                                                        <input name="email" required="" value={emailSIn} onChange={(e) => setEmailSI(e.target.value)} className="form-control" placeholder="Email Address" type="text" />
                                                     </div>
-
                                                     <div className="form-group mt-3">
-                                                        <input name="dzName" required="" className="form-control" placeholder="Password" type="password" />
+                                                        <input name="password" required="" value={passSignIn} onChange={(e) => setPassSignIn(e.target.value)} className="form-control" placeholder="Password" type="password" />
                                                     </div>
                                                     <div className="form-group mt-3 mb-3">
-                                                        <input name="dzName" required="" className="form-control" placeholder="Re-type Your Password" type="password" />
+                                                        <input name="dzName" required="" value={reTypePass} onChange={handleChangePass2} className="form-control" placeholder="Re-type Your Password" type="password" />
                                                     </div>
                                                     <div className="mb-3">
                                                         <span className="form-check float-start me-2 ">
                                                             <input type="checkbox" className="form-check-input" id="check2" name="example1" />
-                                                            <label className="form-check-label d-unset" htmlFor="check2">I agree to the</label>
+                                                            <label className="form-check-label d-unset" htmlFor="check2">I agree to the Terms of Service Privacy Policy</label>
                                                         </span>
-                                                        <label >Terms of Service Privacy Policy</label>
                                                     </div>
-                                                    <div className="form-group clearfix text-left">
+                                                    <br />
+                                                    <div className="form-group signBtns mt-3">
                                                         <button className="btn btn-primary outline gray" data-bs-toggle="tab" data-bs-target="#nav-personal" type="button" role="tab" aria-controls="nav-personal" aria-selected="true">Back</button>
                                                         <button className="btn btn-primary float-end">Submit</button>
                                                     </div>

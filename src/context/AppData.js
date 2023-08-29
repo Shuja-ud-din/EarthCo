@@ -229,9 +229,11 @@ const DataFun = ({ children }) => {
         }
     ])
 
+    const [loggedUser, setLoggedUser] = useState([])
+
 
     return (
-        <DataContext.Provider value={{ contacts, setContacts, estimates, setEstimates, customers, setCustomers, singleObj, setSingleObj, serviceRequests, setServiceRequest, singleSR, setSingleSR, estimateItems, setEstimateItems, wReportData, setWReportData }}>
+        <DataContext.Provider value={{ loggedUser, setLoggedUser, contacts, setContacts, estimates, setEstimates, customers, setCustomers, singleObj, setSingleObj, serviceRequests, setServiceRequest, singleSR, setSingleSR, estimateItems, setEstimateItems, wReportData, setWReportData }}>
             {children}
         </DataContext.Provider>
     )
