@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import axios from "axios";
+import { createContext, useEffect, useState } from "react";
 
 const DataContext = createContext();
 
@@ -6,6 +7,17 @@ const DataFun = ({ children }) => {
 
     const [singleObj, setSingleObj] = useState();
     const [singleSR, setSingleSR] = useState();
+
+    const [users, setUsers] = useState();
+
+    const fetchUsers = async () => {
+        const response = await axios.get('http://localhost:8001/Users');
+        setUsers(response.data)
+    }
+
+    useEffect(() => {
+        fetchUsers();
+    }, [])
 
     const [estimates, setEstimates] = useState([
         {
@@ -233,7 +245,7 @@ const DataFun = ({ children }) => {
 
 
     return (
-        <DataContext.Provider value={{ loggedUser, setLoggedUser, contacts, setContacts, estimates, setEstimates, customers, setCustomers, singleObj, setSingleObj, serviceRequests, setServiceRequest, singleSR, setSingleSR, estimateItems, setEstimateItems, wReportData, setWReportData }}>
+        <DataContext.Provider value={{ users, setUsers, loggedUser, setLoggedUser, contacts, setContacts, estimates, setEstimates, customers, setCustomers, singleObj, setSingleObj, serviceRequests, setServiceRequest, singleSR, setSingleSR, estimateItems, setEstimateItems, wReportData, setWReportData }}>
             {children}
         </DataContext.Provider>
     )

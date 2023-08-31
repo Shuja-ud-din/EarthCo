@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from '../../assets/images/logo/earthco_logo.png'
 import avatar1 from '../../assets/images/avatar/1.jpg'
 import profilePic from '../../assets/images/profile/profile.png'
+import { DataContext } from '../../context/AppData'
 
 
 const HeaderExp = () => {
+
+    const { loggedUser } = useContext(DataContext);
+
+    console.log(loggedUser);
 
     // const location = useLocation();
     // useEffect(() => {
@@ -310,8 +315,8 @@ const HeaderExp = () => {
                                                         <img src={profilePic} alt="" />
                                                     </div>
                                                     <div className="header-info">
-                                                        <h6>Admin</h6>
-                                                        <p>info@gmail.com</p>
+                                                        <h6>{loggedUser.userName}</h6>
+                                                        <p>{loggedUser.email}</p>
                                                     </div>
 
                                                 </div>
@@ -322,7 +327,7 @@ const HeaderExp = () => {
                                                         <div className="products">
                                                             <img src={profilePic} className="avatar avatar-md" alt="" />
                                                             <div>
-                                                                <h6>Admin</h6>
+                                                                <h6>{loggedUser.userName}</h6>
                                                                 <span>Web Designer</span>
                                                             </div>
                                                         </div>

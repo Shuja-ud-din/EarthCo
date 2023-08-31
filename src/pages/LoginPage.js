@@ -1,20 +1,27 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import logo1 from '../assets/images/background/earthco_logo.png'
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { DataContext } from '../context/AppData';
+import { useNavigate } from 'react-router-dom';
 
 
 const LoginPage = () => {
 
-    const [email, setEmail] = useState("hello@example.com");
-    const [password, setPassword] = useState('Password');
+    const { users, setUsers, loggedUser, setLoggedUser } = useContext(DataContext);
+
+    const navigate = useNavigate()
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const [fName, setFName] = useState('');
     const [userName, setUserName] = useState('');
     const [emailSIn, setEmailSI] = useState('');
     const [passSignIn, setPassSignIn] = useState('');
-    const [reTypePass, setReTypePass] = useState('')
+    const [reTypePass, setReTypePass] = useState('');
+    const [signError, setSignError] = useState('');
 
-    const [signInData, setSignInData] = useState({});
+    const [signInData, setSignInData] = useState();
 
     const handleChangePass2 = (event) => {
         setReTypePass(event.target.value)
@@ -27,9 +34,6 @@ const LoginPage = () => {
         setPassword(e.target.value);
     }
 
-    const handleSubmitLogin = (e) => {
-        e.preventDefault();
-    }
 
     const handleSubmitSignIn = (e) => {
         e.preventDefault();
@@ -42,7 +46,62 @@ const LoginPage = () => {
             })
         }
     }
-    console.log(signInData);
+
+    const fetchUsers = async () => {
+        const response = await axios.get('http://localhost:8001/Users');
+        setUsers(response.data)
+    }
+
+    const addUser = async () => {
+        const response = await axios.post('http://localhost:8001/AddUser', {
+            ...signInData
+        })
+        if (response.status === 200) {
+            fetchUsers();
+            document.getElementById('backLogin').click();
+        }
+    }
+
+    const userChecker = () => {
+        const checker = users.map((user) => {
+            if (signInData.userName === user.userName || signInData.email === user.email) {
+                return true;
+            }
+            return false;
+        })
+        return checker.filter((bool) => {
+            return bool === true
+        })
+    }
+
+    useEffect(() => {
+        if (signInData !== undefined) {
+            if (userChecker()[0] === true) {
+                setSignError('User Already Exists')
+            }
+            if (userChecker()[0] !== true) {
+                addUser();
+            }
+        }
+    }, [signInData])
+
+    // login authorization
+
+    const handleSubmitLogin = (e) => {
+        e.preventDefault();
+        loginAuth(email);
+    }
+
+    const loginAuth = () => {
+        users.map((user) => {
+            if (user.email === email && user.password === password) {
+                setLoggedUser(user)
+                navigate('/Dashboard')
+                return user
+            }
+            return null
+        })
+    }
 
     return (
         <>
@@ -74,10 +133,10 @@ const LoginPage = () => {
                                                     </div>
                                                     <p>Enter your e-mail address and your password. </p>
                                                     <div className="form-group mb-3">
-                                                        <input type="email" onChange={handleChangeEmail} className="form-control" value={email} required />
+                                                        <input type="email" onChange={handleChangeEmail} placeholder='E-mail...' className="form-control" value={email} required />
                                                     </div>
                                                     <div className="form-group mb-3">
-                                                        <input type="password" onChange={handleChangePassword} className="form-control" value={password} required />
+                                                        <input type="password" onChange={handleChangePassword} placeholder='Password...' className="form-control" value={password} required />
                                                     </div>
                                                     <div className="form-group text-left mb-3 forget-main">
                                                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -89,25 +148,24 @@ const LoginPage = () => {
                                                         </div>
                                                     </div>
                                                     <div className="text-center bottom">
-                                                        <Link to='/Dashboard' >
-                                                            <button className="btn btn-primary button-md btn-block" type='button'>Sign Me In</button>
-                                                        </Link>
+                                                        {/* <Link to='/Dashboard' > */}
+                                                        <button className="btn btn-primary button-md btn-block" type='submit'>Sign Me In</button>
+                                                        {/* </Link> */}
                                                     </div>
                                                     {/* <div className="dz-social ">
-                                                                        <h5 className="form-title fs-20">Sign In With</h5>
-                                                                        <ul className="dz-social-icon dz-border dz-social-icon-lg text-white">
-                                                                            <li><a target="_blank" href="https://www.facebook.com/" className="fab fa-facebook-f btn-facebook"></a></li>
-                                                                            <li><a target="_blank" href="https://www.google.com/" className="fab fa-google-plus-g btn-google-plus"></a></li>
-                                                                            <li><a target="_blank" href="https://www.linkedin.com/" className="fab fa-linkedin-in btn-linkedin"></a></li>
-                                                                            <li><a target="_blank" href="https://twitter.com/" className="fab fa-twitter btn-twitter"></a></li>
-                                                                        </ul>
-                                                                    </div> */}
+                                                        <h5 className="form-title fs-20">Sign In With</h5>
+                                                        <ul className="dz-social-icon dz-border dz-social-icon-lg text-white">
+                                                            <li><a target="_blank" href="https://www.facebook.com/" className="fab fa-facebook-f btn-facebook"></a></li>
+                                                            <li><a target="_blank" href="https://www.google.com/" className="fab fa-google-plus-g btn-google-plus"></a></li>
+                                                            <li><a target="_blank" href="https://www.linkedin.com/" className="fab fa-linkedin-in btn-linkedin"></a></li>
+                                                            <li><a target="_blank" href="https://twitter.com/" className="fab fa-twitter btn-twitter"></a></li>
+                                                        </ul>
+                                                    </div> */}
                                                 </form>
                                                 <button style={{ width: "100%" }} className="text-center nav-link btn tp-btn-light btn-primary forget-tab " id="nav-sign-tab" data-bs-toggle="tab" data-bs-target="#nav-sign" type="button" role="tab" aria-controls="nav-sign" aria-selected="false">Create an account</button>
                                                 {/* <div className="text-center bottom">
-                                                                    <button className="btn btn-primary button-md btn-block" id="nav-sign-tab" data-bs-toggle="tab" data-bs-target="#nav-sign" type="button" role="tab" aria-controls="nav-sign" aria-selected="false">Create an account</button>
-
-                                                                </div> */}
+                                                        <button className="btn btn-primary button-md btn-block" id="nav-sign-tab" data-bs-toggle="tab" data-bs-target="#nav-sign" type="button" role="tab" aria-controls="nav-sign" aria-selected="false">Create an account</button>
+                                                    </div> */}
                                             </div>
                                             <div className="tab-pane fade" id="nav-forget" role="tabpanel" aria-labelledby="nav-forget-tab">
                                                 <form className="dz-form">
@@ -144,9 +202,10 @@ const LoginPage = () => {
                                                     <div className="form-group mt-3">
                                                         <input name="password" required="" value={passSignIn} onChange={(e) => setPassSignIn(e.target.value)} className="form-control" placeholder="Password" type="password" />
                                                     </div>
-                                                    <div className="form-group mt-3 mb-3">
+                                                    <div className="form-group mt-3 mb-2">
                                                         <input name="dzName" required="" value={reTypePass} onChange={handleChangePass2} className="form-control" placeholder="Re-type Your Password" type="password" />
                                                     </div>
+                                                    <h4 className='authError mb-1'>{signError}</h4>
                                                     <div className="mb-3">
                                                         <span className="form-check float-start me-2 ">
                                                             <input type="checkbox" className="form-check-input" id="check2" name="example1" />
@@ -155,7 +214,7 @@ const LoginPage = () => {
                                                     </div>
                                                     <br />
                                                     <div className="form-group signBtns mt-3">
-                                                        <button className="btn btn-primary outline gray" data-bs-toggle="tab" data-bs-target="#nav-personal" type="button" role="tab" aria-controls="nav-personal" aria-selected="true">Back</button>
+                                                        <button className="btn btn-primary outline gray" id='backLogin' data-bs-toggle="tab" data-bs-target="#nav-personal" type="button" role="tab" aria-controls="nav-personal" aria-selected="true">Back</button>
                                                         <button className="btn btn-primary float-end">Submit</button>
                                                     </div>
                                                 </form>
@@ -167,13 +226,13 @@ const LoginPage = () => {
                                 </nav>
                             </div>
                             {/* <div className="card-footer">
-                                                <div className=" bottom-footer clearfix m-t10 m-b20 row text-center">
-                                                    <div className="col-lg-12 text-center">
-                                                        <span> © Copyright by <span className="heart"></span>
-                                                            <a href="">DexignZone </a> All rights reserved.</span>
-                                                    </div>
-                                                </div>
-                                            </div> */}
+                                    <div className=" bottom-footer clearfix m-t10 m-b20 row text-center">
+                                        <div className="col-lg-12 text-center">
+                                            <span> © Copyright by <span className="heart"></span>
+                                                <a href="">DexignZone </a> All rights reserved.</span>
+                                        </div>
+                                    </div>
+                                </div> */}
 
                         </div>
                     </div>

@@ -44,9 +44,7 @@ function App() {
         <Routes>
           <Route path='/' element={<LoginPage />} />
           <Route path='/Dashboard/*' element={
-            <DataFun>
-              <DashboardPage />
-            </DataFun>
+            <DashboardPage />
           }>
             <Route path='' element={<DashBoard />} />
             <Route path='Customers' element={<CustomerIndex />} >

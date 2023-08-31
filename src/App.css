@@ -21,3 +21,8 @@
   justify-content: space-between;
   width: 100%;
 }
+
+.authError {
+  color: red;
+  margin: 0 5px;
+}
