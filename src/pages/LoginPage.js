@@ -13,6 +13,7 @@ const LoginPage = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('')
 
     const [fName, setFName] = useState('');
     const [userName, setUserName] = useState('');
@@ -25,13 +26,16 @@ const LoginPage = () => {
 
     const handleChangePass2 = (event) => {
         setReTypePass(event.target.value)
+        setSignError('')
     }
 
     const handleChangeEmail = (e) => {
         setEmail(e.target.value);
+        setError('')
     }
     const handleChangePassword = (e) => {
         setPassword(e.target.value);
+        setError('')
     }
 
 
@@ -44,6 +48,10 @@ const LoginPage = () => {
                 email: emailSIn,
                 password: passSignIn
             })
+        }
+
+        if (passSignIn !== reTypePass) {
+            setSignError("Passwords dont't match")
         }
     }
 
@@ -60,6 +68,16 @@ const LoginPage = () => {
             fetchUsers();
             document.getElementById('backLogin').click();
         }
+    }
+
+    const clearInputs = () => {
+        setError('');
+        setSignError('')
+        setEmailSI('');
+        setFName('');
+        setUserName('')
+        setPassSignIn('');
+        setReTypePass('');
     }
 
     const userChecker = () => {
@@ -92,6 +110,18 @@ const LoginPage = () => {
         loginAuth(email);
     }
 
+    const emailChecker = () => {
+        const checker = users.map((user) => {
+            if (user.email !== email) {
+                return false;
+            }
+            return true
+        })
+        return checker.filter((bool) => {
+            return bool !== false;
+        })
+    }
+
     const loginAuth = () => {
         users.map((user) => {
             if (user.email === email && user.password === password) {
@@ -101,6 +131,12 @@ const LoginPage = () => {
             }
             return null
         })
+        if (emailChecker()[0] !== true) {
+            setError('User not found')
+        }
+        else {
+            setError('Incorrect Password')
+        }
     }
 
     return (
@@ -138,6 +174,7 @@ const LoginPage = () => {
                                                     <div className="form-group mb-3">
                                                         <input type="password" onChange={handleChangePassword} placeholder='Password...' className="form-control" value={password} required />
                                                     </div>
+                                                    <h5 className='authError mb-2'>{error}</h5>
                                                     <div className="form-group text-left mb-3 forget-main">
                                                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                                             <span className="form-check d-inline-block">
@@ -194,13 +231,13 @@ const LoginPage = () => {
                                                         <input name="fullName" required="" value={fName} onChange={(e) => setFName(e.target.value)} className="form-control" placeholder="Full Name" type="text" />
                                                     </div>
                                                     <div className="form-group mt-3">
-                                                        <input name="userName" required="" value={userName} onChange={(e) => setUserName(e.target.value)} className="form-control" placeholder="User Name" type="text" />
+                                                        <input name="userName" required="" value={userName} onChange={(e) => { setUserName(e.target.value); setSignError('') }} className="form-control" placeholder="User Name" type="text" />
                                                     </div>
                                                     <div className="form-group mt-3">
-                                                        <input name="email" required="" value={emailSIn} onChange={(e) => setEmailSI(e.target.value)} className="form-control" placeholder="Email Address" type="text" />
+                                                        <input name="email" required="" value={emailSIn} onChange={(e) => { setEmailSI(e.target.value); setSignError('') }} className="form-control" placeholder="Email Address" type="text" />
                                                     </div>
                                                     <div className="form-group mt-3">
-                                                        <input name="password" required="" value={passSignIn} onChange={(e) => setPassSignIn(e.target.value)} className="form-control" placeholder="Password" type="password" />
+                                                        <input name="password" required="" value={passSignIn} onChange={(e) => { setPassSignIn(e.target.value); setSignError('') }} className="form-control" placeholder="Password" type="password" />
                                                     </div>
                                                     <div className="form-group mt-3 mb-2">
                                                         <input name="dzName" required="" value={reTypePass} onChange={handleChangePass2} className="form-control" placeholder="Re-type Your Password" type="password" />
@@ -214,7 +251,7 @@ const LoginPage = () => {
                                                     </div>
                                                     <br />
                                                     <div className="form-group signBtns mt-3">
-                                                        <button className="btn btn-primary outline gray" id='backLogin' data-bs-toggle="tab" data-bs-target="#nav-personal" type="button" role="tab" aria-controls="nav-personal" aria-selected="true">Back</button>
+                                                        <button onClick={clearInputs} className="btn btn-primary outline gray" id='backLogin' data-bs-toggle="tab" data-bs-target="#nav-personal" type="button" role="tab" aria-controls="nav-personal" aria-selected="true">Back</button>
                                                         <button className="btn btn-primary float-end">Submit</button>
                                                     </div>
                                                 </form>

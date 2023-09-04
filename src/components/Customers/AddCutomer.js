@@ -7,6 +7,8 @@ const AddCutomer = () => {
     const [contacts, setContacts] = useState([]);
     const [serviceLocation, setServiceLocation] = useState([]);
 
+    const [adress, setAdress] = useState('')
+
     const [contactName, setContactName] = useState();
     const [email, setEmail] = useState();
     const [phone, setPhone] = useState();
@@ -65,7 +67,6 @@ const AddCutomer = () => {
     //     // boolState(true);
     //     console.log('hell');
     // }
-    console.log(showPop1);
 
 
     return (
@@ -80,7 +81,7 @@ const AddCutomer = () => {
                     <div className="row">
                         <div className="col-xl-6 mb-3">
                             <label htmlFor="exampleFormControlInput1" className="form-label">Customer Name <span className="text-danger">*</span></label>
-                            <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="First Name" />
+                            <input type="text" className="form-control" name='customerName' id="exampleFormControlInput1" placeholder="Customer Name" />
                         </div>
                         {/* <div className="col-xl-6 mb-3">
                             <label htmlFor="exampleFormControlInput2" className="form-label">Last Name<span className="text-danger">*</span></label>
@@ -88,16 +89,16 @@ const AddCutomer = () => {
                         </div> */}
                         <div className="col-xl-6 mb-3">
                             <label htmlFor="exampleFormControlInput4" className="form-label">Title<span className="text-danger">*</span></label>
-                            <input type="text" className="form-control" id="exampleFormControlInput4" placeholder="Title" />
+                            <input type="text" className="form-control" name='title' id="exampleFormControlInput4" placeholder="Title" />
                         </div>
                         <div className="col-xl-6 mb-3">
                             <label className="form-label">Company Name<span className="text-danger">*</span></label>
-                            <input type="text" className="form-control" id="exampleFormControlInput3" placeholder="Company Name" />
+                            <input type="text" className="form-control" name='companyName' id="exampleFormControlInput3" placeholder="Company Name" />
                         </div>
                         <div className="col-xl-6" style={{ position: 'relative' }}>
                             <label className="form-label">Adress<span className="text-danger">*</span></label>
-                            <input type="text" onClick={() => { setShowPop1(!showPop1) }} style={{ cursor: 'pointer' }} className="form-control" id="exampleFormControlInput3" placeholder="Adress" readOnly />
-                            {showPop1 || <AdressModal boolState={setShowPop1} />}
+                            <input type="text" value={adress} onClick={() => { setShowPop1(!showPop1) }} style={{ cursor: 'pointer' }} className="form-control" id="exampleFormControlInput3" placeholder="Adress" readOnly />
+                            {showPop1 || <AdressModal boolState={setShowPop1} handleAdress={setAdress} />}
                         </div>
                         <div className="col-xl-6 ">
                             <label className="form-label">Description<span className="text-danger">*</span></label>
@@ -198,7 +199,7 @@ const AddCutomer = () => {
                                     <div className="col-xl-4 mb-3" style={{ position: 'relative' }}>
                                         <label className="form-label">Adress<span className="text-danger">*</span></label>
                                         <input type="text" onClick={() => { setShowPop2(!showPop2) }} style={{ cursor: 'pointer' }} className="form-control" id="exampleFormControlInput3" placeholder="Adress" readOnly />
-                                        {showPop2 || <AdressModal boolState={setShowPop2} />}
+                                        {showPop2 || <AdressModal boolState={setShowPop2} handleAdress={setAdress} />}
 
                                     </div>
                                     <div className="col-xl-4 mb-3">
