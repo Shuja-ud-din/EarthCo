@@ -241,11 +241,13 @@ const DataFun = ({ children }) => {
         }
     ])
 
-    const [loggedUser, setLoggedUser] = useState([])
+    const [loggedUser, setLoggedUser] = useState([]);
+
+    const [customerAdress, setCustomerAdress] = useState({})
 
 
     return (
-        <DataContext.Provider value={{ users, setUsers, loggedUser, setLoggedUser, contacts, setContacts, estimates, setEstimates, customers, setCustomers, singleObj, setSingleObj, serviceRequests, setServiceRequest, singleSR, setSingleSR, estimateItems, setEstimateItems, wReportData, setWReportData }}>
+        <DataContext.Provider value={{ users, setUsers, loggedUser, setLoggedUser, contacts, setContacts, estimates, setEstimates, customers, setCustomers, singleObj, setSingleObj, serviceRequests, setServiceRequest, singleSR, setSingleSR, estimateItems, setEstimateItems, wReportData, setWReportData, customerAdress, setCustomerAdress }}>
             {children}
         </DataContext.Provider>
     )

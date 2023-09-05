@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-const AdressModal = ({ boolState, handleAdress }) => {
+const AdressModal = ({ boolState, handleAdress, adress, setAdress }) => {
 
-    const [adressObj, setAdressObj] = useState({})
+    // const [adress, setadress] = useState(adress)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -12,20 +12,18 @@ const AdressModal = ({ boolState, handleAdress }) => {
 
     const handleChange = (event) => {
         const value = event.target.value
-        setAdressObj(
-            {
-                ...adressObj,
-                [event.target.name]: value
-            }
-        )
+        setAdress({
+            ...adress,
+            [event.target.name]: value
+        })
     }
 
-    const adressLine = adressObj.adressLine || '';
-    const roomNo = (adressObj.room && (' / ' + adressObj.room)) || '';
-    const city = (adressObj.city && (' / ' + adressObj.city)) || '';
-    const adState = (adressObj.state && (' / ' + adressObj.state)) || '';
-    const postCode = (adressObj.postalCode && (' / ' + adressObj.postalCode)) || '';
-    const country = (adressObj.country && (' / ' + adressObj.country)) || '';
+    const adressLine = adress.adressLine || '';
+    const roomNo = (adress.room && (' / ' + adress.room)) || '';
+    const city = (adress.city && (' / ' + adress.city)) || '';
+    const adState = (adress.state && (' / ' + adress.state)) || '';
+    const postCode = (adress.postalCode && (' / ' + adress.postalCode)) || '';
+    const country = (adress.country && (' / ' + adress.country)) || '';
 
     handleAdress(adressLine + roomNo + city + adState + postCode + country)
 
@@ -39,22 +37,22 @@ const AdressModal = ({ boolState, handleAdress }) => {
                     <div className="basic-form">
                         <form onSubmit={handleSubmit}>
                             <div className="col-md-12 mb-2">
-                                <input type="text" onChange={handleChange} name='adressLine' className="form-control input-default " placeholder="Adress Line 1" />
+                                <input type="text" onChange={handleChange} value={adress.adressLine} name='adressLine' className="form-control input-default " placeholder="Adress Line 1" />
                             </div>
                             <div className="col-md-12 mb-2">
-                                <input type="text" onChange={handleChange} name='room' className="form-control input-default " placeholder="Room / Suite / Apt #" />
+                                <input type="text" onChange={handleChange} value={adress.room} name='room' className="form-control input-default " placeholder="Room / Suite / Apt #" />
                             </div>
                             <div className="col-md-12 mb-2">
-                                <input type="text" onChange={handleChange} name='city' className="form-control input-default " placeholder="City" />
+                                <input type="text" onChange={handleChange} value={adress.city} name='city' className="form-control input-default " placeholder="City" />
                             </div>
                             <div className="col-md-12 mb-2">
-                                <input type="text" onChange={handleChange} name='state' className="form-control input-default " placeholder="State" />
+                                <input type="text" onChange={handleChange} value={adress.state} name='state' className="form-control input-default " placeholder="State" />
                             </div>
                             <div className="col-md-12 mb-2">
-                                <input type="text" onChange={handleChange} name='postalCode' className="form-control input-default " placeholder="Postal Code" />
+                                <input type="text" onChange={handleChange} value={adress.postalCode} name='postalCode' className="form-control input-default " placeholder="Postal Code" />
                             </div>
                             <div className="col-md-12 mb-2">
-                                <input type="text" onChange={handleChange} name='country' className="form-control input-default " placeholder="Country" />
+                                <input type="text" onChange={handleChange} value={adress.country} name='country' className="form-control input-default " placeholder="Country" />
                             </div>
                             <div className="col-md-12 mt-3 text-end">
                                 <button type='button' onClick={handleSubmit} className="btn btn-primary">Done</button>

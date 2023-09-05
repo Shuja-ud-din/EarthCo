@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import AdressModal from '../AdressModal';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
+import { DataContext } from '../../context/AppData';
 
 const AddCutomer = () => {
+
+    const { customerAdress, setCustomerAdress } = useContext(DataContext)
 
     const [contacts, setContacts] = useState([]);
     const [serviceLocation, setServiceLocation] = useState([]);
@@ -58,6 +62,13 @@ const AddCutomer = () => {
         setSLfax('')
     }
 
+    const postCustomer = async () => {
+        console.log(adress);
+        const response = await axios.post('http://localhost:8001/AddCustomer', {
+            adress
+        })
+    }
+
     // const handleSubmit = (e) => {
     //     e.preventDefault();
     //     showPop2(true)
@@ -98,7 +109,7 @@ const AddCutomer = () => {
                         <div className="col-xl-6" style={{ position: 'relative' }}>
                             <label className="form-label">Adress<span className="text-danger">*</span></label>
                             <input type="text" value={adress} onClick={() => { setShowPop1(!showPop1) }} style={{ cursor: 'pointer' }} className="form-control" id="exampleFormControlInput3" placeholder="Adress" readOnly />
-                            {showPop1 || <AdressModal boolState={setShowPop1} handleAdress={setAdress} />}
+                            {showPop1 || <AdressModal adress={customerAdress} setAdress={setCustomerAdress} boolState={setShowPop1} handleAdress={setAdress} />}
                         </div>
                         <div className="col-xl-6 ">
                             <label className="form-label">Description<span className="text-danger">*</span></label>
@@ -262,9 +273,9 @@ const AddCutomer = () => {
 
 
             <div className='text-end'>
-                <NavLink to='/Dashboard/Customers'>
-                    <button className="btn btn-primary me-1">Submit</button>
-                </NavLink>
+                {/* <NavLink to='/Dashboard/Customers'> */}
+                <button className="btn btn-primary me-1" onClick={postCustomer}>Submit</button>
+                {/* </NavLink> */}
             </div>
             {/* </form > */}
         </div >

@@ -40,8 +40,8 @@ server.post('/AddUser', async (req, res) => {
     res.json(doc)
 })
 
-server.get('/test', async (req, res) => {
-    res.send('hello')
+server.post('/AddCustomer', async (req, res) => {
+    console.log(req.body);
 })
 
 server.listen(8001)
