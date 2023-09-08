@@ -18,9 +18,20 @@ const userSchema = new mongoose.Schema({
     password: String
 })
 
+const customerSchema = new mongoose.Schema({
+    customerName: String,
+    companyName: String,
+    title: String,
+    description: String,
+    contacts: Array,
+    adress: Object,
+    serviceLocations: Array
+})
+
 dbConnector();
 
 const Users = mongoose.model('Users', userSchema);
+const Customers = mongoose.model('Customers', customerSchema)
 
 server.get('/Users', async (req, res) => {
     const docs = await Users.find({});
@@ -41,7 +52,18 @@ server.post('/AddUser', async (req, res) => {
 })
 
 server.post('/AddCustomer', async (req, res) => {
-    console.log(req.body);
+    const data = req.body;
+    const customer = new Customers();
+    customer.customerName = data.customerName;
+    customer.companyName = data.companyName;
+    customer.title = data.title;
+    customer.description = data.description;
+    customer.contacts = data.contacts;
+    customer.adress = data.customerAdress;
+    customer.serviceLocations = data.serviceLocation;
+
+    const doc = customer.save();
+    res.json(doc);
 })
 
 server.listen(8001)

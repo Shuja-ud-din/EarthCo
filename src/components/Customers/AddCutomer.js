@@ -2,86 +2,101 @@ import React, { useContext, useState } from 'react'
 import AdressModal from '../AdressModal';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
-import { DataContext } from '../../context/AppData';
 
 const AddCutomer = () => {
 
-    const { customerAdress, setCustomerAdress } = useContext(DataContext)
+    const [customerAdress, setCustomerAdress] = useState({})
+    // const [SLadress, setSLadress] = useState({})
 
     const [contacts, setContacts] = useState([]);
-    const [serviceLocation, setServiceLocation] = useState([]);
+    const [contact, setContact] = useState({})
 
-    const [adress, setAdress] = useState('')
+    const [serviceLocations, setServiceLocations] = useState([]);
+    const [customerInfo, setCustomerInfo] = useState([]);
+    const [SRlocation, setSRlocation] = useState([]);
+    const [serviceLocArr, setServiceLocArr] = useState([]);
 
-    const [contactName, setContactName] = useState();
-    const [email, setEmail] = useState();
-    const [phone, setPhone] = useState();
-    const [mobile, setMobile] = useState();
+    const [adress1, setAdress1] = useState('')
+    const [adress2, setAdress2] = useState('')
+
     const [showPop1, setShowPop1] = useState(true);
     const [showPop2, setShowPop2] = useState(true);
 
-    const [SLname, setSLname] = useState();
-    const [SLadress, setSLadress] = useState();
-    const [SLphone, setSLphone] = useState();
-    const [SLfax, setSLfax] = useState();
+    const [SLadress, setSLadress] = useState({});
 
-    const addContact = (e) => {
-        e.preventDefault();
-        const updatedArr = [
-            ...contacts,
-            {
-                name: contactName,
-                eMail: email,
-                Phone: phone,
-                Mob: mobile
-            }
-        ]
-        setContacts(updatedArr);
-
-        setContactName('');
-        setEmail('');
-        setMobile('');
-        setPhone('');
-    }
-
-    const addServiceLocation = (e) => {
-        e.preventDefault();
-        const updatedArr = [
-            ...serviceLocation,
-            {
-                name: SLname,
-                adress: SLadress,
-                Phone: SLphone,
-                fax: SLfax
-            }
-        ]
-        setServiceLocation(updatedArr);
-        setSLname('')
-        setSLadress('')
-        setSLphone('')
-        setSLfax('')
-    }
-
-    const postCustomer = async () => {
-        console.log(adress);
-        const response = await axios.post('http://localhost:8001/AddCustomer', {
-            adress
+    const handleCustomerInfo = (event) => {
+        const value = event.target.value;
+        setCustomerInfo({
+            ...customerInfo,
+            [event.target.name]: value
         })
     }
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     showPop2(true)
-    // }
+    // contacts
 
-    // const closePop = (boolState) => {
-    //     // boolState(true);
-    //     console.log('hell');
-    // }
+    const handleContacts = (event) => {
+        const value = event.target.value;
+        setContact({
+            ...contact,
+            [event.target.name]: value
+        })
+    }
 
+    const addContact = (e) => {
+        e.preventDefault();
+        setContacts([
+            ...contacts,
+            contact
+        ])
+
+        for (let n = 1; n <= 4; n++) {
+            document.getElementById(`contactInp${n}`).value = '';
+        }
+    }
+
+    // service Locations
+
+    const handleServiceLocation = (event) => {
+        const value = event.target.value;
+        // console.log(adress2);
+        setSRlocation({
+            ...SRlocation,
+            adress: adress2,
+            [event.target.name]: value,
+        })
+    }
+
+
+    const addServiceLocation = (e) => {
+        e.preventDefault();
+        setServiceLocations([
+            ...serviceLocations,
+            SRlocation
+        ]);
+        setServiceLocArr([
+            ...serviceLocArr,
+            { ...SRlocation, adress: SLadress }
+        ])
+        for (let n = 1; n <= 4; n++) {
+            document.getElementById(`SRinput${n}`).value = '';
+        }
+        setAdress2('')
+        setSLadress({})
+    }
+
+    console.log(serviceLocArr);
+
+    const postCustomer = async () => {
+        const response = await axios.post('http://localhost:8001/AddCustomer', {
+            ...customerInfo,
+            contacts,
+            customerAdress,
+            serviceLocation: serviceLocArr
+        })
+        console.log(response.data);
+    }
 
     return (
-
         <div className="container-fluid">
             <div class="card">
                 <div class="card-header">
@@ -92,7 +107,7 @@ const AddCutomer = () => {
                     <div className="row">
                         <div className="col-xl-6 mb-3">
                             <label htmlFor="exampleFormControlInput1" className="form-label">Customer Name <span className="text-danger">*</span></label>
-                            <input type="text" className="form-control" name='customerName' id="exampleFormControlInput1" placeholder="Customer Name" />
+                            <input type="text" className="form-control" name='customerName' id="exampleFormControlInput1" onChange={handleCustomerInfo} placeholder="Customer Name" />
                         </div>
                         {/* <div className="col-xl-6 mb-3">
                             <label htmlFor="exampleFormControlInput2" className="form-label">Last Name<span className="text-danger">*</span></label>
@@ -100,20 +115,20 @@ const AddCutomer = () => {
                         </div> */}
                         <div className="col-xl-6 mb-3">
                             <label htmlFor="exampleFormControlInput4" className="form-label">Title<span className="text-danger">*</span></label>
-                            <input type="text" className="form-control" name='title' id="exampleFormControlInput4" placeholder="Title" />
+                            <input type="text" className="form-control" onChange={handleCustomerInfo} name='title' id="exampleFormControlInput4" placeholder="Title" />
                         </div>
                         <div className="col-xl-6 mb-3">
                             <label className="form-label">Company Name<span className="text-danger">*</span></label>
-                            <input type="text" className="form-control" name='companyName' id="exampleFormControlInput3" placeholder="Company Name" />
+                            <input type="text" className="form-control" onChange={handleCustomerInfo} name='companyName' id="exampleFormControlInput3" placeholder="Company Name" />
                         </div>
                         <div className="col-xl-6" style={{ position: 'relative' }}>
                             <label className="form-label">Adress<span className="text-danger">*</span></label>
-                            <input type="text" value={adress} onClick={() => { setShowPop1(!showPop1) }} style={{ cursor: 'pointer' }} className="form-control" id="exampleFormControlInput3" placeholder="Adress" readOnly />
-                            {showPop1 || <AdressModal adress={customerAdress} setAdress={setCustomerAdress} boolState={setShowPop1} handleAdress={setAdress} />}
+                            <input type="text" value={adress1} onClick={() => { setShowPop1(!showPop1) }} style={{ cursor: 'pointer' }} className="form-control" id="exampleFormControlInput3" placeholder="Adress" readOnly />
+                            {showPop1 || <AdressModal adress={customerAdress} setAdress={setCustomerAdress} boolState={setShowPop1} handleAdress={setAdress1} />}
                         </div>
                         <div className="col-xl-6 ">
                             <label className="form-label">Description<span className="text-danger">*</span></label>
-                            <textarea class="form-txtarea form-control" rows="4" id="comment"></textarea>
+                            <textarea class="form-txtarea form-control" name='description' onChange={handleCustomerInfo} rows="4" id="comment"></textarea>
                         </div>
                     </div>
                 </div>
@@ -130,19 +145,19 @@ const AddCutomer = () => {
                                 <div className="row">
                                     <div className="col-xl-4 mb-3">
                                         <label className="form-label">Contact Name<span className="text-danger">*</span></label>
-                                        <input type="text" className="form-control" value={contactName} onChange={(e) => setContactName(e.target.value)} placeholder="Contact Name" required />
+                                        <input type="text" id='contactInp1' onChange={handleContacts} name='contactName' className="form-control" placeholder="Contact Name" required />
                                     </div>
                                     <div className="col-xl-4 mb-3">
                                         <label className="form-label">Email<span className="text-danger">*</span></label>
-                                        <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
+                                        <input type="email" id='contactInp2' className="form-control" onChange={handleContacts} name='email' placeholder="Email" required />
                                     </div>
                                     <div className="col-xl-4 mb-3">
                                         <label className="form-label">Phone<span className="text-danger">*</span></label>
-                                        <input type="number" className="form-control" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" />
+                                        <input type="number" id='contactInp3' onChange={handleContacts} name='phone' className="form-control" placeholder="Phone" />
                                     </div>
                                     <div className="col-xl-4 mb-3">
                                         <label className="form-label">Mobile<span className="text-danger">*</span></label>
-                                        <input type="number" className="form-control" value={mobile} onChange={(e) => setMobile(e.target.value)} placeholder="Mobile" required />
+                                        <input type="number" id='contactInp4' onChange={handleContacts} name='mobile' className="form-control" placeholder="Mobile" required />
                                     </div>
                                     <div className="col-xl-4 mb-3" style={{ display: 'flex', alignItems: 'center', paddingTop: '26px' }}>
                                         <button className="btn btn-primary">Add</button>
@@ -174,10 +189,10 @@ const AddCutomer = () => {
                                                             <>
                                                                 <tr>
                                                                     <td></td>
-                                                                    <td>{contact.name}</td>
-                                                                    <td>{contact.eMail}</td>
-                                                                    <td>{contact.Phone}</td>
-                                                                    <td>{contact.Mob}</td>
+                                                                    <td>{contact.contactName}</td>
+                                                                    <td>{contact.email}</td>
+                                                                    <td>{contact.phone}</td>
+                                                                    <td>{contact.mobile}</td>
                                                                 </tr>
                                                             </>
                                                         )
@@ -199,27 +214,27 @@ const AddCutomer = () => {
                     <div class="card-header">
                         <h4 className="modal-title" id="#gridSystemModal">Service Locations</h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" id=''>
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="row">
                                     <div className="col-xl-4 mb-3">
                                         <label className="form-label">Name<span className="text-danger">*</span></label>
-                                        <input type="text" className="form-control" value={SLname} onChange={(e) => setSLname(e.target.value)} placeholder="Name" required />
+                                        <input type="text" id='SRinput1' name='name' className="form-control" onChange={handleServiceLocation} placeholder="Name" required />
                                     </div>
                                     <div className="col-xl-4 mb-3" style={{ position: 'relative' }}>
                                         <label className="form-label">Adress<span className="text-danger">*</span></label>
-                                        <input type="text" onClick={() => { setShowPop2(!showPop2) }} style={{ cursor: 'pointer' }} className="form-control" id="exampleFormControlInput3" placeholder="Adress" readOnly />
-                                        {showPop2 || <AdressModal boolState={setShowPop2} handleAdress={setAdress} />}
+                                        <input type="text" id='SRinput2' onClick={() => { setShowPop2(!showPop2) }} style={{ cursor: 'pointer' }} name='adress' className="form-control" value={adress2} placeholder="Adress" required />
+                                        {showPop2 || <AdressModal boolState={setShowPop2} handleAdress={setAdress2} adress={SLadress} setAdress={setSLadress} />}
 
                                     </div>
                                     <div className="col-xl-4 mb-3">
                                         <label className="form-label">Phone<span className="text-danger">*</span></label>
-                                        <input type="text" className="form-control" value={SLphone} onChange={(e) => setSLphone(e.target.value)} placeholder="Phone" />
+                                        <input type="text" id='SRinput3' name='phone' className="form-control" onChange={handleServiceLocation} placeholder="Phone" />
                                     </div>
                                     <div className="col-xl-4 mb-3">
                                         <label className="form-label">Customer Fax<span className="text-danger">*</span></label>
-                                        <input type="text" className="form-control" value={SLfax} onChange={(e) => setSLfax(e.target.value)} placeholder="Fax" required />
+                                        <input type="text" id='SRinput4' name='fax' className="form-control" onChange={handleServiceLocation} placeholder="Fax" required />
                                     </div>
                                     <div className="col-xl-4 mb-3" style={{ display: 'flex', alignItems: 'center', paddingTop: '26px' }}>
                                         <button className="btn btn-primary">Add</button>
@@ -246,14 +261,14 @@ const AddCutomer = () => {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {serviceLocation.map((contact) => {
+                                                    {serviceLocations.map((contact) => {
                                                         return (
                                                             <>
                                                                 <tr>
                                                                     <td></td>
                                                                     <td>{contact.name}</td>
                                                                     <td>{contact.adress}</td>
-                                                                    <td>{contact.Phone}</td>
+                                                                    <td>{contact.phone}</td>
                                                                     <td>{contact.fax}</td>
                                                                 </tr>
                                                             </>
