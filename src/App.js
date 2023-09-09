@@ -3,7 +3,6 @@ import './App.css';
 import './assets/css/style.css'
 import './assets/css/bootstrap-select.min.css'
 import DashboardPage from './pages/DashboardPage';
-import DataFun from './context/AppData';
 import LoginPage from './pages/LoginPage';
 import DashBoard from './components/DashBoard';
 import CustomerIndex from './components/Customers/CustomerIndex';

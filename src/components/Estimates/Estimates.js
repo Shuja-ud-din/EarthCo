@@ -5,16 +5,36 @@ import StatusCardsEst from './StatusCardsEst'
 import { DataContext } from '../../context/AppData'
 import { RoutingContext } from '../../context/RoutesContext'
 import { Form } from 'react-bootstrap'
+import axios from 'axios'
 
 const Estimates = () => {
 
-    const { estimates, setSingleObj, customers } = useContext(DataContext);
+    const { estimates, setSingleObj } = useContext(DataContext);
     const { setEstimateRoute } = useContext(RoutingContext);
 
+    const [customers, setCustomers] = useState([]);
+    const [selectedCustomer, setSelectCustomer] = useState({})
+
     const [customer, setCustomer] = useState('Select Customer');
-    const [locations, setLocations] = useState();
     const [serviceLocation, setServiceLocation] = useState('Select Customer First');
-    // const [locationOptions, setLocationOptions] = useState();
+
+    const getUsers = async () => {
+        const response = await axios.get('http://localhost:8001/Customers');
+        setCustomers(response.data)
+    }
+
+    useEffect(() => {
+        getUsers();
+    }, [])
+
+
+    const popUpData = customers.map((object) => {
+        return {
+            name: object.customerName,
+            locations: object.serviceLocations
+        }
+    })
+    console.log(popUpData);
 
     const handleCatClick = (type, id) => {
         setEstimateRoute(type);
@@ -26,55 +46,35 @@ const Estimates = () => {
         });
         setSingleObj(updatedArr);
     }
-    function getLocations() {
-        const locationsArr = customers.filter((item) => {
-            if (customer === item.name) {
-                return item.name;
-            }
-            return item
-        })[0];
-        setLocations(locationsArr);
-    }
-    useEffect(() => {
-        setLocations(customers.filter((item) => {
-            if (customer === item.name) {
-                return item.name;
-            }
-            return item;
-        })[0]);
-    }, [customers, customer]);
 
-    let locationOptions;
-
-    if (locations) {
-        locationOptions = locations.serviceLocations.map((item) => {
-            return <option key={item} value={item}>{item}</option>
-        })
-    }
-
+    const customerOptions = popUpData.map((item, index) => {
+        return <option key={index} value={item.name}>{item.name}</option>
+    })
 
     const openModal = () => {
-        getLocations();
-        // console.log(locations);
     }
+
+    const handleSelectCustomer = (name) => {
+        const updatedArr = customer.filter((object) => {
+            if (object.name === name) {
+                return object;
+            }
+            return null
+        })
+        setSelectCustomer(updatedArr[0])
+    }
+    console.log(selectedCustomer);
 
     const handleChangeCustomer = (e) => {
         setCustomer(e.target.value);
-        getLocations();
-        // console.log(locations);
+        handleSelectCustomer(e.target.value);
     }
-
-    // setLocationArr(updatedArr[0]);
 
 
 
     const saveAddEstPop = () => {
 
     }
-
-    const customerOptions = customers.map((item) => {
-        return <option key={item.customerId} value={item.name}>{item.name}</option>
-    })
 
 
     const renderedRecords = estimates.map((object, index) => {
@@ -163,11 +163,11 @@ const Estimates = () => {
                                         </div>
                                     </div>
                                     <div className="mb-3 row">
-                                        <label className="col-sm-3 col-form-label">Quantity</label>
+                                        <label className="col-sm-3 col-form-label">Service Location</label>
                                         <div className="col-sm-9">
                                             <Form.Select aria-label="Default select example" size="md" value={serviceLocation} onChange={(e) => setServiceLocation(e.target.value)} id="inlineFormCustomSelect">
                                                 <option value="Select Customer First">Select Customer First...</option>
-                                                {locationOptions}
+                                                {/* {locationOptions} */}
                                             </Form.Select>
                                             {/* <select class="me-sm-2 default-select form-control wide" value={serviceLocation} onChange={(e) => setServiceLocation(e.target.value)} id="inlineFormCustomSelect">
                                                 <option value="Select Customer First">Select Customer First...</option>

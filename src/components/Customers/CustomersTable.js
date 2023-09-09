@@ -1,14 +1,27 @@
-import React from 'react'
-import { useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import CustomerTR from './CustomerTR';
 import { Link } from 'react-router-dom';
-import { DataContext } from '../../context/AppData';
+import axios from 'axios';
 
 const CustomersTable = () => {
-    const { customers } = useContext(DataContext);
+
+    const [customers, setCustomers] = useState([])
+
+    const fetchCustomers = async () => {
+        const response = await axios.get('http://localhost:8001/Customers');
+        // console.log(response.data);
+        setCustomers(response.data)
+    }
+
+    useEffect(() => {
+        fetchCustomers();
+    }, [])
+
+    console.log(customers);
+
 
     const renderedCustomers = customers.map((customer) => {
-        return <CustomerTR key={customer.customerId} customer={customer} />
+        return <CustomerTR key={customer._id} customer={customer} contact={customer.contacts[0]} />
     })
     return (
         <div className="container-fluid">

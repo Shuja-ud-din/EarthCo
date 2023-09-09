@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CustomerTR = ({ customer }) => {
+const CustomerTR = ({ customer, contact }) => {
     return (
         <tr>
             <td>
@@ -12,15 +12,15 @@ const CustomerTR = ({ customer }) => {
             <td>
                 <div className="products">
                     <div>
-                        <h6>{customer.name}</h6>
+                        <h6>{customer.customerName}</h6>
                     </div>
                 </div>
             </td>
-            <td><span>{customer.name}</span></td>
+            <td><span>{contact.contactName}</span></td>
             <td>
-                <span >{customer.fullAdress}</span>
+                <span >{customer.companyName}</span>
             </td>
-            <td><span className="text-primary">{customer.email}</span></td>
+            <td><span className="text-primary">{contact.email}</span></td>
         </tr>
     )
 }

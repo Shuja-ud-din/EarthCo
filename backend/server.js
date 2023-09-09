@@ -66,4 +66,9 @@ server.post('/AddCustomer', async (req, res) => {
     res.json(doc);
 })
 
+server.get('/Customers', async (req, res) => {
+    const docs = await Customers.find({});
+    res.json(docs)
+})
+
 server.listen(8001)

@@ -1,9 +1,11 @@
 import React, { useContext, useState } from 'react'
 import AdressModal from '../AdressModal';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const AddCutomer = () => {
+
+    const navigate = useNavigate()
 
     const [customerAdress, setCustomerAdress] = useState({})
     // const [SLadress, setSLadress] = useState({})
@@ -84,8 +86,6 @@ const AddCutomer = () => {
         setSLadress({})
     }
 
-    console.log(serviceLocArr);
-
     const postCustomer = async () => {
         const response = await axios.post('http://localhost:8001/AddCustomer', {
             ...customerInfo,
@@ -93,7 +93,18 @@ const AddCutomer = () => {
             customerAdress,
             serviceLocation: serviceLocArr
         })
-        console.log(response.data);
+        if (response.status === 200) {
+            navigate('/Dashboard/Customers')
+        }
+        console.log(response);
+    }
+
+    const handleSubmit = () => {
+        console.log(contacts);
+        console.log(serviceLocArr);
+        if (contacts[0] !== undefined && serviceLocArr[0] !== undefined) {
+            postCustomer();
+        }
     }
 
     return (
@@ -103,11 +114,10 @@ const AddCutomer = () => {
                     <h4 className="modal-title" id="#gridSystemModal">Customer Info</h4>
                 </div>
                 <div class="card-body">
-                    {/* <form> */}
                     <div className="row">
                         <div className="col-xl-6 mb-3">
                             <label htmlFor="exampleFormControlInput1" className="form-label">Customer Name <span className="text-danger">*</span></label>
-                            <input type="text" className="form-control" name='customerName' id="exampleFormControlInput1" onChange={handleCustomerInfo} placeholder="Customer Name" />
+                            <input type="text" className="form-control" name='customerName' id="exampleFormControlInput1" onChange={handleCustomerInfo} placeholder="Customer Name" required />
                         </div>
                         {/* <div className="col-xl-6 mb-3">
                             <label htmlFor="exampleFormControlInput2" className="form-label">Last Name<span className="text-danger">*</span></label>
@@ -115,15 +125,15 @@ const AddCutomer = () => {
                         </div> */}
                         <div className="col-xl-6 mb-3">
                             <label htmlFor="exampleFormControlInput4" className="form-label">Title<span className="text-danger">*</span></label>
-                            <input type="text" className="form-control" onChange={handleCustomerInfo} name='title' id="exampleFormControlInput4" placeholder="Title" />
+                            <input type="text" className="form-control" onChange={handleCustomerInfo} name='title' id="exampleFormControlInput4" placeholder="Title" required />
                         </div>
                         <div className="col-xl-6 mb-3">
                             <label className="form-label">Company Name<span className="text-danger">*</span></label>
-                            <input type="text" className="form-control" onChange={handleCustomerInfo} name='companyName' id="exampleFormControlInput3" placeholder="Company Name" />
+                            <input type="text" className="form-control" onChange={handleCustomerInfo} name='companyName' id="exampleFormControlInput3" placeholder="Company Name" required />
                         </div>
                         <div className="col-xl-6" style={{ position: 'relative' }}>
                             <label className="form-label">Adress<span className="text-danger">*</span></label>
-                            <input type="text" value={adress1} onClick={() => { setShowPop1(!showPop1) }} style={{ cursor: 'pointer' }} className="form-control" id="exampleFormControlInput3" placeholder="Adress" readOnly />
+                            <input type="text" value={adress1} onClick={() => { setShowPop1(!showPop1) }} style={{ cursor: 'pointer' }} className="form-control" id="exampleFormControlInput3" placeholder="Adress" readOnly required />
                             {showPop1 || <AdressModal adress={customerAdress} setAdress={setCustomerAdress} boolState={setShowPop1} handleAdress={setAdress1} />}
                         </div>
                         <div className="col-xl-6 ">
@@ -289,10 +299,9 @@ const AddCutomer = () => {
 
             <div className='text-end'>
                 {/* <NavLink to='/Dashboard/Customers'> */}
-                <button className="btn btn-primary me-1" onClick={postCustomer}>Submit</button>
+                <button className="btn btn-primary me-1" onClick={handleSubmit}>Submit</button>
                 {/* </NavLink> */}
             </div>
-            {/* </form > */}
         </div >
     )
 }
