@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 const AdressModal = ({ boolState, handleAdress, adress, setAdress }) => {
 
     // const [adress, setadress] = useState(adress)
-    console.log(adress);
 
     const handleSubmit = (e) => {
         e.preventDefault();

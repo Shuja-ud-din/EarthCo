@@ -17,6 +17,7 @@ const Estimates = () => {
 
     const [customer, setCustomer] = useState('Select Customer');
     const [serviceLocation, setServiceLocation] = useState('Select Customer First');
+    const [locationLabel, setLocationLabel] = useState('Select Customer First...')
 
     const getUsers = async () => {
         const response = await axios.get('http://localhost:8001/Customers');
@@ -34,7 +35,6 @@ const Estimates = () => {
             locations: object.serviceLocations
         }
     })
-    console.log(popUpData);
 
     const handleCatClick = (type, id) => {
         setEstimateRoute(type);
@@ -55,27 +55,27 @@ const Estimates = () => {
     }
 
     const handleSelectCustomer = (name) => {
-        const updatedArr = customer.filter((object) => {
+        const updatedArr = popUpData.filter((object) => {
             if (object.name === name) {
                 return object;
             }
             return null
         })
-        setSelectCustomer(updatedArr[0])
+        setSelectCustomer(updatedArr[0] || [])
     }
-    console.log(selectedCustomer);
 
     const handleChangeCustomer = (e) => {
         setCustomer(e.target.value);
         handleSelectCustomer(e.target.value);
+        if (e.target.value === 'Select Customer')
+            setLocationLabel('Select Customer First...')
+        else
+            setLocationLabel('Select Service Location...')
     }
-
-
 
     const saveAddEstPop = () => {
 
     }
-
 
     const renderedRecords = estimates.map((object, index) => {
         return <EstimateTR key={object.estimateID} index={index} onClick={() => handleCatClick(`Estimate${object.estimateID}`, object.estimateID)} estimate={object} />
@@ -166,8 +166,10 @@ const Estimates = () => {
                                         <label className="col-sm-3 col-form-label">Service Location</label>
                                         <div className="col-sm-9">
                                             <Form.Select aria-label="Default select example" size="md" value={serviceLocation} onChange={(e) => setServiceLocation(e.target.value)} id="inlineFormCustomSelect">
-                                                <option value="Select Customer First">Select Customer First...</option>
-                                                {/* {locationOptions} */}
+                                                <option value="Select Customer First">{locationLabel}</option>
+                                                {selectedCustomer.locations && selectedCustomer.locations.map((location, index) => {
+                                                    return <option key={index} value={location.name}>{location.name}</option>
+                                                })}
                                             </Form.Select>
                                             {/* <select class="me-sm-2 default-select form-control wide" value={serviceLocation} onChange={(e) => setServiceLocation(e.target.value)} id="inlineFormCustomSelect">
                                                 <option value="Select Customer First">Select Customer First...</option>

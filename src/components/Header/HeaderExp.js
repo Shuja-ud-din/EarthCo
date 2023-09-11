@@ -10,8 +10,6 @@ const HeaderExp = () => {
 
     const { loggedUser } = useContext(DataContext);
 
-    console.log(loggedUser);
-
     // const location = useLocation();
     // useEffect(() => {
     //     const scriptFiles = [

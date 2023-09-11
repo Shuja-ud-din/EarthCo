@@ -17,11 +17,9 @@ const CustomersTable = () => {
         fetchCustomers();
     }, [])
 
-    console.log(customers);
 
-
-    const renderedCustomers = customers.map((customer) => {
-        return <CustomerTR key={customer._id} customer={customer} contact={customer.contacts[0]} />
+    const renderedCustomers = customers.map((customer, index) => {
+        return <CustomerTR key={customer._id} index={index} customer={customer} contact={customer.contacts[0]} />
     })
     return (
         <div className="container-fluid">
@@ -42,15 +40,13 @@ const CustomersTable = () => {
                                     <thead>
                                         <tr>
                                             <th>
-                                                <div className="form-check custom-checkbox ms-2">
-                                                    <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
-                                                    <label className="form-check-label" htmlFor="customCheckBox2"></label>
-                                                </div>
+                                                #
                                             </th>
                                             <th>Customer Name </th>
                                             <th>Contact Name</th>
                                             <th>Contact Company </th>
                                             <th>Contact E-mail</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -62,6 +58,22 @@ const CustomersTable = () => {
                     </div>
                 </div>
             </div>
+
+            {/* #modal */}
+
+            {/* <div className="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <div className="modal-body">
+                            ...
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div> */}
 
         </div>
     )

@@ -26,3 +26,18 @@
   color: red;
   margin: 0 5px;
 }
+
+.badgeBox {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.actionBadge {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  margin: 0 5px;
+  border-radius: 10px;
+}

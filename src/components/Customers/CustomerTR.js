@@ -1,27 +1,40 @@
 import React from 'react'
 
-const CustomerTR = ({ customer, contact }) => {
+const CustomerTR = ({ customer, contact, index }) => {
     return (
-        <tr>
-            <td>
-                <div className="form-check custom-checkbox ms-2">
-                    <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
-                    <label className="form-check-label" htmlFor="customCheckBox2"></label>
-                </div>
-            </td>
-            <td>
-                <div className="products">
-                    <div>
-                        <h6>{customer.customerName}</h6>
+        <>
+            <tr>
+                <td>
+                    {index + 1}
+                </td>
+                <td>
+                    <div className="products">
+                        <div>
+                            <h6>{customer.customerName}</h6>
+                        </div>
                     </div>
-                </div>
-            </td>
-            <td><span>{contact.contactName}</span></td>
-            <td>
-                <span >{customer.companyName}</span>
-            </td>
-            <td><span className="text-primary">{contact.email}</span></td>
-        </tr>
+                </td>
+                <td><span>{contact.contactName}</span></td>
+                <td>
+                    <span >{customer.companyName}</span>
+                </td>
+                <td><span className="text-primary">{contact.email}</span></td>
+                <td>
+                    <div className='badgeBox'>
+                        <span className="actionBadge badge-success light border-0">
+                            <span className="material-symbols-outlined">
+                                visibility
+                            </span>
+                        </span>
+                        <span className="actionBadge badge-danger light border-0">
+                            <span className="material-symbols-outlined">
+                                delete
+                            </span>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </>
     )
 }
 
