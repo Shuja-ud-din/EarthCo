@@ -6,6 +6,7 @@ import { DataContext } from '../../context/AppData'
 import { RoutingContext } from '../../context/RoutesContext'
 import { Form } from 'react-bootstrap'
 import axios from 'axios'
+import { NavLink } from 'react-router-dom'
 
 const Estimates = () => {
 
@@ -181,7 +182,9 @@ const Estimates = () => {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-                                <button type="button" className="btn btn-primary">Save</button>
+                                <NavLink to='/Dashboard/Estimates/Add-Estimate'>
+                                    <button type="button" data-bs-dismiss="modal" className="btn btn-primary">Save</button>
+                                </NavLink>
                             </div>
                         </form>
                     </div>

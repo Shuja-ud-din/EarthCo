@@ -1,14 +1,20 @@
 import React from 'react'
+import { Form } from 'react-bootstrap'
 
 const StatusActions = ({ status }) => {
     return (
         <>
             <div className="col-lg-4 col-md-12 mb-2">
-                <select className="default-select  form-control wide" value={status} >
+                <Form.Select aria-label="Default select example" value={status} className='bg-white' size="md" id="inlineFormCustomSelect">
                     <option value='Open'>Open</option>
                     <option value='Approved'>Approved</option>
                     <option value='Closed Billed'>Closed Billed</option>
-                </select>
+                </Form.Select>
+                {/* <select className="default-select  form-control wide" value={status} >
+                    <option value='Open'>Open</option>
+                    <option value='Approved'>Approved</option>
+                    <option value='Closed Billed'>Closed Billed</option>
+                </select> */}
             </div>
             <div className="col-lg-8 col-md-12">
                 <button type="button" className="col-lg-3 btn btn-sm btn-outline-primary">Email</button>

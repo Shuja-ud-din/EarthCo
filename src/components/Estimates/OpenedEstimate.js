@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import StatusActions from '../StatusActions'
 import { DataContext } from '../../context/AppData'
+import { Form } from 'react-bootstrap';
 
 const OpenedEstimate = ({ oneEstimate, customer }) => {
 
@@ -71,14 +72,20 @@ const OpenedEstimate = ({ oneEstimate, customer }) => {
                     <form>
                         <div className="row">
                             <div className="mb-3 col-md-9">
-                                <select id="inputState" value={customer.name} className="default-select form-control wide">
+                                <Form.Select aria-label="Default select example" value={customer.name} className='bg-white' size="md" id="inlineFormCustomSelect">
                                     <option value={customer.name}>{customer.name}</option>
-                                </select>
+                                </Form.Select>
+                                {/* <select id="inputState" value={customer.name} className="default-select form-control wide">
+                                    <option value={customer.name}>{customer.name}</option>
+                                </select> */}
                             </div>
                             <div className="mb-3 col-md-9">
-                                <select id="inputState" className="default-select form-control wide">
+                                <Form.Select aria-label="Default select example" className='bg-white' size="md" id="inlineFormCustomSelect">
                                     <option >Service Location</option>
-                                </select>
+                                </Form.Select>
+                                {/* <select id="inputState" className="default-select form-control wide">
+                                    <option >Service Location</option>
+                                </select> */}
                             </div>
                             <div className="mb-3 col-md-9">
                                 <input type="text" className="form-control" placeholder="Contact" value={customer.email} />
@@ -95,7 +102,7 @@ const OpenedEstimate = ({ oneEstimate, customer }) => {
                             </div>
                             <div className="mb-3 col-md-9">
                                 <label className="form-label">Issued Date</label>
-                                <input className="form-control input-limit-datepicker" placeholder='Issued Date' type="text" name="daterange" value={oneEstimate.issuedDate} />
+                                <input className="form-control input-limit-datepicker" placeholder='Issued Date' type='date' name="daterange" value='2023-09-10' />
                             </div>
                         </div>
                     </form>
