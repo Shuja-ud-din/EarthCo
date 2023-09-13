@@ -41,3 +41,14 @@
   margin: 0 5px;
   border-radius: 10px;
 }
+
+.actionBtns button {
+  white-space: nowrap;
+  min-width: 70px;
+  margin: 5px;
+}
+
+.actionBtns {
+  display: flex;
+  flex-wrap: nowrap;
+}

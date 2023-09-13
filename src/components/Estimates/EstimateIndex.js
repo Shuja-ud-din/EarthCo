@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import EstimateList from './EstimateList'
 import EstimateIDopen from './EstimateIDopen'
 import { RoutingContext } from '../../context/RoutesContext'
-import AddEstimateForm from './AddEstimateForm'
+import AddEstimate from './AddEstimate'
 
 const EstimateIndex = () => {
 
@@ -15,7 +15,7 @@ const EstimateIndex = () => {
                 <Routes>
                     <Route path='' element={<EstimateList />} />
                     <Route path={estimateRoute} element={<EstimateIDopen />} />
-                    <Route path='Add-Estimate' element={<AddEstimateForm />} />
+                    <Route path='Add-Estimate' element={<AddEstimate />} />
                 </Routes>
             </div>
         </>

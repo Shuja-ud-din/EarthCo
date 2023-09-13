@@ -6,7 +6,7 @@ import { DataContext } from '../../context/AppData'
 import { RoutingContext } from '../../context/RoutesContext'
 import { Form } from 'react-bootstrap'
 import axios from 'axios'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 const Estimates = () => {
 
@@ -19,6 +19,9 @@ const Estimates = () => {
     const [customer, setCustomer] = useState('Select Customer');
     const [serviceLocation, setServiceLocation] = useState('Select Customer First');
     const [locationLabel, setLocationLabel] = useState('Select Customer First...')
+    const [opacity, setOpacity] = useState('50%');
+
+    const navigate = useNavigate();
 
     const getUsers = async () => {
         const response = await axios.get('http://localhost:8001/Customers');
@@ -28,6 +31,15 @@ const Estimates = () => {
     useEffect(() => {
         getUsers();
     }, [])
+
+    useEffect(() => {
+        if (customer !== 'Select Customer' && serviceLocation !== 'Select Customer First') {
+            setOpacity('100%')
+        }
+        else {
+            setOpacity('50%')
+        }
+    }, [serviceLocation, customer])
 
 
     const popUpData = customers.map((object) => {
@@ -63,6 +75,7 @@ const Estimates = () => {
             return null
         })
         setSelectCustomer(updatedArr[0] || [])
+        setServiceLocation('Select Customer First')
     }
 
     const handleChangeCustomer = (e) => {
@@ -72,6 +85,13 @@ const Estimates = () => {
             setLocationLabel('Select Customer First...')
         else
             setLocationLabel('Select Service Location...')
+    }
+
+    const goToAddEst = () => {
+        if (customer !== 'Select Customer' && serviceLocation !== 'Select Customer First') {
+            document.getElementById('closer').click();
+            navigate('/Dashboard/Estimates/Add-Estimate');
+        }
     }
 
     const saveAddEstPop = () => {
@@ -181,10 +201,10 @@ const Estimates = () => {
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-                                <NavLink to='/Dashboard/Estimates/Add-Estimate'>
-                                    <button type="button" data-bs-dismiss="modal" className="btn btn-primary">Save</button>
-                                </NavLink>
+                                <button type="button" id='closer' className="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                                {/* <NavLink to='/Dashboard/Estimates/Add-Estimate'> */}
+                                <button type="button" onClick={goToAddEst} style={{ opacity: opacity }} className="btn btn-primary">Save</button>
+                                {/* </NavLink> */}
                             </div>
                         </form>
                     </div>

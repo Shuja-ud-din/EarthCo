@@ -30,7 +30,7 @@ import { RoutingContext } from '../context/RoutesContext'
 import SRlist from '../components/ServiceRequest/SRlist'
 import EstimateList from '../components/Estimates/EstimateList'
 import EstimateIDopen from '../components/Estimates/EstimateIDopen'
-import AddEstimateForm from '../components/Estimates/AddEstimateForm'
+import AddEstimate from '../components/Estimates/AddEstimate'
 
 const DashboardPage = () => {
 
@@ -49,7 +49,7 @@ const DashboardPage = () => {
                 </Route>
                 <Route path='Estimates' element={<EstimateIndex />} >
                     <Route path='' element={<EstimateList />} />
-                    <Route path='Add-Estimate' element={<AddEstimateForm />} />
+                    <Route path='Add-Estimate' element={<AddEstimate />} />
                     <Route path={estimateRoute} element={<EstimateIDopen />} />
                 </Route>
                 <Route path='Service-Requests' element={<ServiceIndex />} >
