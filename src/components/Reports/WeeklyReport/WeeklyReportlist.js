@@ -15,7 +15,7 @@ const WeeklyReportlist = () => {
         <path d="M11.2229 10.6388H8.14655" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
 
-    const { wReportData } = useContext(DataContext)
+    const { wReportData } = useContext(DataContext);
 
     const renderReports = wReportData.map((item) => {
         return (
