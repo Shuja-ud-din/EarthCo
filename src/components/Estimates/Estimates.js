@@ -1,14 +1,19 @@
 import EstimateTR from './EstimateTR'
 import './Estimates.css'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import StatusCardsEst from './StatusCardsEst'
 import { DataContext } from '../../context/AppData'
 import { RoutingContext } from '../../context/RoutesContext'
 import { Form } from 'react-bootstrap'
 import axios from 'axios'
 import { NavLink, useNavigate } from 'react-router-dom'
+import $ from 'jquery';
+import 'datatables.net';
+import { Autocomplete, TextField } from '@mui/material'
 
 const Estimates = () => {
+
+    const activeRef = useRef(null)
 
     const { estimates, setSingleObj } = useContext(DataContext);
     const { setEstimateRoute } = useContext(RoutingContext);
@@ -16,9 +21,8 @@ const Estimates = () => {
     const [customers, setCustomers] = useState([]);
     const [selectedCustomer, setSelectCustomer] = useState({})
 
-    const [customer, setCustomer] = useState('Select Customer');
-    const [serviceLocation, setServiceLocation] = useState('Select Customer First');
-    const [locationLabel, setLocationLabel] = useState('Select Customer First...')
+    const [customer, setCustomer] = useState('');
+    const [serviceLocation, setServiceLocation] = useState('');
     const [opacity, setOpacity] = useState('50%');
 
     const navigate = useNavigate();
@@ -30,10 +34,11 @@ const Estimates = () => {
 
     useEffect(() => {
         getUsers();
+        $('#estimateTbl2').DataTable();
     }, [])
 
     useEffect(() => {
-        if (customer !== 'Select Customer' && serviceLocation !== 'Select Customer First') {
+        if (customer !== '' && serviceLocation !== '') {
             setOpacity('100%')
         }
         else {
@@ -61,7 +66,7 @@ const Estimates = () => {
     }
 
     const customerOptions = popUpData.map((item, index) => {
-        return <option key={index} value={item.name}>{item.name}</option>
+        return item.name
     })
 
     const openModal = () => {
@@ -75,16 +80,21 @@ const Estimates = () => {
             return null
         })
         setSelectCustomer(updatedArr[0] || [])
-        setServiceLocation('Select Customer First')
+        // setServiceLocation('Select Customer First')
     }
 
-    const handleChangeCustomer = (e) => {
-        setCustomer(e.target.value);
-        handleSelectCustomer(e.target.value);
-        if (e.target.value === 'Select Customer')
-            setLocationLabel('Select Customer First...')
-        else
-            setLocationLabel('Select Service Location...')
+    const locations = selectedCustomer.locations && selectedCustomer.locations.map((loc) => {
+        return loc.name;
+    })
+
+    const handleChangeCustomer = (e, value) => {
+        setCustomer(value);
+        setServiceLocation('')
+        handleSelectCustomer(value);
+        // if (e.target.value === 'Select Customer')
+        //     setLocationLabel('Select Customer First...')
+        // else
+        //     setLocationLabel('Select Service Location...')
     }
 
     const goToAddEst = () => {
@@ -115,9 +125,9 @@ const Estimates = () => {
                                         <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal" onClick={openModal}>+ Add Estimates</button>
                                     </div>
                                     <div className="col-md-7">
-                                        <div>
+                                        {/* <div>
                                             <input className="from-control form-control-sm" style={{ width: '100%' }} type="text" placeholder="Default input" />
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className="col-md-2" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
                                         <div className="col-md-12">
@@ -131,7 +141,7 @@ const Estimates = () => {
                                 </div>
                             </div>
                             <div className="table-responsive active-projects style-1">
-                                <table id="empoloyees-tblwrapper" className="table">
+                                <table id="estimateTbl2" className="table">
                                     <thead>
                                         <tr>
                                             <th>
@@ -171,31 +181,35 @@ const Estimates = () => {
                             <div className="modal-body">
                                 <div className="basic-form">
                                     <div className="mb-3 row">
-                                        <label className="col-sm-3 col-form-label">Customer</label>
-                                        <div className="col-sm-9">
-                                            <Form.Select aria-label="Default select example" size="md" value={customer} onChange={handleChangeCustomer} id="inlineFormCustomSelect">
-                                                <option value='Select Customer'>Select Customer...</option>
-                                                {customerOptions}
-                                            </Form.Select>
-                                            {/* <select className="me-sm-2 default-select form-control wide" value={customer} onChange={handleChangeCustomer} id="inlineFormCustomSelect">
-                                                <option value='Select Customer'>Select Customer...</option>
-                                                {customerOptions}
-                                            </select> */}
+                                        <label className="col-sm-4 col-form-label">Customer</label>
+                                        <div className="col-sm-8">
+                                            <Autocomplete
+                                                disablePortal
+                                                id="combo-box-demo"
+                                                size='small'
+                                                options={customerOptions}
+                                                value={customer}
+                                                onChange={handleChangeCustomer}
+                                                sx={{ width: 300 }}
+                                                renderInput={(params) => <TextField {...params} label="Customer" variant="outlined" />
+                                                }
+                                            />
                                         </div>
                                     </div>
-                                    <div className="mb-3 row">
-                                        <label className="col-sm-3 col-form-label">Service Location</label>
-                                        <div className="col-sm-9">
-                                            <Form.Select aria-label="Default select example" size="md" value={serviceLocation} onChange={(e) => setServiceLocation(e.target.value)} id="inlineFormCustomSelect">
-                                                <option value="Select Customer First">{locationLabel}</option>
-                                                {selectedCustomer.locations && selectedCustomer.locations.map((location, index) => {
-                                                    return <option key={index} value={location.name}>{location.name}</option>
-                                                })}
-                                            </Form.Select>
-                                            {/* <select className="me-sm-2 default-select form-control wide" value={serviceLocation} onChange={(e) => setServiceLocation(e.target.value)} id="inlineFormCustomSelect">
-                                                <option value="Select Customer First">Select Customer First...</option>
-                                                {locationOptions}
-                                            </select> */}
+                                    <div className="mb-4 row">
+                                        <label className="col-sm-4 col-form-label">Service Location</label>
+                                        <div className="col-sm-8">
+                                            <Autocomplete
+                                                disablePortal
+                                                id="combo-box-demo cutomerAF"
+                                                size='small'
+                                                options={locations || false}
+                                                value={serviceLocation}
+                                                onChange={(e, val) => setServiceLocation(val)}
+                                                sx={{ width: 300 }}
+                                                renderInput={(params) => <TextField {...params} label="Service Location" variant="outlined" />
+                                                }
+                                            />
                                         </div>
                                     </div>
                                 </div>

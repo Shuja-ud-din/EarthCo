@@ -2,20 +2,30 @@ import React, { useEffect, useState } from 'react'
 import CustomerTR from './CustomerTR';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import $ from 'jquery';
+import 'datatables.net';
 
 const CustomersTable = () => {
 
-    const [customers, setCustomers] = useState([])
+    const [customers, setCustomers] = useState([]);
+
+    console.log(customers);
 
     const fetchCustomers = async () => {
         const response = await axios.get('http://localhost:8001/Customers');
-        // console.log(response.data);
         setCustomers(response.data)
     }
 
     useEffect(() => {
         fetchCustomers();
+        // $('#customerTbl').DataTable();
     }, [])
+
+    useEffect(() => {
+        if (customers[0] !== undefined) {
+            $('#customerTbl').DataTable();
+        }
+    }, [customers])
 
 
     const renderedCustomers = customers.map((customer, index) => {
@@ -36,7 +46,7 @@ const CustomersTable = () => {
                                         </Link>
                                     </div>
                                 </div>
-                                <table id="empoloyees-tblwrapper" className="table">
+                                <table id="customerTbl" className="table">
                                     <thead>
                                         <tr>
                                             <th>
@@ -59,6 +69,8 @@ const CustomersTable = () => {
                 </div>
             </div>
 
+
+
             {/* #modal */}
 
             {/* <div className="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -74,8 +86,8 @@ const CustomersTable = () => {
                     </div>
                 </div>
             </div> */}
-
         </div>
+
     )
 }
 

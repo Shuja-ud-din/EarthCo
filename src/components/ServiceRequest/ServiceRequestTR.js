@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-const ServiceRequestTR = ({ record, onClick }) => {
+const ServiceRequestTR = ({ record, onClick, index }) => {
 
 
     const handleClick = () => {
@@ -10,10 +10,7 @@ const ServiceRequestTR = ({ record, onClick }) => {
     return (
         <tr className='serviceRequestRecords'>
             <td>
-                <div className="form-check custom-checkbox ms-2">
-                    <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
-                    <label className="form-check-label" htmlFor="customCheckBox2"></label>
-                </div>
+                {index + 1}
             </td>
 
             {/* <td>

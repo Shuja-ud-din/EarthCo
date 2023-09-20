@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 const SideBar = () => {
 
     const [activeIndex, setActiveIndex] = useState(0);
-    const [subClass, setSubClass] = useState(-1)
-
+    const [subClass, setSubClass] = useState(-1);
 
     const sideBarData = [
         {
@@ -23,6 +22,13 @@ const SideBar = () => {
                 <path fillRule="evenodd" clipRule="evenodd" d="M10.986 14.0673C7.4407 14.0673 4.41309 14.6034 4.41309 16.7501C4.41309 18.8969 7.4215 19.4521 10.986 19.4521C14.5313 19.4521 17.5581 18.9152 17.5581 16.7693C17.5581 14.6234 14.5505 14.0673 10.986 14.0673Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
                 <path fillRule="evenodd" clipRule="evenodd" d="M10.986 11.0054C13.3126 11.0054 15.1983 9.11881 15.1983 6.79223C15.1983 4.46564 13.3126 2.57993 10.986 2.57993C8.65944 2.57993 6.77285 4.46564 6.77285 6.79223C6.76499 9.11096 8.63849 10.9975 10.9563 11.0054H10.986Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
+        },
+        {
+            label: 'Map',
+            path: '/Dashboard/Map',
+            icon: <span class="material-symbols-outlined locationIcon">
+                location_on
+            </span>
         },
         {
             label: 'Estimates',
@@ -90,10 +96,10 @@ const SideBar = () => {
             setActiveIndex(clickIndex)
         }
         let activeClass = '';
-        if (activeIndex === index) {
+        if (window.location.pathname === option.path) {
             activeClass = 'mm-active'
         }
-        if (window.location.pathname === option.path) {
+        if (activeIndex === index) {
             activeClass = 'mm-active'
         }
         else {
@@ -115,8 +121,8 @@ const SideBar = () => {
 
     const toggleShowMenu = () => {
         // document.getElementById('collapseMenu').classList.toggle('mm-show');
-        document.getElementById('bottomChev').classList.toggle('rotatezero')
-        setShowSM(!showSubMenu)
+        document.getElementById('bottomChev').classList.toggle('rotatezero');
+        setShowSM(!showSubMenu);
     }
 
     return (
@@ -134,7 +140,7 @@ const SideBar = () => {
                                     <path fillRule="evenodd" clipRule="evenodd" d="M15.2952 1.83333H6.70474C3.7103 1.83333 1.83331 3.95274 1.83331 6.95306V15.0469C1.83331 18.0473 3.70157 20.1667 6.70474 20.1667H15.2952C18.2984 20.1667 20.1666 18.0473 20.1666 15.0469V6.95306C20.1666 3.95274 18.2984 1.83333 15.2952 1.83333Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"></path>
                                 </svg>
                             </div>
-                            <span className="nav-text">Monthly Reports</span>
+                            <span className="nav-text">Reports</span>
                             <span className="material-symbols-sharp" id='bottomChev'>
                                 expand_more
                             </span>

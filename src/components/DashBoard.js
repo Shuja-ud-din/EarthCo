@@ -1,11 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import EstimateTR from './Estimates/EstimateTR';
 import ServiceRequestTR from './ServiceRequest/ServiceRequestTR';
 import { NavLink } from 'react-router-dom';
 import { DataContext } from '../context/AppData';
 import { RoutingContext } from '../context/RoutesContext';
+import $ from 'jquery';
+import 'datatables.net';
 
 const DashBoard = () => {
+
+    useEffect(() => {
+        $('#serviceReqTbl').DataTable();
+        $('#empoloyeesTbl').DataTable();
+    }, [])
 
     const { estimates, setSingleObj, serviceRequests, setSingleSR } = useContext(DataContext);
     const { setEstimateRoute, setSRroute } = useContext(RoutingContext)
@@ -31,8 +38,8 @@ const DashBoard = () => {
         setSingleSR(updatedArr[0]);
     }
 
-    const renderedRows = serviceRequests.map((item) => {
-        return <ServiceRequestTR key={item.ID} record={item} onClick={() => handleCatClick2(`service-request${item.ID}`, item.ID)} />
+    const renderedRows = serviceRequests.map((item, index) => {
+        return <ServiceRequestTR key={item.ID} index={index} record={item} onClick={() => handleCatClick2(`service-request${item.ID}`, item.ID)} />
     })
 
     const renderedEstimates = estimates.map((object, index) => {
@@ -53,9 +60,8 @@ const DashBoard = () => {
                     </ol>
                 </div>
                 <div className="col-md-6">
-                    <NavLink className="text-primary fs-13" style={{ float: 'right' }} data-bs-toggle="offcanvas" href="#offcanvasExample1" role="button" aria-controls="offcanvasExample1">+ Add Service Request</NavLink>
-                    <NavLink className="text-primary fs-13 me-4" style={{ float: 'right' }} data-bs-toggle="offcanvas" href="#offcanvasExample1" role="button" aria-controls="offcanvasExample1">+ Add Estimate</NavLink>
-
+                    <NavLink to='/Dashboard/Estimates' className="text-primary fs-13" style={{ float: 'right' }} >+ Add Service Request</NavLink>
+                    <NavLink to='/Dashboard/Service-Requests' className="text-primary fs-13 me-4" style={{ float: 'right' }} >+ Add Estimate</NavLink>
                 </div>
 
 
@@ -560,14 +566,11 @@ const DashBoard = () => {
                                     <div className="tbl-caption">
                                         <h4 className="heading mb-0">Service Requests</h4>
                                     </div>
-                                    <table id="example5" className="display table" style={{ minWidth: '845px' }}>
+                                    <table id="serviceReqTbl" className="display table" style={{ minWidth: '845px' }}>
                                         <thead>
                                             <tr className='serviceRequestRecords'>
                                                 <th>
-                                                    <div className="form-check custom-checkbox ms-2">
-                                                        <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
-                                                        <label className="form-check-label" htmlFor="customCheckBox2"></label>
-                                                    </div>
+                                                    #
                                                 </th>
 
                                                 <th>Customer Name </th>
@@ -654,7 +657,7 @@ const DashBoard = () => {
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">Service Requests</h4>
                                 </div>
-                                <table id="empoloyees-tblwrapper" className="table">
+                                <table id="empoloyeesTbl" className="table">
                                     <thead>
                                         <tr>
                                             <th>
