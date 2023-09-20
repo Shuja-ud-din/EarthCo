@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom'
 
 const SideBar = () => {
 
-    const [activeIndex, setActiveIndex] = useState(0)
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [subClass, setSubClass] = useState(-1)
 
 
     const sideBarData = [
@@ -58,6 +59,25 @@ const SideBar = () => {
                 <path d="M13.9014 4.21895L18.0869 8.40445" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
         }
+    ]
+
+    const subMenu = [
+        {
+            label: 'Service Request',
+            path: '/Dashboard/SummaryReport',
+        },
+        {
+            label: 'Proposal Summary',
+            path: '/Dashboard/ProposalSummary',
+        },
+        {
+            label: 'Weekly',
+            path: '/Dashboard/Weekly-Reports',
+        },
+        {
+            label: 'Landsacpe',
+            path: '/Dashboard/Landsacpe',
+        },
     ]
 
     const handlePreventLink = (event) => {
@@ -119,82 +139,39 @@ const SideBar = () => {
                                 expand_more
                             </span>
                         </a>
-                        <ul className="left" >
+                        <ul className="subMenu" >
                             {showSubMenu &&
                                 <>
-                                    <li><NavLink to="/Dashboard/SummaryReport">Service Request</NavLink></li>
-                                    <li><NavLink to="/Dashboard/ProposalSummary">Proposal Summary</NavLink></li>
-                                    <li><NavLink to="/Dashboard/Weekly-Reports">Weekly </NavLink></li>
-                                    <li><NavLink to="/Dashboard/Landscape">Landsacpe</NavLink></li>
+                                    {subMenu.map((link, index) => {
+                                        let activeClass = '';
+                                        if (subClass === index) {
+                                            activeClass = 'activeSub'
+                                        }
+                                        else {
+                                            activeClass = ''
+                                        }
+                                        // const activeSub = (indx) => {
+                                        //     if (indx === indx) {
+                                        //         setSubClass('activeSub')
+                                        //     }
+                                        // }
+                                        // const deactiveSub = () => {
+                                        //     setSubClass('')
+                                        // }
+
+                                        return (
+                                            <li key={index}><NavLink to={link.path} style={{ display: 'flex' }} onMouseEnter={() => setSubClass(index)} onMouseLeave={() => setSubClass(-1)}>
+                                                <div className='blueBarBox'>
+                                                    <span id='blueBar' className={activeClass}></span>
+                                                </div>
+                                                {link.label}
+                                            </NavLink></li>
+                                        )
+                                    })}
                                 </>
                             }
                         </ul>
                     </li>
-                    {/* <li>
-                        <NavLink to='/Landscapelist' className="" >
-                            <div className="menu-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fillRule="evenodd" clipRule="evenodd" d="M14.7379 2.76181H8.08493C6.00493 2.75381 4.29993 4.41181 4.25093 6.49081V17.2038C4.20493 19.3168 5.87993 21.0678 7.99293 21.1148C8.02393 21.1148 8.05393 21.1158 8.08493 21.1148H16.0739C18.1679 21.0298 19.8179 19.2998 19.8029 17.2038V8.03781L14.7379 2.76181Z" stroke="#888888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M14.4751 2.75V5.659C14.4751 7.079 15.6231 8.23 17.0431 8.234H19.7981" stroke="#888888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M14.2882 15.3585H8.88818" stroke="#888888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M12.2432 11.606H8.88721" stroke="#888888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </div>
-                            <span className="nav-text">Landsacpe</span>
-                        </NavLink>
-                    </li> */}
-
-
-
-                    {/* <li><a className="" >
-                        <div className="menu-icon">
-                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fillRule="evenodd" clipRule="evenodd" d="M14.9732 2.52102H7.0266C4.25735 2.52102 2.52118 4.48177 2.52118 7.25651V14.7438C2.52118 17.5186 4.2491 19.4793 7.0266 19.4793H14.9723C17.7507 19.4793 19.4795 17.5186 19.4795 14.7438V7.25651C19.4795 4.48177 17.7507 2.52102 14.9732 2.52102Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M7.73657 11.0002L9.91274 13.1754L14.2632 8.82493" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </div>
-                        <span className="nav-text">Performance</span>
-                    </a>
-                    </li>
-                    <li><a className="" >
-                        <div className="menu-icon">
-                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.75713 9.35157V15.64" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M11.0349 6.34253V15.64" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M15.2428 12.6746V15.64" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
-                                <path fillRule="evenodd" clipRule="evenodd" d="M15.2952 1.83333H6.70474C3.7103 1.83333 1.83331 3.95274 1.83331 6.95306V15.0469C1.83331 18.0473 3.70157 20.1667 6.70474 20.1667H15.2952C18.2984 20.1667 20.1666 18.0473 20.1666 15.0469V6.95306C20.1666 3.95274 18.2984 1.83333 15.2952 1.83333Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </div>
-                        <span className="nav-text">Projects</span>
-                    </a>
-                    </li>
-                 
-                    <li><a className="" >
-                        <div className="menu-icon">
-                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fillRule="evenodd" clipRule="evenodd" d="M8.79222 13.9396C12.1738 13.9396 15.0641 14.452 15.0641 16.4989C15.0641 18.5458 12.1931 19.0729 8.79222 19.0729C5.40972 19.0729 2.52039 18.5651 2.52039 16.5172C2.52039 14.4694 5.39047 13.9396 8.79222 13.9396Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
-                                <path fillRule="evenodd" clipRule="evenodd" d="M8.79223 11.0182C6.57206 11.0182 4.77173 9.21874 4.77173 6.99857C4.77173 4.7784 6.57206 2.97898 8.79223 2.97898C11.0115 2.97898 12.8118 4.7784 12.8118 6.99857C12.8201 9.21049 11.0326 11.0099 8.82064 11.0182H8.79223Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M15.1095 9.9748C16.5771 9.76855 17.7073 8.50905 17.7101 6.98464C17.7101 5.48222 16.6147 4.23555 15.1782 3.99997" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M17.0458 13.5045C18.4675 13.7163 19.4603 14.2149 19.4603 15.2416C19.4603 15.9483 18.9928 16.4067 18.2374 16.6936" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </div>
-                        <span className="nav-text">Manage Clients</span>
-                    </a>
-                    </li>
-                    <li><a className="" >
-                        <div className="menu-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fillRule="evenodd" clipRule="evenodd" d="M14.7379 2.76181H8.08493C6.00493 2.75381 4.29993 4.41181 4.25093 6.49081V17.2038C4.20493 19.3168 5.87993 21.0678 7.99293 21.1148C8.02393 21.1148 8.05393 21.1158 8.08493 21.1148H16.0739C18.1679 21.0298 19.8179 19.2998 19.8029 17.2038V8.03781L14.7379 2.76181Z" stroke="#888888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M14.4751 2.75V5.659C14.4751 7.079 15.6231 8.23 17.0431 8.234H19.7981" stroke="#888888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M14.2882 15.3585H8.88818" stroke="#888888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M12.2432 11.606H8.88721" stroke="#888888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-
-                        </div>
-                        <span className="nav-text">Blog</span>
-                      <span className="badge badge-danger badge-xs ms-1">NEW</span> 
-                    </a>
-                    </li> */}
                 </ul>
             </div>
         </div>

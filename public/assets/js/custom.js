@@ -119,11 +119,11 @@ var W3Crm = function () {
 	}
 
 	var handleHeaderHight = function () {
-		const headerHight = $('.header').innerHeight();
-		$(window).scroll(function () {
-			if ($('body').attr('data-layout') === "horizontal" && $('body').attr('data-header-position') === "static" && $('body').attr('data-sidebar-position') === "fixed")
-				$(this.window).scrollTop() >= headerHight ? $('.deznav').addClass('fixed') : $('.deznav').removeClass('fixed')
-		});
+		// const headerHight = $('.header').innerHeight();
+		// $(window).scroll(function () {
+		// 	if ($('body').attr('data-layout') === "horizontal" && $('body').attr('data-header-position') === "static" && $('body').attr('data-sidebar-position') === "fixed")
+		// 		$(this.window).scrollTop() >= headerHight ? $('.deznav').addClass('fixed') : $('.deznav').removeClass('fixed')
+		// });
 	}
 
 	var handleMenuTabs = function () {
@@ -155,17 +155,17 @@ var W3Crm = function () {
 		/* Main navigation fixed on top  when scroll down function custom */
 		jQuery(window).on('scroll', function () {
 
-			if (jQuery('.header').length > 0) {
-				var menu = jQuery('.header');
-				$(window).scroll(function () {
-					var sticky = $('.header'),
-						scroll = $(window).scrollTop();
+			// if (jQuery('.header').length > 0) {
+			// 	var menu = jQuery('.header');
+			// 	$(window).scroll(function () {
+			// 		var sticky = $('.header'),
+			// 			scroll = $(window).scrollTop();
 
-					if (scroll >= 100) {
-						sticky.addClass('is-fixed');
-					} else { sticky.removeClass('is-fixed'); }
-				});
-			}
+			// 		if (scroll >= 100) {
+			// 			sticky.addClass('is-fixed');
+			// 		} else { sticky.removeClass('is-fixed'); }
+			// 	});
+			// }
 
 		});
 		/* Main navigation fixed on top  when scroll down function custom end*/
@@ -527,7 +527,7 @@ var W3Crm = function () {
 	var handlePageOnScroll = function (event) {
 
 		'use strict';
-		var headerHeight = parseInt($('.header').css('height'), 10);
+		// var headerHeight = parseInt($('.header').css('height'), 10);
 
 		$('.navbar-nav .scroll').on('click', function (event) {
 			event.preventDefault();
@@ -538,7 +538,7 @@ var W3Crm = function () {
 			if (this.hash !== "") {
 				var hash = this.hash;
 				var seactionPosition = parseInt($(hash).offset().top, 10);
-				var headerHeight = parseInt($('.header').css('height'), 10);
+				// var headerHeight = parseInt($('.header').css('height'), 10);
 
 				var scrollTopPosition = seactionPosition - headerHeight;
 				$('html, body').animate({
@@ -557,7 +557,7 @@ var W3Crm = function () {
 
 		if (jQuery('.navbar-nav').length > 0) {
 
-			var headerHeight = parseInt(jQuery('.header').height(), 10);
+			// var headerHeight = parseInt(jQuery('.header').height(), 10);
 
 			jQuery(document).on("scroll", function () {
 

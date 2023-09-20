@@ -40,6 +40,7 @@ const HeaderExp = () => {
 
     return (
         <>
+            {/* <div style={{ height: '4vw' }}> */}
             <div className="nav-header">
                 <NavLink className="brand-logo" style={{ background: '#fff' }}>
                     {/* <svg className="logo-abbr" width="39" height="23" viewBox="0 0 39 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +67,7 @@ const HeaderExp = () => {
             </div>
             <div>
                 <div className="header">
-                    <div className="header-content" style={{ background: '#000000e6' }}>
+                    <div className="header-content" style={{ background: '#000' }}>
                         <nav className="navbar navbar-expand">
                             <div className="collapse navbar-collapse justify-content-between">
                                 <div className="header-left">
@@ -386,6 +387,7 @@ const HeaderExp = () => {
                     </div>
                 </div>
             </div>
+            {/* </div> */}
         </>
     )
 }

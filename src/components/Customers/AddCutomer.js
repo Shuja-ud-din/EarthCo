@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import AdressModal from '../AdressModal';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const AddCutomer = () => {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const [customerAdress, setCustomerAdress] = useState({})
     // const [SLadress, setSLadress] = useState({})
@@ -48,13 +48,15 @@ const AddCutomer = () => {
         e.preventDefault();
         setContacts([
             ...contacts,
-            contact
+            { ...contact, id: Math.round(Math.random() * 9999) }
         ])
 
         for (let n = 1; n <= 4; n++) {
             document.getElementById(`contactInp${n}`).value = '';
         }
     }
+
+    console.log(contacts);
 
     // service Locations
 
@@ -73,7 +75,7 @@ const AddCutomer = () => {
         e.preventDefault();
         setServiceLocations([
             ...serviceLocations,
-            SRlocation
+            { ...SRlocation, id: Math.round(Math.random() * 9999) }
         ]);
         setServiceLocArr([
             ...serviceLocArr,
@@ -82,9 +84,11 @@ const AddCutomer = () => {
         for (let n = 1; n <= 4; n++) {
             document.getElementById(`SRinput${n}`).value = '';
         }
-        setAdress2('')
-        setSLadress({})
+        setAdress2('');
+        setSLadress({});
     }
+
+    console.log(serviceLocations);
 
     const postCustomer = async () => {
         const response = await axios.post('http://localhost:8001/AddCustomer', {
@@ -100,20 +104,34 @@ const AddCutomer = () => {
     }
 
     const handleSubmit = () => {
-        console.log(contacts);
-        console.log(serviceLocArr);
         if (contacts[0] !== undefined && serviceLocArr[0] !== undefined) {
             postCustomer();
         }
     }
 
+    const deleteContact = (id) => {
+        const updatedArr = contacts.filter((item) => {
+            return item.id !== id;
+        })
+        setContacts(
+            updatedArr
+        )
+    }
+
+    const deleteLocation = (id) => {
+        const updatedArr = serviceLocations.filter((item) => {
+            return item.id !== id;
+        })
+        setServiceLocations(updatedArr)
+    }
+
     return (
         <div className="container-fluid">
-            <div class="card">
-                <div class="card-header">
+            <div className="card">
+                <div className="card-header">
                     <h4 className="modal-title" id="#gridSystemModal">Customer Info</h4>
                 </div>
-                <div class="card-body">
+                <div className="card-body">
                     <div className="row">
                         <div className="col-xl-6 mb-3">
                             <label htmlFor="exampleFormControlInput1" className="form-label">Customer Name <span className="text-danger">*</span></label>
@@ -138,18 +156,18 @@ const AddCutomer = () => {
                         </div>
                         <div className="col-xl-6 ">
                             <label className="form-label">Description<span className="text-danger">*</span></label>
-                            <textarea class="form-txtarea form-control" name='description' onChange={handleCustomerInfo} rows="4" id="comment"></textarea>
+                            <textarea className="form-txtarea form-control" name='description' onChange={handleCustomerInfo} rows="4" id="comment"></textarea>
                         </div>
                     </div>
                 </div>
             </div>
 
             <form onSubmit={addContact}>
-                <div class="card">
-                    <div class="card-header">
+                <div className="card">
+                    <div className="card-header">
                         <h4 className="modal-title" id="#gridSystemModal">Contact</h4>
                     </div>
-                    <div class="card-body">
+                    <div className="card-body">
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="row">
@@ -191,6 +209,7 @@ const AddCutomer = () => {
                                                         <th>E-mail</th>
                                                         <th>Phone</th>
                                                         <th>Mobile</th>
+                                                        <th>Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -203,6 +222,15 @@ const AddCutomer = () => {
                                                                     <td>{contact.email}</td>
                                                                     <td>{contact.phone}</td>
                                                                     <td>{contact.mobile}</td>
+                                                                    <td>
+                                                                        <div className='badgeBox'>
+                                                                            <span className="actionBadge badge-danger light border-0" onClick={() => deleteContact(contact.id)}>
+                                                                                <span className="material-symbols-outlined">
+                                                                                    delete
+                                                                                </span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
                                                             </>
                                                         )
@@ -220,11 +248,11 @@ const AddCutomer = () => {
             </form>
 
             <form onSubmit={addServiceLocation}>
-                <div class="card">
-                    <div class="card-header">
+                <div className="card">
+                    <div className="card-header">
                         <h4 className="modal-title" id="#gridSystemModal">Service Locations</h4>
                     </div>
-                    <div class="card-body" id=''>
+                    <div className="card-body" id=''>
                         <div className="row">
                             <div className="col-lg-12">
                                 <div className="row">
@@ -234,7 +262,7 @@ const AddCutomer = () => {
                                     </div>
                                     <div className="col-xl-4 mb-3" style={{ position: 'relative' }}>
                                         <label className="form-label">Adress<span className="text-danger">*</span></label>
-                                        <input type="text" id='SRinput2' onClick={() => { setShowPop2(!showPop2) }} style={{ cursor: 'pointer' }} name='adress' className="form-control" value={adress2} placeholder="Adress" required />
+                                        <input type="text" id='SRinput2' onClick={() => { setShowPop2(!showPop2) }} style={{ cursor: 'pointer' }} name='adress' className="form-control" value={adress2} placeholder="Adress" readOnly />
                                         {showPop2 || <AdressModal boolState={setShowPop2} handleAdress={setAdress2} adress={SLadress} setAdress={setSLadress} />}
 
                                     </div>
@@ -268,6 +296,7 @@ const AddCutomer = () => {
                                                         <th>Address</th>
                                                         <th>Phone</th>
                                                         <th>Customer Fax</th>
+                                                        <th>Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -280,6 +309,15 @@ const AddCutomer = () => {
                                                                     <td>{contact.adress}</td>
                                                                     <td>{contact.phone}</td>
                                                                     <td>{contact.fax}</td>
+                                                                    <td>
+                                                                        <div className='badgeBox'>
+                                                                            <span className="actionBadge badge-danger light border-0" onClick={() => deleteLocation(contact.id)}>
+                                                                                <span className="material-symbols-outlined">
+                                                                                    delete
+                                                                                </span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
                                                             </>
                                                         )
@@ -300,6 +338,9 @@ const AddCutomer = () => {
             <div className='text-end'>
                 {/* <NavLink to='/Dashboard/Customers'> */}
                 <button className="btn btn-primary me-1" onClick={handleSubmit}>Submit</button>
+                <NavLink to='/Dashboard/Customers'>
+                    <button className="btn btn-danger light ms-1">Cancel</button>
+                </NavLink>
                 {/* </NavLink> */}
             </div>
         </div >

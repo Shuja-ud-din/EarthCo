@@ -56,7 +56,7 @@ function App() {
               <Route path='Add-Estimate' element={<AddEstimate />} />
               <Route path={estimateRoute} element={<EstimateIDopen />} />
             </Route>
-            <Route path='Service-Requests' element={<ServiceIndex />}>
+            <Route path='Service-Requests/*' element={<ServiceIndex />}>
               <Route path='' element={<SRlist />} />
               <Route path={SRroute} element={<ServiceRequest />} />
             </Route>

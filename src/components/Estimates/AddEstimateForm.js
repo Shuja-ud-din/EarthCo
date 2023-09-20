@@ -1,17 +1,22 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import StatusActions from '../StatusActions'
 import { Form } from 'react-bootstrap'
 import { DataContext } from '../../context/AppData';
+import { NavLink } from 'react-router-dom';
 
 const AddEstimateForm = () => {
 
     const { estimateItems } = useContext(DataContext);
 
-    const [itemObj, setItemObj] = useState(estimateItems)
+    const inputFile = useRef(null);
+
+    const [itemObj, setItemObj] = useState(estimateItems);
+    const [date, setDate] = useState('2023-09-10')
     const [itemName, setItemName] = useState();
     const [itemQty, setItemQty] = useState();
     const [itemDesc, setItemDesc] = useState();
     const [rate, setRate] = useState();
+    const [files, setFiles] = useState([]);
 
     const addItem = (event) => {
         event.preventDefault();
@@ -40,9 +45,30 @@ const AddEstimateForm = () => {
         setItemObj(updatedArr)
     }
 
+    const addFile = () => {
+        inputFile.current.click();
+    }
+
+    const trackFile = (event) => {
+        const file = event.target.files[0];
+        setFiles([
+            ...files,
+            file
+        ])
+    }
+
+    const deleteFile = (id) => {
+        const updatedArr = files.filter((file) => {
+            return file.name !== id;
+        });
+        setFiles(updatedArr);
+    }
+
+    console.log(files);
+
     const renderItems = itemObj.map((item, index) => {
         return (
-            <tr>
+            <tr key={index}>
                 <td>{index + 1}</td>
                 <td className='text-center'><span>{item.qty}</span></td>
                 <td>
@@ -61,7 +87,7 @@ const AddEstimateForm = () => {
                     <span>{item.tax}</span>
                 </td>
                 <td className='text-center'>
-                    <input type='checkbox' checked />
+                    <input type='checkbox' checked readOnly />
                 </td>
                 <td>
                     <div className='badgeBox' onClick={() => deleteItem(item.id)}>
@@ -126,7 +152,7 @@ const AddEstimateForm = () => {
                                 </div>
                                 <div className="mb-3 col-md-9">
                                     <label className="form-label">Issued Date</label>
-                                    <input className="form-control input-limit-datepicker" placeholder='Issued Date' type="date" name="daterange" value="2023-09-10" />
+                                    <input className="form-control input-limit-datepicker" placeholder='Issued Date' onChange={(e) => setDate(e.target.value)} type="date" name="daterange" value={date} />
                                 </div>
                             </div>
                         </form>
@@ -266,7 +292,7 @@ const AddEstimateForm = () => {
                             <div className="itemtitleBar">
                                 <h4>Items</h4>
                             </div>
-                            <a href='/' className="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal" style={{ margin: '12px 20px' }}>+ Add Items</a>
+                            <button className="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal" style={{ margin: '12px 20px' }}>+ Add Items</button>
                             <div className="table-responsive active-projects style-1">
                                 <table id="empoloyees-tblwrapper" className="table">
                                     <thead>
@@ -298,72 +324,47 @@ const AddEstimateForm = () => {
                             <div className="itemtitleBar">
                                 <h4>Files</h4>
                             </div>
-                            <a className="btn btn-primary btn-sm" style={{ margin: '12px 20px' }}>+ Add</a>
+                            <button className="btn btn-primary btn-sm" style={{ margin: '12px 20px' }} onClick={addFile}>+ Add</button>
+                            <input type='file' ref={inputFile} onChange={trackFile} style={{ display: 'none' }} />
                             <div className="table-responsive active-projects style-1">
                                 <table id="empoloyees-tblwrapper" className="table">
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>File Name</th>
-                                            <th>Caption</th>
-                                            <th>Date</th>
-                                            <th>Share</th>
+                                            <th>Last Modified Date</th>
+                                            <th>Type</th>
+                                            <th>Size</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><span>1001</span></td>
-                                            <td>
-                                                <div className="products">
-                                                    <div>
-                                                        <h6>Liam Antony</h6>
-
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td><span>Computer Science</span></td>
-                                            <td><span className="text-primary">abc@gmail.com</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span>1001</span></td>
-                                            <td>
-                                                <div className="products">
-                                                    <div>
-                                                        <h6>Noah Oliver</h6>
-
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td><span>Computer Science</span></td>
-                                            <td><span className="text-primary">abc@gmail.com</span></td>
-
-                                        </tr>
-                                        <tr>
-                                            <td><span>1001</span></td>
-                                            <td>
-                                                <div className="products">
-                                                    <div>
-                                                        <h6>Elijah James</h6>
-
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td><span>Computer Science</span></td>
-                                            <td><span className="text-primary">abc@gmail.com</span></td>
-
-                                        </tr>
-                                        <tr>
-                                            <td><span>1001</span></td>
-                                            <td>
-                                                <div className="products">
-                                                    <div>
-                                                        <h6>Liam Antony</h6>
-
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td><span>Computer Science</span></td>
-                                            <td><span className="text-primary">abc@gmail.com</span></td>
-                                        </tr>
+                                        {files && files.map((file, index) => {
+                                            return (
+                                                <tr key={index}>
+                                                    <td>{index + 1}</td>
+                                                    <td><h5>{file.name}</h5></td>
+                                                    <td><span>{file.lastModifiedDate.toLocaleDateString()}</span></td>
+                                                    <td>
+                                                        <div className="products">
+                                                            <div>
+                                                                {file.type}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td><span className="text-primary">{(file.size / 1024).toFixed(2)} kb</span></td>
+                                                    <td>
+                                                        <div className='badgeBox' onClick={() => deleteFile(file.name)}>
+                                                            <span className="actionBadge badge-danger light border-0">
+                                                                <span className="material-symbols-outlined">
+                                                                    delete
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })}
                                     </tbody>
                                 </table>
                             </div>
@@ -449,9 +450,11 @@ const AddEstimateForm = () => {
                 </div>
 
                 <div class="mb-2 row text-end">
-                    <div>
-                        <a href='#'><button type='button' class="btn btn-primary me-1">Submit</button></a>
-                        <button class="btn btn-danger light ms-1">Cancel</button>
+                    <div className='flex-right'>
+                        <button type='button' class="btn btn-primary me-1">Submit</button>
+                        <NavLink to='/Dashboard/Estimates'>
+                            <button class="btn btn-danger light ms-1">Cancel</button>
+                        </NavLink>
                     </div>
                 </div>
             </div>

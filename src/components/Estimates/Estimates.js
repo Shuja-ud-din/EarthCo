@@ -112,14 +112,14 @@ const Estimates = () => {
                             <div className="tbl-caption">
                                 <div className="row p-3 ">
                                     <div className="col-md-3">
-                                        <a href='/' className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal" onClick={openModal}>+ Add Estimates</a>
+                                        <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal" onClick={openModal}>+ Add Estimates</button>
                                     </div>
                                     <div className="col-md-7">
                                         <div>
-                                            <input class="from-control form-control-sm" style={{ width: '100%' }} type="text" placeholder="Default input" />
+                                            <input className="from-control form-control-sm" style={{ width: '100%' }} type="text" placeholder="Default input" />
                                         </div>
                                     </div>
-                                    <div class="col-md-2" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                                    <div className="col-md-2" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
                                         <div className="col-md-12">
                                             <Form.Select aria-label="Default select example" size="md">
                                                 <option>All</option>
@@ -177,7 +177,7 @@ const Estimates = () => {
                                                 <option value='Select Customer'>Select Customer...</option>
                                                 {customerOptions}
                                             </Form.Select>
-                                            {/* <select class="me-sm-2 default-select form-control wide" value={customer} onChange={handleChangeCustomer} id="inlineFormCustomSelect">
+                                            {/* <select className="me-sm-2 default-select form-control wide" value={customer} onChange={handleChangeCustomer} id="inlineFormCustomSelect">
                                                 <option value='Select Customer'>Select Customer...</option>
                                                 {customerOptions}
                                             </select> */}
@@ -192,7 +192,7 @@ const Estimates = () => {
                                                     return <option key={index} value={location.name}>{location.name}</option>
                                                 })}
                                             </Form.Select>
-                                            {/* <select class="me-sm-2 default-select form-control wide" value={serviceLocation} onChange={(e) => setServiceLocation(e.target.value)} id="inlineFormCustomSelect">
+                                            {/* <select className="me-sm-2 default-select form-control wide" value={serviceLocation} onChange={(e) => setServiceLocation(e.target.value)} id="inlineFormCustomSelect">
                                                 <option value="Select Customer First">Select Customer First...</option>
                                                 {locationOptions}
                                             </select> */}

@@ -35,8 +35,8 @@ const DashBoard = () => {
         return <ServiceRequestTR key={item.ID} record={item} onClick={() => handleCatClick2(`service-request${item.ID}`, item.ID)} />
     })
 
-    const renderedEstimates = estimates.map((object) => {
-        return <EstimateTR key={object.estimateID} onClick={() => handleCatClick(`Estimate${object.estimateID}`, object.estimateID)} estimate={object} />
+    const renderedEstimates = estimates.map((object, index) => {
+        return <EstimateTR key={object.estimateID} index={index} onClick={() => handleCatClick(`Estimate${object.estimateID}`, object.estimateID)} estimate={object} />
     });
     return (
         <div className="content-body">
