@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import StatusCards from '../../ServiceRequest/StatusCards'
 import { NavLink } from 'react-router-dom'
 import { useContext } from 'react';
 import TitleBar from '../../TitleBar'
 import { DataContext } from '../../../context/AppData'
 import { Form } from 'react-bootstrap';
-
+import $ from 'jquery';
+import 'datatables.net';
 
 const WeeklyReportlist = () => {
     const icon = <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -17,14 +18,15 @@ const WeeklyReportlist = () => {
 
     const { wReportData } = useContext(DataContext);
 
-    const renderReports = wReportData.map((item) => {
+    useEffect(() => {
+        $('#weeklyTbl').DataTable();
+    }, [])
+
+    const renderReports = wReportData.map((item, index) => {
         return (
             <tr>
                 <td>
-                    <div className="form-check custom-checkbox ms-2">
-                        <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
-                        <label className="form-check-label" htmlFor="customCheckBox2"></label>
-                    </div>
+                    {index + 1}
                 </td>
                 <td>
                     {item.id}
@@ -45,57 +47,52 @@ const WeeklyReportlist = () => {
     })
     return (
         <>
-            <div className="content-body">
-                <TitleBar icon={icon} title='Weekly Reports' />
-                <div className="container-fluid">
-                    <div className="row">
-                        <StatusCards newData={1178} open={5142} closed={71858} total={78178} />
-                        <div className="col-xl-12">
-                            <div className="card">
-                                <div className="card-body p-0">
-                                    <div className="tbl-caption">
-                                        <div className="row p-3 ">
-                                            <div className="col-md-6">
-                                                <NavLink to='/Dashboard/Weekly-Reports/Add-Weekly-Report'>
-                                                    <a href='/' className="btn btn-primary btn-md">+ Add Weekly Report</a>
-                                                </NavLink>
-                                            </div>
-                                            <div class="col-md-6" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                                <div className="col-md-3">
-                                                    <Form.Select aria-label="Default select example" size="md">
-                                                        <option>All</option>
-                                                        <option value="1">Current Month</option>
-                                                        <option value="2">Previous Month</option>
-                                                    </Form.Select>
-                                                </div>
+            <TitleBar icon={icon} title='Weekly Reports' />
+            <div className="container-fluid">
+                <div className="row">
+                    <StatusCards newData={1178} open={5142} closed={71858} total={78178} />
+                    <div className="col-xl-12">
+                        <div className="card">
+                            <div className="card-body">
+                                <div className="tbl-caption">
+                                    <div className="row p-3 ">
+                                        <div className="col-md-6">
+                                            <NavLink to='/Dashboard/Weekly-Reports/Add-Weekly-Report'>
+                                                <a href='/' className="btn btn-primary btn-md">+ Add Weekly Report</a>
+                                            </NavLink>
+                                        </div>
+                                        <div class="col-md-6" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                            <div className="col-md-3">
+                                                <Form.Select aria-label="Default select example" size="md">
+                                                    <option>All</option>
+                                                    <option value="1">Current Month</option>
+                                                    <option value="2">Previous Month</option>
+                                                </Form.Select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="table-responsive">
-                                        <table id="example5" className="display table" style={{ minWidth: '845px' }}>
-                                            <thead>
-                                                <tr className='serviceRequestRecords'>
-                                                    <th>
-                                                        <div className="form-check custom-checkbox ms-2">
-                                                            <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
-                                                            <label className="form-check-label" htmlFor="customCheckBox2"></label>
-                                                        </div>
-                                                    </th>
-                                                    <th>ID</th>
-                                                    <th>Assign / Appointment</th>
-                                                    <th>Customer</th>
-                                                    <th>Status</th>
-                                                    <th>Created</th>
-                                                    <th>Estimate Total</th>
-                                                    <th>Work Requested</th>
-                                                    <th>Report</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {renderReports}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                </div>
+                                <div className="table-responsive">
+                                    <table id="weeklyTbl" className="display table" style={{ minWidth: '845px' }}>
+                                        <thead>
+                                            <tr className='serviceRequestRecords'>
+                                                <th>
+                                                    #
+                                                </th>
+                                                <th>ID</th>
+                                                <th>Assign / Appointment</th>
+                                                <th>Customer</th>
+                                                <th>Status</th>
+                                                <th>Created</th>
+                                                <th>Estimate Total</th>
+                                                <th>Work Requested</th>
+                                                <th>Report</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {renderReports}
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

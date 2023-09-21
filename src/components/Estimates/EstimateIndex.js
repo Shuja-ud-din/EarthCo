@@ -11,13 +11,11 @@ const EstimateIndex = () => {
 
     return (
         <>
-            <div className="content-body" style={{ paddingBottom: '1px' }}>
-                <Routes>
-                    <Route path='' element={<EstimateList />} />
-                    <Route path={estimateRoute} element={<EstimateIDopen />} />
-                    <Route path='Add-Estimate' element={<AddEstimate />} />
-                </Routes>
-            </div>
+            <Routes>
+                <Route path='' element={<EstimateList />} />
+                <Route path={estimateRoute} element={<EstimateIDopen />} />
+                <Route path='Add-Estimate' element={<AddEstimate />} />
+            </Routes>
         </>
     )
 }

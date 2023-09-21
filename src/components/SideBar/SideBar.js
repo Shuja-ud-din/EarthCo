@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import $ from 'jquery'
+import { StyleContext } from '../../context/StyleData';
 
 const SideBar = () => {
 
+    const subShowRef = useRef(null);
+    const sidebarRef = useRef(null);
+
+    const { showSubMenu, setShowSM, mainControl, setMainControl, eliminate } = useContext(StyleContext);
+
     const [activeIndex, setActiveIndex] = useState(0);
     const [subClass, setSubClass] = useState(-1);
+
+    const [showSubMenuHov, setSubHov] = useState(false)
 
     const sideBarData = [
         {
@@ -82,105 +91,174 @@ const SideBar = () => {
         },
         {
             label: 'Landsacpe',
-            path: '/Dashboard/Landsacpe',
+            path: '/Dashboard/Landscape',
         },
     ]
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                subShowRef.current &&
+                !subShowRef.current.contains(event.target)
+            ) {
+                setSubHov(false)
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+
+        const handleSidebar = (event) => {
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target) && !eliminate.current.contains(event.target)) {
+                setMainControl('mobileH')
+            }
+            console.log(eliminate);
+        }
+
+        document.body.addEventListener('click', handleSidebar)
+
+        return () => {
+            document.body.removeEventListener('click', handleSidebar)
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
+
     const handlePreventLink = (event) => {
         event.preventDefault();
-        toggleShowMenu()
+        if (mainControl === 'tab') {
+            setSubHov(!showSubMenuHov);
+            setShowSM(false);
+        }
+        else {
+            toggleShowMenu();
+        }
     }
+
+    let activeClass = '';
 
     const renderOptions = sideBarData.map((option, index) => {
         const handleActiveClass = (clickIndex) => {
             setActiveIndex(clickIndex)
         }
-        let activeClass = '';
-        if (window.location.pathname === option.path) {
+        if (activeIndex === index) {
             activeClass = 'mm-active'
         }
-        if (activeIndex === index) {
+        if (window.location.pathname === option.path) {
             activeClass = 'mm-active'
         }
         else {
             activeClass = ''
         }
         return (
-            <li key={index} className={activeClass} onClick={() => { handleActiveClass(index) }}>
-                <NavLink to={option.path}  >
+            <li key={index} className={activeClass + ' linkSide'} onClick={() => { handleActiveClass(index) }}>
+                <NavLink to={option.path} >
                     <div className="menu-icon ">
                         {option.icon}
                     </div>
-                    <span className="nav-text">{option.label}</span>
+                    <span className="nav-text navLabel">{option.label}</span>
                 </NavLink>
             </li>
         )
     })
 
-    const [showSubMenu, setShowSM] = useState(false);
-
     const toggleShowMenu = () => {
-        // document.getElementById('collapseMenu').classList.toggle('mm-show');
-        document.getElementById('bottomChev').classList.toggle('rotatezero');
         setShowSM(!showSubMenu);
     }
+    useEffect(() => {
+        if (showSubMenu === true) {
+            document.getElementById('bottomChev').classList.add('rotatezero');
+        }
+        else {
+            document.getElementById('bottomChev').classList.remove('rotatezero');
+        }
+    }, [showSubMenu])
 
     return (
-        <div className="deznav">
-            <div className="deznav-scroll">
-                <ul className="metismenu" id="menu">
-                    {renderOptions}
-                    <li>
-                        <a href='/' className='expand-bottom' onClick={handlePreventLink}>
-                            <div className="menu-icon">
-                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.75713 9.35157V15.64" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"></path>
-                                    <path d="M11.0349 6.34253V15.64" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"></path>
-                                    <path d="M15.2428 12.6746V15.64" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"></path>
-                                    <path fillRule="evenodd" clipRule="evenodd" d="M15.2952 1.83333H6.70474C3.7103 1.83333 1.83331 3.95274 1.83331 6.95306V15.0469C1.83331 18.0473 3.70157 20.1667 6.70474 20.1667H15.2952C18.2984 20.1667 20.1666 18.0473 20.1666 15.0469V6.95306C20.1666 3.95274 18.2984 1.83333 15.2952 1.83333Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"></path>
-                                </svg>
-                            </div>
-                            <span className="nav-text">Reports</span>
-                            <span className="material-symbols-sharp" id='bottomChev'>
-                                expand_more
-                            </span>
-                        </a>
-                        <ul className="subMenu" >
-                            {showSubMenu &&
-                                <>
-                                    {subMenu.map((link, index) => {
-                                        let activeClass = '';
-                                        if (subClass === index) {
-                                            activeClass = 'activeSub'
-                                        }
-                                        else {
-                                            activeClass = ''
-                                        }
-                                        // const activeSub = (indx) => {
-                                        //     if (indx === indx) {
-                                        //         setSubClass('activeSub')
-                                        //     }
-                                        // }
-                                        // const deactiveSub = () => {
-                                        //     setSubClass('')
-                                        // }
+        <>
+            <div className="deznav" id='sideBarDez' ref={sidebarRef}>
+                <div className="deznav-scroll">
+                    <ul className="metismenu" id="menu">
+                        {renderOptions}
+                        <li>
+                            <a href='/' className='expand-bottom' onClick={handlePreventLink} ref={subShowRef}>
+                                <div className="menu-icon">
+                                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.75713 9.35157V15.64" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"></path>
+                                        <path d="M11.0349 6.34253V15.64" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"></path>
+                                        <path d="M15.2428 12.6746V15.64" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"></path>
+                                        <path fillRule="evenodd" clipRule="evenodd" d="M15.2952 1.83333H6.70474C3.7103 1.83333 1.83331 3.95274 1.83331 6.95306V15.0469C1.83331 18.0473 3.70157 20.1667 6.70474 20.1667H15.2952C18.2984 20.1667 20.1666 18.0473 20.1666 15.0469V6.95306C20.1666 3.95274 18.2984 1.83333 15.2952 1.83333Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round"></path>
+                                    </svg>
+                                </div>
+                                <span className="nav-text navLabel">Reports
+                                    <span className="material-symbols-sharp" id='bottomChev'>
+                                        expand_more
+                                    </span>
+                                </span>
+                            </a>
+                            <ul className="subMenu" >
+                                {showSubMenu &&
+                                    <>
+                                        {subMenu.map((link, index) => {
+                                            let activeClass = '';
+                                            if (subClass === index) {
+                                                activeClass = 'activeSub'
+                                            }
+                                            else {
+                                                activeClass = ''
+                                            }
+                                            // const activeSub = (indx) => {
+                                            //     if (indx === indx) {
+                                            //         setSubClass('activeSub')
+                                            //     }
+                                            // }
+                                            // const deactiveSub = () => {
+                                            //     setSubClass('')
+                                            // }
 
-                                        return (
-                                            <li key={index}><NavLink to={link.path} style={{ display: 'flex' }} onMouseEnter={() => setSubClass(index)} onMouseLeave={() => setSubClass(-1)}>
-                                                <div className='blueBarBox'>
-                                                    <span id='blueBar' className={activeClass}></span>
-                                                </div>
-                                                {link.label}
-                                            </NavLink></li>
-                                        )
-                                    })}
-                                </>
-                            }
-                        </ul>
-                    </li>
-                </ul>
+                                            return (
+                                                <li key={index}><NavLink to={link.path} style={{ display: 'flex' }} onMouseEnter={() => setSubClass(index)} onMouseLeave={() => setSubClass(-1)}>
+                                                    <div className='blueBarBox'>
+                                                        <span id='blueBar' className={activeClass}></span>
+                                                    </div>
+                                                    {link.label}
+                                                </NavLink></li>
+                                            )
+                                        })}
+                                    </>
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+
+            {showSubMenuHov &&
+                <ul className="activeHover subMenu" >
+                    {showSubMenuHov &&
+                        <>
+                            {subMenu.map((link, index) => {
+                                let activeClass = '';
+                                if (subClass === index) {
+                                    activeClass = 'activeSub'
+                                }
+                                else {
+                                    activeClass = ''
+                                }
+
+                                return (
+                                    <li key={index}><NavLink to={link.path} style={{ display: 'flex' }} onMouseEnter={() => setSubClass(index)} onMouseLeave={() => setSubClass(-1)}>
+                                        <div className='blueBarBox'>
+                                            <span id='blueBar' className={activeClass}></span>
+                                        </div>
+                                        {link.label}
+                                    </NavLink></li>
+                                )
+                            })}
+                        </>
+                    }
+                </ul>
+            }
+        </>
     )
 }
 

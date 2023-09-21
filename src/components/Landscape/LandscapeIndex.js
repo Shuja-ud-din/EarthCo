@@ -15,13 +15,11 @@ const LandscapeIndex = () => {
 
     return (
         <>
-            <div className="content-body">
-                <TitleBar icon={icon} title='Landscape' />
-                <Routes>
-                    <Route path='' element={<Landscapelist />} />
-                    <Route path='Add-Landscape' element={<LandscapeForm />} />
-                </Routes>
-            </div>
+            <TitleBar icon={icon} title='Landscape' />
+            <Routes>
+                <Route path='' element={<Landscapelist />} />
+                <Route path='Add-Landscape' element={<LandscapeForm />} />
+            </Routes>
         </>
     )
 }

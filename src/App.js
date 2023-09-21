@@ -33,6 +33,7 @@ import SRlist from './components/ServiceRequest/SRlist';
 import EstimateList from './components/Estimates/EstimateList';
 import EstimateIDopen from './components/Estimates/EstimateIDopen';
 import AddEstimate from './components/Estimates/AddEstimate';
+import MapIndex from './components/Map/MapIndex';
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
               <Route path='' element={<CustomersTable />} />
               <Route path='Add-Customer' element={<AddCutomer />} />
             </Route>
+            <Route path='Map' element={<MapIndex />} />
             <Route path='Estimates' element={<EstimateIndex />} >
               <Route path='' element={<EstimateList />} />
               <Route path='Add-Estimate' element={<AddEstimate />} />

@@ -5,6 +5,8 @@ import { DataContext } from '../../context/AppData';
 import { RoutingContext } from '../../context/RoutesContext';
 import StatusCards from './StatusCards';
 import { Form } from 'react-bootstrap';
+import $ from 'jquery';
+import 'datatables.net';
 
 const ServiceRequests = () => {
     const { serviceRequests, customers, setSingleSR } = useContext(DataContext);
@@ -25,6 +27,11 @@ const ServiceRequests = () => {
         });
         setSingleSR(updatedArr[0]);
     }
+
+    useEffect(() => {
+        $('#srReqTbl').DataTable();
+    }, [])
+
     function getLocations() {
         const locationsArr = customers.filter((item) => {
             if (customer === item.name) {
@@ -68,8 +75,8 @@ const ServiceRequests = () => {
     })
 
 
-    const renderedRows = serviceRequests.map((item) => {
-        return <ServiceRequestTR record={item} onClick={() => handleCatClick(`service-request${item.ID}`, item.ID)} />
+    const renderedRows = serviceRequests.map((item, index) => {
+        return <ServiceRequestTR index={index} record={item} onClick={() => handleCatClick(`service-request${item.ID}`, item.ID)} />
     })
     return (
         <div className="container-fluid">
@@ -77,7 +84,7 @@ const ServiceRequests = () => {
                 <StatusCards newData={1178} open={5142} closed={71858} total={78178} />
                 <div className="col-xl-12">
                     <div className="card">
-                        <div className="card-body p-0">
+                        <div className="card-body">
                             <div className="tbl-caption">
                                 <div className="row p-3 ">
                                     <div className="col-md-3">
@@ -105,14 +112,11 @@ const ServiceRequests = () => {
                                 </div>
                             </div>
                             <div className="table-responsive">
-                                <table id="example5" className="display table" style={{ minWidth: '845px' }}>
+                                <table id="srReqTbl" className="display table" style={{ minWidth: '845px' }}>
                                     <thead>
                                         <tr className='serviceRequestRecords'>
                                             <th>
-                                                <div className="form-check custom-checkbox ms-2">
-                                                    <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
-                                                    <label className="form-check-label" htmlFor="customCheckBox2"></label>
-                                                </div>
+                                                #
                                             </th>
 
                                             <th>Customer Name </th>

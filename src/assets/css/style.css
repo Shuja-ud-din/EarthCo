@@ -13994,7 +13994,7 @@ label {
 }
 
 .nav-header {
-    height: 3.125rem;
+    height: 3.225rem;
     width: 15rem;
     display: inline-block;
     text-align: left;
@@ -14088,6 +14088,7 @@ label {
     fill: var(--primary);
 }
 
+/* 
 @media only screen and (max-width: 63.9375rem) {
     .nav-header {
         width: 5rem;
@@ -14096,7 +14097,7 @@ label {
     .nav-header .brand-title {
         display: none;
     }
-}
+} */
 
 .nav-control {
     cursor: pointer;
@@ -19359,11 +19360,11 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
     font-weight: 500;
 }
 
-@media only screen and (max-width: 63.9375rem) {
+/* @media only screen and (max-width: 63.9375rem) {
     .nav-header {
         width: 5rem;
     }
-}
+} */
 
 @media (max-width: 47.9375rem) {
     .brand-title {
@@ -45136,7 +45137,7 @@ table.dataTable thead .sorting_asc {
 }
 
 .active-projects .tbl-caption {
-    padding: 20px;
+    padding: 10px 0px;
 }
 
 .active-projects .dt-buttons {
@@ -45581,7 +45582,6 @@ table.dataTable thead .sorting_asc {
 }
 
 .event-scroll {
-    height: 144px;
     padding: 0 1.25rem;
 }
 
@@ -53405,8 +53405,9 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 
 #menu li a {
     cursor: pointer;
-    /* display: flex;
-    justify-content: center; */
+    display: flex;
+    flex-wrap: no-wrap;
+    /* justify-content: center; */
 }
 
 #menu li {

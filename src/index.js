@@ -5,12 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import RoutesContext from './context/RoutesContext';
 import DataFun from './context/AppData';
+import StyleData from './context/StyleData';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <RoutesContext>
     <DataFun>
-      <App />
+      <StyleData>
+        <div id="main-wrapper" className='show'>
+          <App />
+        </div>
+      </StyleData>
     </DataFun>
   </RoutesContext>
 );

@@ -145,8 +145,14 @@
 #customerTbl_paginate a,
 #serviceReqTbl_paginate a,
 #empoloyeesTbl_paginate a,
-#estimateTbl2_paginate a {
+#estimateTbl2_paginate a,
+#srReqTbl_paginate a,
+#irrigationTbl_paginate a,
+#punchListTbl_paginate a,
+#landscapeTbl_paginate a,
+#weeklyTbl_paginate a {
   display: inline-table !important;
+  cursor: pointer;
 }
 
 /* map css */
@@ -188,11 +194,19 @@
   height: 80vh;
 }
 
+.serviceLocations {
+  padding: 1rem;
+}
+
 .serviceLocations .col-md-12 {
   padding: 0;
   height: min-content;
   border: 1px solid grey;
   margin: 0.5rem 0;
+}
+
+.locationInfo {
+  display: flex;
 }
 
 .locationInfo .col-md-3 {
@@ -206,4 +220,100 @@
 
 .locationInfo .col-md-3 p {
   margin: 0;
+}
+
+.react-calendar {
+  width: 100% !important;
+}
+
+/* toggle Sidebar */
+.deznav>* {
+  overflow-x: hidden;
+}
+
+.dispNone {
+  display: none;
+  transition: 0s;
+}
+
+#menu li.linkSide {
+  min-height: 40px;
+  max-height: 40px;
+}
+
+.logoWidth {
+  width: 15rem !important;
+}
+
+.bodyChanges {
+  margin-left: 5rem !important;
+}
+
+
+.toShort {
+  width: 5rem !important;
+}
+
+.header-left {
+  margin-left: 15rem;
+}
+
+.header-left {
+  transition: 0.2s all;
+}
+
+
+/* show hover menu */
+.activeHover {
+  position: fixed;
+  left: 5rem;
+  top: 26.875rem;
+  width: 14.875rem;
+  z-index: 1001;
+  padding: 0.5rem 0 !important;
+  box-shadow: 0rem 0rem 2.5rem 0rem rgba(82, 63, 105, 0.1);
+  height: auto !important;
+  border-radius: 0.375rem;
+  background: #fff;
+}
+
+
+/* mobile sideBar */
+@media only screen and (max-width: 450px) {
+  .deznav {
+    width: 17rem !important;
+  }
+
+  #sideBarDez {
+    transform: translateX(-17rem);
+  }
+
+  #menu li {
+    margin: 2px 0;
+    font-weight: 400;
+  }
+
+  .metismenu>li {
+    padding: 0rem 0.9375rem;
+  }
+
+  .metismenu>li .active {
+    border-radius: 0.375rem;
+  }
+
+  .mm-active {
+    font-size: 0.875rem;
+    padding: 0.75rem 0.875rem;
+    color: #888888;
+  }
+
+  .content-body {
+    padding-right: 0rem;
+    margin-left: 0 !important;
+  }
+}
+
+
+.transRight {
+  transform: translateX(0px) !important;
 }

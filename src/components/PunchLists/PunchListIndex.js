@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TitleBar from '../TitleBar';
 import { NavLink } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
+import $ from 'jquery';
+import 'datatables.net';
 
 const PunchListIndex = () => {
 
@@ -30,8 +32,12 @@ const PunchListIndex = () => {
         }
     }
 
+    useEffect(() => {
+        $('#punchListTbl').DataTable();
+    }, [])
+
     return (
-        <div className="content-body">
+        <>
             <TitleBar icon={icon} title='Punchlists' />
             <div className="container-fluid">
                 <div className="row">
@@ -79,7 +85,7 @@ const PunchListIndex = () => {
                     </div>
                     <div className="col-xl-12">
                         <div className="card">
-                            <div className="card-body p-0">
+                            <div className="card-body">
                                 <div className="tbl-caption">
                                     <div className="row p-3 ">
                                         <div className="col-md-6">
@@ -97,14 +103,11 @@ const PunchListIndex = () => {
                                     </div>
                                 </div>
                                 <div className="table-responsive">
-                                    <table id="example5" className="display table" style={{ minWidth: '845px' }}>
+                                    <table id="punchListTbl" className="display table" style={{ minWidth: '845px' }}>
                                         <thead>
                                             <tr className='serviceRequestRecords'>
                                                 <th>
-                                                    <div className="form-check custom-checkbox ms-2">
-                                                        <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
-                                                        <label className="form-check-label" htmlFor="customCheckBox2"></label>
-                                                    </div>
+                                                    #
                                                 </th>
 
 
@@ -119,10 +122,7 @@ const PunchListIndex = () => {
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <div className="form-check custom-checkbox ms-2">
-                                                        <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
-                                                        <label className="form-check-label" htmlFor="customCheckBox2"></label>
-                                                    </div>
+                                                    1
                                                 </td>
                                                 <td>Vincente, Allan</td>
                                                 <td>
@@ -213,7 +213,7 @@ const PunchListIndex = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

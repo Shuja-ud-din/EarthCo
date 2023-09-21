@@ -65,209 +65,208 @@ const AddWRform = () => {
     // })
     return (
         <>
-            <div className="content-body">
-                <TitleBar icon={icon} title='Add Weekly Report' />
-                <div className="card-body">
-                    <div className="basic-form">
-                        <form>
-                            <div className="row">
-                                <div className="mb-3 col-md-4">
-                                    <label className="form-label">Customer</label>
-                                    <Form.Select aria-label="Default select example" className='bg-white' size="md">
+            <TitleBar icon={icon} title='Add Weekly Report' />
+            <div className="card-body">
+                <div className="basic-form">
+                    <form>
+                        <div className="row">
+                            <div className="mb-3 col-md-4">
+                                <label className="form-label">Customer</label>
+                                <Form.Select aria-label="Default select example" className='bg-white' size="md">
+                                    <option>Select Custmer...</option>
+                                    <option>Hillandale Ave</option>
+                                    <option>Crest DeVille</option>
+                                </Form.Select>
+                                {/* <select class="me-sm-2 default-select form-control wide" id="inlineFormCustomSelect">
                                         <option>Select Custmer...</option>
                                         <option>Hillandale Ave</option>
                                         <option>Crest DeVille</option>
-                                    </Form.Select>
-                                    {/* <select class="me-sm-2 default-select form-control wide" id="inlineFormCustomSelect">
-                                        <option>Select Custmer...</option>
-                                        <option>Hillandale Ave</option>
-                                        <option>Crest DeVille</option>
                                     </select> */}
-                                </div>
-                                <div className="mb-3 col-md-4">
-                                    <label className="form-label">Service Location</label>
-                                    <Form.Select aria-label="Default select example" className='bg-white' size="md">
-                                        <option>Select Service Location...</option>
-                                        <option>Keystone Pacific</option>
-                                        <option>Brian Jacobs</option>
-                                    </Form.Select>
-                                    {/* <select class="me-sm-2 default-select form-control wide" id="inlineFormCustomSelect">
-                                        <option>Select Service Location...</option>
-                                        <option>Keystone Pacific</option>
-                                        <option>Brian Jacobs</option>
-                                    </select> */}
-                                </div>
-                                <div className="mb-3 col-md-4">
-                                    <label>Contact</label>
-                                    <Form.Select aria-label="Default select example" className='bg-white' size="md">
-                                        <option>Select Contact...</option>
-                                        <option>mark334@gmail.com</option>
-                                        <option>Jchavis@keystonepacific.com</option>
-                                    </Form.Select>
-                                    {/* <select class="me-sm-2 default-select form-control wide" id="inlineFormCustomSelect">
-                                        <option>Select Contact...</option>
-                                        <option>mark334@gmail.com</option>
-                                        <option>Jchavis@keystonepacific.com</option>
-                                    </select> */}
-                                </div>
                             </div>
-                        </form>
-                    </div>
+                            <div className="mb-3 col-md-4">
+                                <label className="form-label">Service Location</label>
+                                <Form.Select aria-label="Default select example" className='bg-white' size="md">
+                                    <option>Select Service Location...</option>
+                                    <option>Keystone Pacific</option>
+                                    <option>Brian Jacobs</option>
+                                </Form.Select>
+                                {/* <select class="me-sm-2 default-select form-control wide" id="inlineFormCustomSelect">
+                                        <option>Select Service Location...</option>
+                                        <option>Keystone Pacific</option>
+                                        <option>Brian Jacobs</option>
+                                    </select> */}
+                            </div>
+                            <div className="mb-3 col-md-4">
+                                <label>Contact</label>
+                                <Form.Select aria-label="Default select example" className='bg-white' size="md">
+                                    <option>Select Contact...</option>
+                                    <option>mark334@gmail.com</option>
+                                    <option>Jchavis@keystonepacific.com</option>
+                                </Form.Select>
+                                {/* <select class="me-sm-2 default-select form-control wide" id="inlineFormCustomSelect">
+                                        <option>Select Contact...</option>
+                                        <option>mark334@gmail.com</option>
+                                        <option>Jchavis@keystonepacific.com</option>
+                                    </select> */}
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div className="container-fluid">
-                    <div className="card">
-                        <div className="card-body p-0">
-                            <div className="itemtitleBar">
-                                <h4>General Information</h4>
-                            </div>
-                            <div className="card-body" style={{ padding: '1.5rem 5rem' }}>
-                                <div class="basic-form">
-                                    <form>
-                                        <div class="row flexCenter">
-                                            <div class="col-sm-5 mx-2 mb-3">
-                                                <div className="col-md-12">
-                                                    <h5>Job Name</h5>
-                                                </div>
-                                                <input type="text" class="form-control" placeholder="Customer Name" />
+            </div>
+            <div className="container-fluid">
+                <div className="card">
+                    <div className="card-body p-0">
+                        <div className="itemtitleBar">
+                            <h4>General Information</h4>
+                        </div>
+                        <div className="card-body" style={{ padding: '1.5rem 5rem' }}>
+                            <div class="basic-form">
+                                <form>
+                                    <div class="row flexCenter">
+                                        <div class="col-sm-5 mx-2 mb-3">
+                                            <div className="col-md-12">
+                                                <h5>Job Name</h5>
                                             </div>
-                                            <div class="col-sm-5 mx-2 mb-3">
-                                                <div className="col-md-12">
-                                                    <h5>Created</h5>
-                                                </div>
-                                                <input type="date" class="form-control" placeholder="Created" />
+                                            <input type="text" class="form-control" placeholder="Customer Name" />
+                                        </div>
+                                        <div class="col-sm-5 mx-2 mb-3">
+                                            <div className="col-md-12">
+                                                <h5>Created</h5>
                                             </div>
-                                            <div className="col-sm-5 mx-2 mb-3">
-                                                <h5 className="form-label">Notes:</h5>
-                                                <div className="col-md-12">
-                                                    <textarea className="form-txtarea form-control" rows="4" id="comment"></textarea>
-                                                </div>
+                                            <input type="date" class="form-control" placeholder="Created" />
+                                        </div>
+                                        <div className="col-sm-5 mx-2 mb-3">
+                                            <h5 className="form-label">Notes:</h5>
+                                            <div className="col-md-12">
+                                                <textarea className="form-txtarea form-control" rows="4" id="comment"></textarea>
                                             </div>
-                                            <div className="col-sm-5 mx-2 mb-3">
-                                                <h5 className="form-label">Assign / Apointment :</h5>
-                                                <div className="row">
-                                                    <div className="col-md-12">
-                                                        <Form.Select aria-label="Default select example" size="md">
-                                                            <option selected>Choose...</option>
-                                                            <option>Option 1</option>
-                                                            <option>Option 2</option>
-                                                            <option>Option 3</option>
-                                                        </Form.Select>
-                                                        {/* <select id="inputState" className="default-select form-control wide">
+                                        </div>
+                                        <div className="col-sm-5 mx-2 mb-3">
+                                            <h5 className="form-label">Assign / Apointment :</h5>
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <Form.Select aria-label="Default select example" size="md">
+                                                        <option selected>Choose...</option>
+                                                        <option>Option 1</option>
+                                                        <option>Option 2</option>
+                                                        <option>Option 3</option>
+                                                    </Form.Select>
+                                                    {/* <select id="inputState" className="default-select form-control wide">
                                                             <option selected>Choose...</option>
                                                             <option>Option 1</option>
                                                             <option>Option 2</option>
                                                             <option>Option 3</option>
                                                         </select> */}
-                                                    </div>
-                                                    <div className="col-md-12 mt-3 text-end">
-                                                        <button type="button" class="btn btn-outline-dark btn-md scheduleBTN">Schedule</button>
-                                                    </div>
+                                                </div>
+                                                <div className="col-md-12 mt-3 text-end">
+                                                    <button type="button" class="btn btn-outline-dark btn-md scheduleBTN">Schedule</button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* modal */}
-                    <div className="modal fade" id="basicModal">
-                        <div className="modal-dialog" role="document">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <h5 className="modal-title">Add Item</h5>
-                                    <button type="button" className="btn-close" data-bs-dismiss="modal">
-                                    </button>
-                                </div>
-                                <div className="modal-body">
-                                    <div className="basic-form">
-                                        <form>
-                                            <div className="mb-3 row">
-                                                <label className="col-sm-3 col-form-label">Name</label>
-                                                <div className="col-sm-9">
-                                                    <input type="text" value={itemName} onChange={(e) => setItemName(e.target.value)} className="form-control" placeholder="Name" />
-                                                </div>
-                                            </div>
-                                            <div className="mb-3 row">
-                                                <label className="col-sm-3 col-form-label">Quantity</label>
-                                                <div className="col-sm-9">
-                                                    <input type="number" value={itemQty} onChange={(e) => setItemQty(e.target.value)} className="form-control" placeholder="Quantity" />
-                                                </div>
-                                            </div>
-                                            <div className="mb-3 row">
-                                                <label className="col-sm-3 col-form-label">Description</label>
-                                                <div className="col-sm-9">
-                                                    <textarea className="form-txtarea form-control" value={itemDesc} onChange={(e) => setItemDesc(e.target.value)} rows="3" id="comment"></textarea>
-                                                </div>
-                                            </div>
-                                            <div className="mb-3 row">
-                                                <label className="col-sm-3 col-form-label">Rate</label>
-                                                <div className="col-sm-9">
-                                                    <input type="number" value={rate} onChange={(e) => setRate(e.target.value)} className="form-control" placeholder="Rate" />
-                                                </div>
-                                            </div>
-                                            <div className="mb-3 row">
-                                                <label className="col-sm-3 col-form-label">Tax</label>
-                                                <div className="col-sm-9">
-                                                    <select className="default-select  form-control wide" >
-                                                        <option>Non (Non - Taxable Sales)</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div className="row">
-                                                <label className="col-sm-3 col-form-label">Item Total</label>
-                                                <div className="col-sm-9" style={{ display: 'flex', alignItems: 'center' }}>
-                                                    <h5 style={{ margin: '0' }}>$100.00</h5>
-                                                </div>
-                                            </div>
-                                        </form>
                                     </div>
-                                </div>
-                                <div className="modal-footer">
-                                    <button type="button" className="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={addItem}>Save</button>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div className="card">
-                        <div className="card-body p-0">
-                            <div className="itemtitleBar">
-                                <h4>General Information</h4>
+                {/* modal */}
+                <div className="modal fade" id="basicModal">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">Add Item</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal">
+                                </button>
                             </div>
-                            <div className="card-body" style={{ padding: '1.5rem 5rem' }}>
-                                <div class="basic-form">
+                            <div className="modal-body">
+                                <div className="basic-form">
                                     <form>
-                                        <div class="row flexCenter">
-                                            <div class="col-sm-4">
-                                                <div className="col-md-12">
-                                                    <h5>Report for Week of:</h5>
-                                                </div>
-                                                <input type="date" class="form-control" placeholder="Created" />
+                                        <div className="mb-3 row">
+                                            <label className="col-sm-3 col-form-label">Name</label>
+                                            <div className="col-sm-9">
+                                                <input type="text" value={itemName} onChange={(e) => setItemName(e.target.value)} className="form-control" placeholder="Name" />
                                             </div>
-                                            <div class="col-sm-4">
-                                                <div className="col-md-12">
-                                                    <h5>This week's rotation:</h5>
-                                                </div>
-                                                <input type="number" class="form-control" value={4} />
+                                        </div>
+                                        <div className="mb-3 row">
+                                            <label className="col-sm-3 col-form-label">Quantity</label>
+                                            <div className="col-sm-9">
+                                                <input type="number" value={itemQty} onChange={(e) => setItemQty(e.target.value)} className="form-control" placeholder="Quantity" />
                                             </div>
-                                            <div className="col-sm-4">
-                                                <h5 className="form-label">Next weeks rotation: </h5>
-                                                <input type="number" class="form-control" value={5} />
+                                        </div>
+                                        <div className="mb-3 row">
+                                            <label className="col-sm-3 col-form-label">Description</label>
+                                            <div className="col-sm-9">
+                                                <textarea className="form-txtarea form-control" value={itemDesc} onChange={(e) => setItemDesc(e.target.value)} rows="3" id="comment"></textarea>
+                                            </div>
+                                        </div>
+                                        <div className="mb-3 row">
+                                            <label className="col-sm-3 col-form-label">Rate</label>
+                                            <div className="col-sm-9">
+                                                <input type="number" value={rate} onChange={(e) => setRate(e.target.value)} className="form-control" placeholder="Rate" />
+                                            </div>
+                                        </div>
+                                        <div className="mb-3 row">
+                                            <label className="col-sm-3 col-form-label">Tax</label>
+                                            <div className="col-sm-9">
+                                                <select className="default-select  form-control wide" >
+                                                    <option>Non (Non - Taxable Sales)</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <label className="col-sm-3 col-form-label">Item Total</label>
+                                            <div className="col-sm-9" style={{ display: 'flex', alignItems: 'center' }}>
+                                                <h5 style={{ margin: '0' }}>$100.00</h5>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                                <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={addItem}>Save</button>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    {/* <div className="card">
+                <div className="card">
+                    <div className="card-body p-0">
+                        <div className="itemtitleBar">
+                            <h4>General Information</h4>
+                        </div>
+                        <div className="card-body" style={{ padding: '1.5rem 5rem' }}>
+                            <div class="basic-form">
+                                <form>
+                                    <div class="row flexCenter">
+                                        <div class="col-sm-4">
+                                            <div className="col-md-12">
+                                                <h5>Report for Week of:</h5>
+                                            </div>
+                                            <input type="date" class="form-control" placeholder="Created" />
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div className="col-md-12">
+                                                <h5>This week's rotation:</h5>
+                                            </div>
+                                            <input type="number" class="form-control" value={4} />
+                                        </div>
+                                        <div className="col-sm-4">
+                                            <h5 className="form-label">Next weeks rotation: </h5>
+                                            <input type="number" class="form-control" value={5} />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* <div className="card">
                         <div className="card-body p-0">
                             <div className="estDataBox">
                                 <div className="itemtitleBar">
@@ -297,151 +296,150 @@ const AddWRform = () => {
                         </div>
                     </div> */}
 
-                    <div className="card">
-                        <div className="card-body p-0">
-                            <div className="estDataBox">
-                                <div className="itemtitleBar">
-                                    <h4>Proposals</h4>
-                                </div>
-                                <div className="basic-form">
-                                    <form className='SRdetailsForm srReportForm'>
-                                        {/* <div className="col-md-12"> */}
-                                        <div className="row" style={{ width: '100%' }}>
-                                            <div className="col-md-3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                                <h5>Proposals Completed</h5>
-                                            </div>
-                                            <div className="col-md-8">
-                                                <div class="basic-form">
-                                                    <form>
-                                                        <div class="mb-3">
-                                                            <textarea class="form-txtarea form-control" rows="3" id="comment"></textarea>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                                <h5>Proposals Submitted</h5>
-                                            </div>
-                                            <div className="col-md-8">
-                                                <div class="basic-form">
-                                                    <form>
-                                                        <div class="mb-3">
-                                                            <textarea class="form-txtarea form-control" rows="3" id="comment"></textarea>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                                <h5>Notes</h5>
-                                            </div>
-                                            <div className="col-md-8">
-                                                <div class="basic-form">
-                                                    <form>
-                                                        <div class="mb-3">
-                                                            <textarea class="form-txtarea form-control" rows="3" id="comment"></textarea>
-                                                        </div>
-                                                    </form>
-                                                </div>
+                <div className="card">
+                    <div className="card-body p-0">
+                        <div className="estDataBox">
+                            <div className="itemtitleBar">
+                                <h4>Proposals</h4>
+                            </div>
+                            <div className="basic-form">
+                                <form className='SRdetailsForm srReportForm'>
+                                    {/* <div className="col-md-12"> */}
+                                    <div className="row" style={{ width: '100%' }}>
+                                        <div className="col-md-3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                            <h5>Proposals Completed</h5>
+                                        </div>
+                                        <div className="col-md-8">
+                                            <div class="basic-form">
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <textarea class="form-txtarea form-control" rows="3" id="comment"></textarea>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
-                                        {/* </div> */}
-                                    </form>
-                                </div>
+                                        <div className="col-md-3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                            <h5>Proposals Submitted</h5>
+                                        </div>
+                                        <div className="col-md-8">
+                                            <div class="basic-form">
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <textarea class="form-txtarea form-control" rows="3" id="comment"></textarea>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                            <h5>Notes</h5>
+                                        </div>
+                                        <div className="col-md-8">
+                                            <div class="basic-form">
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <textarea class="form-txtarea form-control" rows="3" id="comment"></textarea>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* </div> */}
+                                </form>
                             </div>
                         </div>
                     </div>
-
-                    <div className="card">
-                        <div className="card-body p-0">
-                            <div className="estDataBox">
-                                <div className="itemtitleBar">
-                                    <h4>Files</h4>
-                                </div>
-                                <a href='/' className="btn btn-primary btn-sm" style={{ margin: '12px 20px' }}>+ Add</a>
-                                <div className="table-responsive active-projects style-1">
-                                    <table id="empoloyees-tblwrapper" className="table">
-                                        <thead>
-                                            <tr>
-                                                <th>File Name</th>
-                                                <th>Caption</th>
-                                                <th>Date</th>
-                                                <th>Share</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><span>1001</span></td>
-                                                <td>
-                                                    <div className="products">
-                                                        <div>
-                                                            <h6>Liam Antony</h6>
-
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><span>Computer Science</span></td>
-                                                <td><span className="text-primary">abc@gmail.com</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><span>1001</span></td>
-                                                <td>
-                                                    <div className="products">
-                                                        <div>
-                                                            <h6>Noah Oliver</h6>
-
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><span>Computer Science</span></td>
-                                                <td><span className="text-primary">abc@gmail.com</span></td>
-
-                                            </tr>
-                                            <tr>
-                                                <td><span>1001</span></td>
-                                                <td>
-                                                    <div className="products">
-                                                        <div>
-                                                            <h6>Elijah James</h6>
-
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><span>Computer Science</span></td>
-                                                <td><span className="text-primary">abc@gmail.com</span></td>
-
-                                            </tr>
-                                            <tr>
-                                                <td><span>1001</span></td>
-                                                <td>
-                                                    <div className="products">
-                                                        <div>
-                                                            <h6>Liam Antony</h6>
-
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td><span>Computer Science</span></td>
-                                                <td><span className="text-primary">abc@gmail.com</span></td>
-
-                                            </tr>
-
-
-                                        </tbody>
-
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row text-end">
-                        <div>
-                            <NavLink to='/Dashboard/Weekly-Reports'><button type='button' class="btn btn-primary me-1">Submit</button></NavLink>
-                            <button class="btn btn-danger light ms-1">Cancel</button>
-                        </div>
-                    </div>
-
                 </div>
+
+                <div className="card">
+                    <div className="card-body p-0">
+                        <div className="estDataBox">
+                            <div className="itemtitleBar">
+                                <h4>Files</h4>
+                            </div>
+                            <a href='/' className="btn btn-primary btn-sm" style={{ margin: '12px 20px' }}>+ Add</a>
+                            <div className="table-responsive active-projects style-1">
+                                <table id="empoloyees-tblwrapper" className="table">
+                                    <thead>
+                                        <tr>
+                                            <th>File Name</th>
+                                            <th>Caption</th>
+                                            <th>Date</th>
+                                            <th>Share</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span>1001</span></td>
+                                            <td>
+                                                <div className="products">
+                                                    <div>
+                                                        <h6>Liam Antony</h6>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span>Computer Science</span></td>
+                                            <td><span className="text-primary">abc@gmail.com</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>1001</span></td>
+                                            <td>
+                                                <div className="products">
+                                                    <div>
+                                                        <h6>Noah Oliver</h6>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span>Computer Science</span></td>
+                                            <td><span className="text-primary">abc@gmail.com</span></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td><span>1001</span></td>
+                                            <td>
+                                                <div className="products">
+                                                    <div>
+                                                        <h6>Elijah James</h6>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span>Computer Science</span></td>
+                                            <td><span className="text-primary">abc@gmail.com</span></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td><span>1001</span></td>
+                                            <td>
+                                                <div className="products">
+                                                    <div>
+                                                        <h6>Liam Antony</h6>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span>Computer Science</span></td>
+                                            <td><span className="text-primary">abc@gmail.com</span></td>
+
+                                        </tr>
+
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row text-end">
+                    <div>
+                        <NavLink to='/Dashboard/Weekly-Reports'><button type='button' class="btn btn-primary me-1">Submit</button></NavLink>
+                        <button class="btn btn-danger light ms-1">Cancel</button>
+                    </div>
+                </div>
+
             </div>
         </>
     )

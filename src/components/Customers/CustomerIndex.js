@@ -13,13 +13,11 @@ const CustomerIndex = () => {
 
     return (
         <>
-            <div className="content-body" style={{ paddingBottom: '1px' }}>
-                <TitleBar icon={icon} title='Customers' />
-                <Routes>
-                    <Route path='' element={<CustomersTable />} />
-                    <Route path='Add-Customer' element={<AddCutomer />} />
-                </Routes>
-            </div>
+            <TitleBar icon={icon} title='Customers' />
+            <Routes>
+                <Route path='' element={<CustomersTable />} />
+                <Route path='Add-Customer' element={<AddCutomer />} />
+            </Routes>
         </>
     )
 }

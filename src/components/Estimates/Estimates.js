@@ -25,6 +25,8 @@ const Estimates = () => {
     const [serviceLocation, setServiceLocation] = useState('');
     const [opacity, setOpacity] = useState('50%');
 
+    const [locations, setLocations] = useState(['Select Customer First']);
+
     const navigate = useNavigate();
 
     const getUsers = async () => {
@@ -38,7 +40,7 @@ const Estimates = () => {
     }, [])
 
     useEffect(() => {
-        if (customer !== '' && serviceLocation !== '') {
+        if (customer !== '' && serviceLocation !== 'Select Customer First') {
             setOpacity('100%')
         }
         else {
@@ -83,9 +85,17 @@ const Estimates = () => {
         // setServiceLocation('Select Customer First')
     }
 
-    const locations = selectedCustomer.locations && selectedCustomer.locations.map((loc) => {
-        return loc.name;
-    })
+    useEffect(() => {
+        if (selectedCustomer.locations !== undefined) {
+            const updatedArr = selectedCustomer.locations.map((loc) => {
+                return loc.name;
+            })
+            setLocations(updatedArr)
+        }
+    }, [selectedCustomer])
+
+
+    console.log(locations);
 
     const handleChangeCustomer = (e, value) => {
         setCustomer(value);
@@ -96,9 +106,9 @@ const Estimates = () => {
         // else
         //     setLocationLabel('Select Service Location...')
     }
-
+    console.log(selectedCustomer);
     const goToAddEst = () => {
-        if (customer !== 'Select Customer' && serviceLocation !== 'Select Customer First') {
+        if (customer !== 'Select Customer' && serviceLocation !== 'Select Customer First' && serviceLocation !== '') {
             document.getElementById('closer').click();
             navigate('/Dashboard/Estimates/Add-Estimate');
         }
@@ -118,9 +128,9 @@ const Estimates = () => {
                 <StatusCardsEst drafts={28102} sent={7089} approved={4576} rejected={145} total={39912} />
                 <div className="col-xl-12">
                     <div className="card">
-                        <div className="card-body p-0">
+                        <div className="card-body">
                             <div className="tbl-caption">
-                                <div className="row p-3 ">
+                                <div className="row mb-3">
                                     <div className="col-md-3">
                                         <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal" onClick={openModal}>+ Add Estimates</button>
                                     </div>
@@ -203,7 +213,7 @@ const Estimates = () => {
                                                 disablePortal
                                                 id="combo-box-demo cutomerAF"
                                                 size='small'
-                                                options={locations || false}
+                                                options={locations}
                                                 value={serviceLocation}
                                                 onChange={(e, val) => setServiceLocation(val)}
                                                 sx={{ width: 300 }}

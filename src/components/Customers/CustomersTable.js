@@ -36,7 +36,7 @@ const CustomersTable = () => {
             <div className="row">
                 <div className="col-xl-12">
                     <div className="card">
-                        <div className="card-body p-0">
+                        <div className="card-body">
                             <div className="table-responsive active-projects style-1">
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">Customers</h4>

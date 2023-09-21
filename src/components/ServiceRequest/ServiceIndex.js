@@ -12,12 +12,10 @@ const ServiceIndex = () => {
 
     return (
         <>
-            <div className="content-body">
-                <Routes>
-                    <Route path='' element={<SRlist />} />
-                    <Route path={SRroute} element={<ServiceRequest />} />
-                </Routes>
-            </div>
+            <Routes>
+                <Route path='' element={<SRlist />} />
+                <Route path={SRroute} element={<ServiceRequest />} />
+            </Routes>
         </>
     )
 }

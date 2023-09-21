@@ -14,13 +14,11 @@ const IrrigationIndex = () => {
 
     return (
         <>
-            <div className="content-body">
-                <TitleBar icon={icon} title='Irrigation - Audit Form' />
-                <Routes>
-                    <Route path='' element={<Irrigationlist />} />
-                    <Route path='Add-Irrigation' element={<IrrigationForm />} />
-                </Routes>
-            </div>
+            <TitleBar icon={icon} title='Irrigation - Audit Form' />
+            <Routes>
+                <Route path='' element={<Irrigationlist />} />
+                <Route path='Add-Irrigation' element={<IrrigationForm />} />
+            </Routes>
         </>
     )
 }

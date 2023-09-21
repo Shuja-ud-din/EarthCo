@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Form } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import $ from 'jquery';
+import 'datatables.net';
 
 const Landscapelist = () => {
+
+    useEffect(() => {
+        $('#landscapeTbl').DataTable();
+    })
 
     return (
         <>
@@ -52,7 +58,7 @@ const Landscapelist = () => {
                     </div>
                     <div className="col-xl-12">
                         <div className="card">
-                            <div className="card-body p-0">
+                            <div className="card-body">
                                 <div className="tbl-caption">
                                     <div className="row p-3 ">
                                         <div className="col-md-6">
@@ -70,14 +76,11 @@ const Landscapelist = () => {
                                     </div>
                                 </div>
                                 <div className="table-responsive">
-                                    <table id="example5" className="display table" style={{ minWidth: '845px' }}>
+                                    <table id="landscapeTbl" className="display table" style={{ minWidth: '845px' }}>
                                         <thead>
                                             <tr className='serviceRequestRecords'>
                                                 <th>
-                                                    <div className="form-check custom-checkbox ms-2">
-                                                        <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
-                                                        <label className="form-check-label" htmlFor="customCheckBox2"></label>
-                                                    </div>
+                                                    #
                                                 </th>
 
 
@@ -93,10 +96,7 @@ const Landscapelist = () => {
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <div className="form-check custom-checkbox ms-2">
-                                                        <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
-                                                        <label className="form-check-label" htmlFor="customCheckBox2"></label>
-                                                    </div>
+                                                    1
                                                 </td>
                                                 <td>Vincente, Allan</td>
                                                 <td>

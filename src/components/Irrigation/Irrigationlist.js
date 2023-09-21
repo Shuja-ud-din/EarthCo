@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom';
+import $ from 'jquery';
+import 'datatables.net';
 
 const Irrigationlist = () => {
 
+    useEffect(() => {
+        $('#irrigationTbl').DataTable();
+    }, [])
 
     return (
         <div className="container-fluid">
             <div className="row">
                 <div className="col-xl-12">
                     <div className="card">
-                        <div className="card-body p-0">
+                        <div className="card-body">
                             <div className="table-responsive active-projects style-1">
                                 <div className="tbl-caption">
                                     <h4 className="heading mb-0">Irrigation</h4>
@@ -19,14 +24,11 @@ const Irrigationlist = () => {
                                         </NavLink>
                                     </div>
                                 </div>
-                                <table id="empoloyees-tblwrapper" className="table">
+                                <table id="irrigationTbl" className="table">
                                     <thead>
                                         <tr>
                                             <th>
-                                                <div className="form-check custom-checkbox ms-2">
-                                                    <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
-                                                    <label className="form-check-label" htmlFor="customCheckBox2"></label>
-                                                </div>
+                                                #
                                             </th>
                                             <th>Customer Name </th>
                                             <th>Created Date </th>
@@ -37,10 +39,7 @@ const Irrigationlist = () => {
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <div className="form-check custom-checkbox ms-2">
-                                                    <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
-                                                    <label className="form-check-label" htmlFor="customCheckBox2"></label>
-                                                </div>
+                                                1
                                             </td>
                                             <td>
                                                 <div className="products">

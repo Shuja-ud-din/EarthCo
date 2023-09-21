@@ -6,6 +6,9 @@ import { DataContext } from '../context/AppData';
 import { RoutingContext } from '../context/RoutesContext';
 import $ from 'jquery';
 import 'datatables.net';
+import 'react-calendar/dist/Calendar.css';
+import Calendar from 'react-calendar';
+import TitleBar from './TitleBar';
 
 const DashBoard = () => {
 
@@ -45,27 +48,15 @@ const DashBoard = () => {
     const renderedEstimates = estimates.map((object, index) => {
         return <EstimateTR key={object.estimateID} index={index} onClick={() => handleCatClick(`Estimate${object.estimateID}`, object.estimateID)} estimate={object} />
     });
+
+    const icon = <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2.5 7.49999L10 1.66666L17.5 7.49999V16.6667C17.5 17.1087 17.3244 17.5326 17.0118 17.8452C16.6993 18.1577 16.2754 18.3333 15.8333 18.3333H4.16667C3.72464 18.3333 3.30072 18.1577 2.98816 17.8452C2.67559 17.5326 2.5 17.1087 2.5 16.6667V7.49999Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M7.5 18.3333V10H12.5V18.3333" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+
     return (
-        <div className="content-body">
-            <div className="row page-titles">
-                <div className="col-md-6">
-                    <ol className="breadcrumb">
-                        <div className="menu-icon">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2.5 7.49999L10 1.66666L17.5 7.49999V16.6667C17.5 17.1087 17.3244 17.5326 17.0118 17.8452C16.6993 18.1577 16.2754 18.3333 15.8333 18.3333H4.16667C3.72464 18.3333 3.30072 18.1577 2.98816 17.8452C2.67559 17.5326 2.5 17.1087 2.5 16.6667V7.49999Z" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M7.5 18.3333V10H12.5V18.3333" stroke="#888888" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </div>
-                        <li><h5 className="bc-title">Dashboard</h5></li>
-                    </ol>
-                </div>
-                <div className="col-md-6">
-                    <NavLink to='/Dashboard/Estimates' className="text-primary fs-13" style={{ float: 'right' }} >+ Add Service Request</NavLink>
-                    <NavLink to='/Dashboard/Service-Requests' className="text-primary fs-13 me-4" style={{ float: 'right' }} >+ Add Estimate</NavLink>
-                </div>
-
-
-            </div>
+        <>
+            <TitleBar icon={icon} title='Dashboard' />
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-xl-12 wid-100">
@@ -237,7 +228,7 @@ const DashBoard = () => {
                                             <NavLink className="text-black"> + Add To Do</NavLink>
                                         </div>
                                     </div>
-                                    <div className="card-body p-0">
+                                    <div className="card-body">
                                         <div className="dt-do-bx">
                                             <div className="draggable-zone dropzoneContainer to-dodroup dz-scroll">
                                                 <div className="sub-card draggable-handle draggable">
@@ -558,9 +549,9 @@ const DashBoard = () => {
                         </div>
                     </div> */}
 
-                    <div className="col-xl-5 col-md-5 active-p">
+                    <div className="col-xl-5 col-md-12 active-p">
                         <div className="card">
-                            <div className="card-body p-0">
+                            <div className="card-body">
                                 <div className="table-responsive active-projects shorting">
 
                                     <div className="tbl-caption">
@@ -592,13 +583,13 @@ const DashBoard = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-xl-3 col-md-3 up-shd">
+                    <div className="col-xl-3 col-md-5 up-shd">
                         <div className="card">
                             <div className="card-header border-0 pb-1">
                                 <h4 className="heading mb-0">Upcoming Schedules</h4>
                             </div>
                             <div className="card-body schedules-cal p-2">
-                                <input type="text" className="form-control d-none" id="datetimepicker1" />
+                                <Calendar style={{ width: '100%' }} />
                                 <div className="events">
                                     <h6>events</h6>
                                     <div className="dz-scroll event-scroll">
@@ -647,41 +638,43 @@ const DashBoard = () => {
                         </div>
                     </div>
 
-                    <div className="col-xl-4 col-md-4 up-shd">
+                    <div className="col-xl-4 col-md-7 up-shd">
                         <div className="card">
                             <div className="card-header pb-0 border-0">
                                 <h4 className="heading mb-0">Projects Status</h4>
                             </div>
-                            <div className="table-responsive active-projects shorting">
+                            <div className="card-body">
+                                <div className="table-responsive active-projects shorting">
 
-                                <div className="tbl-caption">
-                                    <h4 className="heading mb-0">Service Requests</h4>
+                                    <div className="tbl-caption">
+                                        <h4 className="heading mb-0">Service Requests</h4>
+                                    </div>
+                                    <table id="empoloyeesTbl" className="table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <div className="form-check custom-checkbox ms-2">
+                                                        <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
+                                                        <label className="form-check-label" htmlFor="customCheckBox2"></label>
+                                                    </div>
+                                                </th>
+                                                <th>Customer Name</th>
+                                                <th>Assign to</th>
+                                                <th>Estimate Number</th>
+                                                <th>Estimate Amount</th>
+                                                <th>Description of Work </th>
+                                                <th>Date Created</th>
+                                                <th>Status</th>
+                                                <th>QB Status</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {renderedEstimates}
+                                        </tbody>
+
+                                    </table>
                                 </div>
-                                <table id="empoloyeesTbl" className="table">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                <div className="form-check custom-checkbox ms-2">
-                                                    <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
-                                                    <label className="form-check-label" htmlFor="customCheckBox2"></label>
-                                                </div>
-                                            </th>
-                                            <th>Customer Name</th>
-                                            <th>Assign to</th>
-                                            <th>Estimate Number</th>
-                                            <th>Estimate Amount</th>
-                                            <th>Description of Work </th>
-                                            <th>Date Created</th>
-                                            <th>Status</th>
-                                            <th>QB Status</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {renderedEstimates}
-                                    </tbody>
-
-                                </table>
                             </div>
                         </div>
                     </div>
@@ -689,7 +682,7 @@ const DashBoard = () => {
 
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
