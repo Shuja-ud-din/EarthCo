@@ -106,12 +106,10 @@ const SideBar = () => {
         };
 
         document.addEventListener('click', handleClickOutside);
-
         const handleSidebar = (event) => {
-            if (sidebarRef.current && !sidebarRef.current.contains(event.target) && !eliminate.current.contains(event.target)) {
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target) && !eliminate.current.contains(event.target) && window.innerWidth < 450) {
                 setMainControl('mobileH')
             }
-            console.log(eliminate);
         }
 
         document.body.addEventListener('click', handleSidebar)
@@ -122,7 +120,6 @@ const SideBar = () => {
         };
     }, []);
 
-
     const handlePreventLink = (event) => {
         event.preventDefault();
         if (mainControl === 'tab') {
@@ -130,7 +127,8 @@ const SideBar = () => {
             setShowSM(false);
         }
         else {
-            toggleShowMenu();
+            // toggleShowMenu();
+            setShowSM(!showSubMenu);
         }
     }
 
