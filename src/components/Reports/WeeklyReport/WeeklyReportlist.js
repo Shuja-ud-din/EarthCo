@@ -35,8 +35,6 @@ const WeeklyReportlist = () => {
                 <td>{item.customer}</td>
                 <td>{item.status}</td>
                 <td>{item.created}</td>
-                <td>${item.estTotal}</td>
-                <td>{item.workRequested}</td>
                 <td>
                     <NavLink to='/Dashboard/Weekly-Reports/WeeklyReport'>
                         <span class="badge badge-primary light border-0 me-1">Open Report</span>
@@ -84,9 +82,7 @@ const WeeklyReportlist = () => {
                                                 <th>Customer</th>
                                                 <th>Status</th>
                                                 <th>Created</th>
-                                                <th>Estimate Total</th>
-                                                <th>Work Requested</th>
-                                                <th>Report</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>

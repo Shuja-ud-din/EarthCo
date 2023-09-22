@@ -91,6 +91,7 @@ const Landscapelist = () => {
                                                 <th>Status</th>
                                                 <th>Date Created</th>
                                                 <th>Report</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -111,6 +112,17 @@ const Landscapelist = () => {
                                                     <NavLink to='/Dashboard/Landscape/PunchList-Report'>
                                                         <span class="badge badge-primary light border-0 me-1">Open</span>
                                                     </NavLink>
+                                                </td>
+                                                <td>
+                                                    <div className="flex-box">
+                                                        <button title="Edit" type="button" className="btn btn-warning btn-sm mx-1" >
+                                                            <i className="fa fa-pen"></i>
+                                                        </button>
+
+                                                        <button title="Delete" type="button" className="btn btn-danger btn-sm mx-1">
+                                                            <i className="fa fa-trash"></i>
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>

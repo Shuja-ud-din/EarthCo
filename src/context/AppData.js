@@ -28,7 +28,8 @@ const DataFun = ({ children }) => {
             SRstatus: 'Open',
             serviceRequest: 'Estimate (#',
             QBstatus: 'Not Sent',
-            status: 'Sent'
+            status: 'Sent',
+            notes: 'Notes...'
         },
         {
             estimateID: 1001,
@@ -38,7 +39,8 @@ const DataFun = ({ children }) => {
             SRstatus: 'Closed',
             serviceRequest: 'Estimate (#',
             QBstatus: 'Not Sent',
-            status: 'Sent'
+            status: 'Sent',
+            notes: 'Notes...'
         },
         {
             estimateID: 1002,
@@ -48,7 +50,8 @@ const DataFun = ({ children }) => {
             SRstatus: 'Open',
             serviceRequest: 'Estimate (#',
             QBstatus: 'Not Sent',
-            status: 'Sent'
+            status: 'Sent',
+            notes: 'Notes...'
         },
         {
             estimateID: 1003,
@@ -58,7 +61,8 @@ const DataFun = ({ children }) => {
             SRstatus: 'Open',
             serviceRequest: 'Estimate (#',
             QBstatus: 'Ready to Send',
-            status: 'Sent'
+            status: 'Sent',
+            notes: 'Notes...'
         },
         {
             estimateID: 1004,
@@ -68,7 +72,8 @@ const DataFun = ({ children }) => {
             SRstatus: 'Closed',
             serviceRequest: 'Estimate (#',
             QBstatus: 'Not Sent',
-            status: 'Sent'
+            status: 'Sent',
+            notes: 'Notes...'
         },
         {
             estimateID: 1005,
@@ -78,7 +83,8 @@ const DataFun = ({ children }) => {
             SRstatus: 'Open',
             serviceRequest: 'Estimate (#',
             QBstatus: 'Not Sent',
-            status: 'Sent'
+            status: 'Sent',
+            notes: 'Notes...'
         }
     ]);
 

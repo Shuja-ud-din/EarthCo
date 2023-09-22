@@ -13,7 +13,7 @@ const AddEstimate = () => {
     return (
         <>
             <TitleBar icon={icon} title='Add Estimate' />
-            <div className="card-body">
+            {/* <div className="card-body">
                 <div className="basic-form">
                     <form>
                         <div className="row">
@@ -32,7 +32,7 @@ const AddEstimate = () => {
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> */}
             <div className="add-item" style={{ margin: '20px', }}>
                 {/* <div className="tabSwitch">
                     <button type="button" className="btn btn-secondary btn-sm" style={{ borderRadius: '5px 0 0 0' }}>

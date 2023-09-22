@@ -27,7 +27,6 @@ const AddEstimateForm = () => {
                 qty: itemQty,
                 description: itemDesc,
                 rate: rate,
-                tax: 'Non',
             }
         ]
         setItemObj(updatedArr);
@@ -83,9 +82,6 @@ const AddEstimateForm = () => {
                 <td>
                     <span>${item.rate}</span>
                 </td>
-                <td>
-                    <span>{item.tax}</span>
-                </td>
                 <td className='text-center'>
                     <input type='checkbox' checked readOnly />
                 </td>
@@ -118,7 +114,7 @@ const AddEstimateForm = () => {
                             <div className="row">
                                 <div className="mb-3 col-md-9">
                                     <Form.Select aria-label="Default select example" id="inputState" className='bg-white'>
-                                        <option selected>Choose...</option>
+                                        <option selected>Customer</option>
                                         <option>Option 1</option>
                                         <option>Option 2</option>
                                         <option>Option 3</option>
@@ -132,12 +128,12 @@ const AddEstimateForm = () => {
                                 </div>
                                 <div className="mb-3 col-md-9">
                                     <Form.Select aria-label="Default select example" id="inputState" className='bg-white'>
-                                        <option value="Customer">Customer</option>
+                                        <option value="Customer">Service Location</option>
                                     </Form.Select>
                                 </div>
                                 <div className="mb-3 col-md-9">
                                     <Form.Select aria-label="Default select example" id="inputState" className='bg-white'>
-                                        <option value="Service Location">Service Location</option>
+                                        <option value="Service Location">Contact</option>
                                     </Form.Select>
                                 </div>
                             </div>
@@ -258,17 +254,6 @@ const AddEstimateForm = () => {
                                                 <input type="number" value={rate} onChange={(e) => setRate(e.target.value)} className="form-control" placeholder="Rate" required />
                                             </div>
                                         </div>
-                                        <div className="mb-3 row">
-                                            <label className="col-sm-3 col-form-label">Tax</label>
-                                            <div className="col-sm-9">
-                                                <Form.Select aria-label="Default select example" id="inputState" className='bg-white'>
-                                                    <option>Non (Non - Taxable Sales)</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                </Form.Select>
-                                            </div>
-                                        </div>
                                         <div className="row">
                                             <label className="col-sm-3 col-form-label">Item Total</label>
                                             <div className="col-sm-9" style={{ display: 'flex', alignItems: 'center' }}>
@@ -303,7 +288,6 @@ const AddEstimateForm = () => {
                                             <th>Description</th>
                                             <th>Rate</th>
                                             <th>Amount</th>
-                                            <th>Tax</th>
                                             <th>Approved</th>
                                             <th>Action</th>
                                         </tr>

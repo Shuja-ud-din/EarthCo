@@ -161,11 +161,11 @@ const Estimates = () => {
                                             <th>Assign to</th>
                                             <th>Estimate Number</th>
                                             <th>Estimate Amount</th>
+                                            <th>Estimate Noets</th>
                                             <th>Description of Work </th>
                                             <th>Date Created</th>
                                             <th>Status</th>
-                                            <th>QB Status</th>
-
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>

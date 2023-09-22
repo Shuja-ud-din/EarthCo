@@ -32,6 +32,10 @@ import EstimateList from '../components/Estimates/EstimateList'
 import EstimateIDopen from '../components/Estimates/EstimateIDopen'
 import AddEstimate from '../components/Estimates/AddEstimate'
 import MapIndex from '../components/Map/MapIndex'
+import AddSRform from '../components/ServiceRequest/AddSRform'
+import StaffIndex from '../components/Staff/StaffIndex'
+import StaffList from '../components/Staff/StaffList'
+import AddStaff from '../components/Staff/AddStaff'
 
 const DashboardPage = () => {
 
@@ -49,6 +53,10 @@ const DashboardPage = () => {
                         <Route path='' element={<CustomersTable />} />
                         <Route path='Add-Customer' element={<AddCutomer />} />
                     </Route>
+                    <Route path='Staff' element={<StaffIndex />} >
+                        <Route path='' element={<StaffList />} />
+                        <Route path='Add-Staff' element={<AddStaff />} />
+                    </Route>
                     <Route path='Map' element={<MapIndex />} />
                     <Route path='Estimates' element={<EstimateIndex />} >
                         <Route path='' element={<EstimateList />} />
@@ -57,6 +65,7 @@ const DashboardPage = () => {
                     </Route>
                     <Route path='Service-Requests' element={<ServiceIndex />} >
                         <Route path='' element={<SRlist />} />
+                        <Route path='Add' element={<AddSRform />} />
                         <Route path={SRroute} element={<ServiceRequest />} />
                     </Route>
                     <Route path='Irrigation' element={<IrrigationIndex />} >

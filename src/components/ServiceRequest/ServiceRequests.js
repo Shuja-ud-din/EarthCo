@@ -7,6 +7,8 @@ import StatusCards from './StatusCards';
 import { Form } from 'react-bootstrap';
 import $ from 'jquery';
 import 'datatables.net';
+import { Autocomplete, TextField } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 const ServiceRequests = () => {
     const { serviceRequests, customers, setSingleSR } = useContext(DataContext);
@@ -50,13 +52,15 @@ const ServiceRequests = () => {
         })[0]);
     }, [customer, customers]);
 
-    let locationOptions;
+    let locationOptions = ['Select Customer'];
 
     if (locations) {
         locationOptions = locations.serviceLocations.map((item) => {
-            return <option key={item} value={item}>{item}</option>
+            return item
         })
     }
+
+    console.log(locations);
 
 
     const openModal = () => {
@@ -64,16 +68,17 @@ const ServiceRequests = () => {
         // console.log(locations);
     }
 
-    const handleChangeCustomer = (e) => {
-        setCustomer(e.target.value);
+    const handleChangeCustomer = (e, val) => {
+        setCustomer(val);
         getLocations();
         // console.log(locations);
     }
 
     const customerOptions = customers.map((item) => {
-        return <option key={item.customerId} value={item.name}>{item.name}</option>
+        return item.name
     })
 
+    // console.log(locationOptions);
 
     const renderedRows = serviceRequests.map((item, index) => {
         return <ServiceRequestTR index={index} record={item} onClick={() => handleCatClick(`service-request${item.ID}`, item.ID)} />
@@ -91,9 +96,7 @@ const ServiceRequests = () => {
                                         <a href='/' class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal" onClick={openModal}>+ Add Service Request</a>
                                     </div>
                                     <div className="col-md-7">
-                                        <div>
-                                            <input class="form-control" type="text" placeholder="Default input" />
-                                        </div>
+
                                     </div>
                                     <div class="col-md-2" style={{ display: 'flex', justifyContent: 'flex-end' }}>
                                         <div className="col-md-12">
@@ -102,11 +105,6 @@ const ServiceRequests = () => {
                                                 <option value="1">Current Month</option>
                                                 <option value="2">Previous Month</option>
                                             </Form.Select>
-                                            {/* <select class="default-select form-control wide" id="inlineFormCustomSelect">
-                                                <option selected>All</option>
-                                                <option value="1">Current Month</option>
-                                                <option value="2">Previous Month</option>
-                                            </select> */}
                                         </div>
                                     </div>
                                 </div>
@@ -119,15 +117,15 @@ const ServiceRequests = () => {
                                                 #
                                             </th>
 
+                                            <th>Service Request #</th>
                                             <th>Customer Name </th>
                                             <th>Assigned to</th>
-                                            <th>Service Request Number</th>
 
                                             <th>Status</th>
                                             <th>Work Requested</th>
                                             <th>Date Created</th>
                                             <th>Type</th>
-
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -152,36 +150,47 @@ const ServiceRequests = () => {
                             <div className="modal-body">
                                 <div className="basic-form">
                                     <div className="mb-3 row">
-                                        <label className="col-sm-3 col-form-label">Customer</label>
-                                        <div className="col-sm-9">
-                                            <Form.Select aria-label="Default select example" size="md" value={customer} onChange={handleChangeCustomer} id="inlineFormCustomSelect">
-                                                <option value='Select Customer'>Select Customer...</option>
-                                                {customerOptions}
-                                            </Form.Select>
-                                            {/* <select class="me-sm-2 default-select form-control wide" value={customer} onChange={handleChangeCustomer} id="inlineFormCustomSelect">
-                                                <option value='Select Customer'>Select Customer...</option>
-                                                {customerOptions}
-                                            </select> */}
+                                        <label className="col-sm-4 col-form-label">Customer</label>
+                                        <div className="col-sm-8">
+                                            <Autocomplete
+                                                disablePortal
+                                                id="combo-box-demo"
+                                                size='small'
+                                                options={customerOptions}
+                                                onChange={handleChangeCustomer}
+                                                sx={{ width: 300 }}
+                                                renderInput={(params) => <TextField {...params} label="Customer" variant="outlined" />
+                                                }
+                                            />
                                         </div>
                                     </div>
                                     <div className="mb-3 row">
-                                        <label className="col-sm-3 col-form-label">Service Location</label>
-                                        <div className="col-sm-9">
-                                            <Form.Select aria-label="Default select example" size="md" value={serviceLocation} onChange={(e) => setServiceLocation(e.target.value)} id="inlineFormCustomSelect">
+                                        <label className="col-sm-4 col-form-label">Service Location</label>
+                                        <div className="col-sm-8">
+                                            {/* <Form.Select aria-label="Default select example" size="md" value={serviceLocation} onChange={(e) => setServiceLocation(e.target.value)} id="inlineFormCustomSelect">
                                                 <option value="Select Customer First">Select Customer First...</option>
                                                 {locationOptions}
-                                            </Form.Select>
-                                            {/* <select class="me-sm-2 default-select form-control wide" value={serviceLocation} onChange={(e) => setServiceLocation(e.target.value)} id="inlineFormCustomSelect">
-                                                <option value="Select Customer First">Select Customer First...</option>
-                                                {locationOptions}
-                                            </select> */}
+                                            </Form.Select> */}
+                                            <Autocomplete
+                                                disablePortal
+                                                id="combo-box-demo"
+                                                size='small'
+                                                options={locationOptions}
+                                                // value={serviceLocation}
+                                                onChange={(e, val) => setServiceLocation(val)}
+                                                sx={{ width: 300 }}
+                                                renderInput={(params) => <TextField {...params} label="Service Location" variant="outlined" />
+                                                }
+                                            />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-                                <button type="button" className="btn btn-primary">Save</button>
+                                <NavLink to='/Dashboard/Service-Requests/Add'>
+                                    <button type="button" data-bs-dismiss="modal" className="btn btn-primary">Save</button>
+                                </NavLink>
                             </div>
                         </form>
                     </div>

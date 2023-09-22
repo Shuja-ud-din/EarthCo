@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom';
 import $ from 'jquery';
 import 'datatables.net';
+import { Form } from 'react-bootstrap';
 
 const Irrigationlist = () => {
 
@@ -34,6 +35,7 @@ const Irrigationlist = () => {
                                             <th>Created Date </th>
                                             <th>Controller Number </th>
                                             <th>Report</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -50,11 +52,27 @@ const Irrigationlist = () => {
                                             </td>
                                             <td><span>7/10/2023</span></td>
                                             <td>
-                                                <span >Evolution DX2</span>
+                                                <Form.Select>
+                                                    <option value="">Evolution DX1</option>
+                                                    <option value="">Evolution DX2</option>
+                                                    <option value="">Evolution DX3</option>
+                                                    <option value="">Evolution DX4</option>
+                                                </Form.Select>
                                             </td>
                                             <td><NavLink to='/Dashboard/Irrigation/Audit-Report'>
                                                 <span class="badge badge-primary light border-0 me-1">Open</span>
                                             </NavLink></td>
+                                            <td>
+                                                <div className="flex-box">
+                                                    <button title="Edit" type="button" className="btn btn-warning btn-sm mx-1">
+                                                        <i className="fa fa-pen"></i>
+                                                    </button>
+
+                                                    <button title="Delete" type="button" className="btn btn-danger btn-sm mx-1">
+                                                        <i className="fa fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

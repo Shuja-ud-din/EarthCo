@@ -572,7 +572,7 @@ const DashBoard = () => {
                                                 <th>Work Requested</th>
                                                 <th>Date Created</th>
                                                 <th>Type</th>
-
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -641,14 +641,14 @@ const DashBoard = () => {
                     <div className="col-xl-4 col-md-7 up-shd">
                         <div className="card">
                             <div className="card-header pb-0 border-0">
-                                <h4 className="heading mb-0">Projects Status</h4>
+                                <h4 className="heading mb-0">Estimates</h4>
                             </div>
                             <div className="card-body">
                                 <div className="table-responsive active-projects shorting">
 
-                                    <div className="tbl-caption">
-                                        <h4 className="heading mb-0">Service Requests</h4>
-                                    </div>
+                                    {/* <div className="tbl-caption">
+                                        <h4 className="heading mb-0">Estimates</h4>
+                                    </div> */}
                                     <table id="empoloyeesTbl" className="table">
                                         <thead>
                                             <tr>
@@ -662,11 +662,11 @@ const DashBoard = () => {
                                                 <th>Assign to</th>
                                                 <th>Estimate Number</th>
                                                 <th>Estimate Amount</th>
+                                                <th>Estimate Notes</th>
                                                 <th>Description of Work </th>
                                                 <th>Date Created</th>
                                                 <th>Status</th>
-                                                <th>QB Status</th>
-
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>

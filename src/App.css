@@ -317,3 +317,12 @@
 .transRight {
   transform: translateX(0px) !important;
 }
+
+
+.visNo {
+  display: none;
+}
+
+.staffAdress {
+  top: -415px;
+}

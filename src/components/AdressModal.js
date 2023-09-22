@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const AdressModal = ({ boolState, handleAdress, adress, setAdress }) => {
+const AdressModal = ({ boolState, handleAdress, adress, setAdress, topClass }) => {
 
     // const [adress, setadress] = useState(adress)
 
@@ -28,7 +28,7 @@ const AdressModal = ({ boolState, handleAdress, adress, setAdress }) => {
     handleAdress(adressLine + roomNo + city + adState + postCode + country)
 
     return (
-        <div className="adressmodal">
+        <div className={"adressmodal " + topClass}>
             <div className="card" style={{ marginBottom: '0px' }}>
                 <div className="card-header" style={{ background: '#f8f4f4' }}>
                     <h4 className="card-title">Adress</h4>

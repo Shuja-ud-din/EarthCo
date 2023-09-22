@@ -70,7 +70,6 @@ const AddCutomer = () => {
         })
     }
 
-
     const addServiceLocation = (e) => {
         e.preventDefault();
         setServiceLocations([
@@ -137,10 +136,6 @@ const AddCutomer = () => {
                             <label htmlFor="exampleFormControlInput1" className="form-label">Customer Name <span className="text-danger">*</span></label>
                             <input type="text" className="form-control" name='customerName' id="exampleFormControlInput1" onChange={handleCustomerInfo} placeholder="Customer Name" required />
                         </div>
-                        {/* <div className="col-xl-6 mb-3">
-                            <label htmlFor="exampleFormControlInput2" className="form-label">Last Name<span className="text-danger">*</span></label>
-                            <input type="text" className="form-control" id="exampleFormControlInput2" placeholder="Last Name" />
-                        </div> */}
                         <div className="col-xl-6 mb-3">
                             <label htmlFor="exampleFormControlInput4" className="form-label">Title<span className="text-danger">*</span></label>
                             <input type="text" className="form-control" onChange={handleCustomerInfo} name='title' id="exampleFormControlInput4" placeholder="Title" required />

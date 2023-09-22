@@ -38,7 +38,7 @@ const CustomersTable = () => {
                     <div className="card">
                         <div className="card-body">
                             <div className="table-responsive active-projects style-1">
-                                <div className="tbl-caption">
+                                <div className="tbl-caption mb-3">
                                     <h4 className="heading mb-0">Customers</h4>
                                     <div>
                                         <Link to='/Dashboard/Customers/Add-Customer'>
@@ -87,7 +87,6 @@ const CustomersTable = () => {
                 </div>
             </div> */}
         </div>
-
     )
 }
 

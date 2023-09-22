@@ -5,7 +5,7 @@ const StatusActions = ({ status }) => {
     return (
         <>
             <div className="col-lg-4 col-md-12 mb-2" style={{ minWidth: '150px' }}>
-                <Form.Select aria-label="Default select example" value={status} className='bg-white' size="md" id="inlineFormCustomSelect">
+                <Form.Select aria-label="Default select example" value={status} size="md" id="inlineFormCustomSelect">
                     <option value='Open'>Open</option>
                     <option value='Approved'>Approved</option>
                     <option value='Closed Billed'>Closed Billed</option>

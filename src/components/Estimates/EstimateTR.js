@@ -28,15 +28,24 @@ const EstimateTR = ({ estimate, onClick, index }) => {
             </td> <td><span>{estimate.estimateID}</span></td>
 
             <td><span>${estimate.approvedTotal}</span></td>
+            <td>{estimate.notes}</td>
             <td>
                 <span><p>{estimate.SRstatus} : {estimate.serviceRequest}{estimate.estimateID}</p></span>
             </td>
+            <td><span>{estimate.issuedDate}</span></td>
             <td>
                 <span className="badge badge-success light border-0">{estimate.status}</span>
             </td>
-            <td><span>{estimate.issuedDate}</span></td>
             <td>
-                <span>{estimate.QBstatus}</span>
+                <div className="flex-box">
+                    <button title="Edit" type="button" className="btn btn-warning btn-sm mx-1">
+                        <i className="fa fa-pen"></i>
+                    </button>
+
+                    <button title="Delete" type="button" className="btn btn-danger btn-sm mx-1">
+                        <i className="fa fa-trash"></i>
+                    </button>
+                </div>
             </td>
         </tr>
         // </NavLink>

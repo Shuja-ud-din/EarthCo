@@ -30,7 +30,7 @@ const EstimateIDopen = () => {
     return (
         <>
             <TitleBar icon={icon} title={`Estimate #${OneEstimate.estimateID}`} />
-            <div className="card-body">
+            {/* <div className="card-body">
                 <div className="basic-form">
                     <form>
                         <div className="row">
@@ -39,9 +39,6 @@ const EstimateIDopen = () => {
                                 <Form.Select aria-label="Default select example" className='bg-white' onChange={customerChange} size="md">
                                     <option value={OneEstimate.customerName}>{OneEstimate.customerName}</option>
                                 </Form.Select>
-                                {/* <select class="me-sm-2 default-select form-control wide" value={OneEstimate.customerName} onChange={customerChange} id="inlineFormCustomSelect">
-                                    <option value={OneEstimate.customerName}>{OneEstimate.customerName}</option>
-                                </select> */}
                             </div>
                             <div className="mb-3 col-md-4">
                                 <label className="form-label">Service Location</label>
@@ -54,13 +51,12 @@ const EstimateIDopen = () => {
                                 <Form.Select aria-label="Default select example" className='bg-white' size="md">
                                     <option value='Service Location'>{singleCustomer.email}</option>
                                 </Form.Select>
-                                {/* <input type="text" className="form-control" placeholder="Contact" value={singleCustomer.email} /> */}
                             </div>
                         </div>
                     </form>
                 </div>
-            </div>
-            <div className="add-item" style={{ margin: '20px', }}>
+            </div> */}
+            <div className="container-fluid">
                 <OpenedEstimate oneEstimate={OneEstimate} customer={singleCustomer} />
             </div>
         </>
