@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap'
 import { DataContext } from '../../context/AppData';
 import TitleBar from '../TitleBar';
 import { NavLink } from 'react-router-dom';
-import { Autocomplete, TextField } from '@mui/material';
+// import { Autocomplete, TextField } from '@mui/material';
 
 const AddSRform = () => {
 
@@ -110,47 +110,11 @@ const AddSRform = () => {
                                 <div className="itemtitleBar">
                                     <h4>Service Request Details</h4>
                                 </div>
-                                {/* <div className="basic-form">
-                                    <form className='SRdetailsForm'>
-                                        <div className="row" style={{ width: '80%' }}>
-                                            <div className=" col-md-6">
-                                                <label className="form-label">Job Name:</label>
-                                                <div className="col-md-10">
-                                                    <input type="text" className="form-control" placeholder="Job Name" />
-                                                </div>
-                                            </div>
-                                            <div className=" col-md-6">
-                                                <label className="form-label">Due Date:</label>
-                                                <div className="col-md-10">
-                                                    <input type="text" className="form-control" placeholder="Due Date" />
-                                                </div>
-                                            </div>
-                                            <div className="col-md-11 mt-3" style={{ alignItems: 'flex-start' }}>
-                                                <label className="form-label">Notes:</label>
-                                                <div className="col-md-12">
-                                                    <textarea className="form-txtarea form-control" rows="4" id="comment"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div> */}
                                 <div className="basic-form">
                                     <div className="row">
                                         <div className="mb-3 col-md-4">
                                             <label className="form-label">Customer</label>
                                             <input type="text" className="form-control" placeholder="Service Location" />
-
-                                            {/* <Autocomplete
-                                                disablePortal
-                                                id="combo-box-demo"
-                                                size='small'
-                                                options={customerOptions}
-                                                // value={customer}
-                                                // onChange={handleChangeCustomer}
-                                                sx={{ width: 300 }}
-                                                renderInput={(params) => <TextField {...params} label="Customer" variant="outlined" />
-                                                }
-                                            /> */}
                                         </div>
                                         <div className="mb-3 col-md-4">
                                             <label className="form-label">Service Location</label>
@@ -256,7 +220,7 @@ const AddSRform = () => {
                                     <div className="itemtitleBar">
                                         <h4>Items</h4>
                                     </div>
-                                    <a className="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal" style={{ margin: '12px 20px' }}>+ Add Items</a>
+                                    <NavLink className="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal" style={{ margin: '12px 20px' }}>+ Add Items</NavLink>
                                     <div className="table-responsive active-projects style-1">
                                         <table id="empoloyees-tblwrapper" className="table">
                                             <thead>
@@ -277,34 +241,6 @@ const AddSRform = () => {
                                 </div>
                             </div>
                         </div>
-
-                        {/* <div className="card">
-                            <div className="card-body p-0">
-                                <div className="estDataBox">
-                                    <div className="itemtitleBar">
-                                        <h4>Assign & Schedule</h4>
-                                    </div>
-                                    <div className="basic-form">
-                                        <form className='SRdetailsForm'>
-                                            <div className="SRfields col-md-10">
-                                                <label className="form-label">Assign / Apointment :</label>
-                                                <div className="col-md-7">
-                                                    <Form.Select aria-label="Default select example" className='bg-white' size="md">
-                                                        <option selected>Choose...</option>
-                                                        <option>Option 1</option>
-                                                        <option>Option 2</option>
-                                                        <option>Option 3</option>
-                                                    </Form.Select>
-                                                </div>
-                                                <div className="col-md-2 flex-box">
-                                                    <button type="button" className="btn btn-outline-dark btn-md scheduleBTN">Schedule</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
 
                         <div className="card">
                             <div className="card-body p-0">
@@ -366,7 +302,7 @@ const AddSRform = () => {
                                     <div className="itemtitleBar">
                                         <h4>Sites</h4>
                                     </div>
-                                    <a className="btn btn-primary btn-sm" style={{ margin: '12px 20px' }}>+ Add</a>
+                                    <NavLink className="btn btn-primary btn-sm" style={{ margin: '12px 20px' }}>+ Add</NavLink>
                                     <div className="table-responsive active-projects style-1">
                                         <table id="empoloyees-tblwrapper" className="table">
                                             <thead>

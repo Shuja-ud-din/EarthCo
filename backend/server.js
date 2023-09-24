@@ -5,7 +5,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser');
 
 server.use(bodyParser.json());
-server.use(cors())
+server.use(cors());
 
 const dbConnector = async () => {
     await mongoose.connect('mongodb://127.0.0.1:27017/EarthCo');

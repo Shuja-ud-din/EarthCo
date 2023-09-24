@@ -653,10 +653,7 @@ const DashBoard = () => {
                                         <thead>
                                             <tr>
                                                 <th>
-                                                    <div className="form-check custom-checkbox ms-2">
-                                                        <input type="checkbox" className="form-check-input" id="customCheckBox2" required="" />
-                                                        <label className="form-check-label" htmlFor="customCheckBox2"></label>
-                                                    </div>
+                                                    #
                                                 </th>
                                                 <th>Customer Name</th>
                                                 <th>Assign to</th>

@@ -48,9 +48,6 @@ const OpenedEstimate = ({ oneEstimate, customer }) => {
                     <span>${item.rate}</span>
                 </td>
                 <td>
-                    <span>{item.tax}</span>
-                </td>
-                <td>
                     <input type='checkbox' checked />
                 </td>
             </tr>
@@ -131,12 +128,6 @@ const OpenedEstimate = ({ oneEstimate, customer }) => {
                                             <label className="col-sm-3 col-form-label">Description</label>
                                             <div className="col-sm-9">
                                                 <textarea className="form-txtarea form-control" value={itemDesc} onChange={(e) => setItemDesc(e.target.value)} rows="3" id="comment"></textarea>
-                                            </div>
-                                        </div>
-                                        <div className="mb-3 row">
-                                            <label className="col-sm-3 col-form-label">Rate</label>
-                                            <div className="col-sm-9">
-                                                <input type="number" value={rate} onChange={(e) => setRate(e.target.value)} className="form-control" placeholder="Rate" />
                                             </div>
                                         </div>
                                         <div className="mb-3 row">
