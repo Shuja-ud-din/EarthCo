@@ -129,6 +129,7 @@ const OpenedEstimate = ({ oneEstimate, customer }) => {
                                             <div className="col-sm-9">
                                                 <textarea className="form-txtarea form-control" value={itemDesc} onChange={(e) => setItemDesc(e.target.value)} rows="3" id="comment"></textarea>
                                             </div>
+                                            {/* cooment */}
                                         </div>
                                         <div className="mb-3 row">
                                             <label className="col-sm-3 col-form-label">Tax</label>
