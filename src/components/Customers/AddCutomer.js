@@ -329,6 +329,20 @@ const AddCutomer = () => {
                 </div>
             </form>
 
+            <div className="card">
+                <div className="card-header">
+                    <h4 className="modal-title" id="#gridSystemModal">User Login</h4>
+                </div>
+                <div className="card-body" id=''>
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="row">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div className='text-end'>
                 {/* <NavLink to='/Dashboard/Customers'> */}

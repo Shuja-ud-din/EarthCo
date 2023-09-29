@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
 
-    const { users, setUsers, loggedUser, setLoggedUser } = useContext(DataContext);
+    const { users, setUsers,  setLoggedUser } = useContext(DataContext);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
