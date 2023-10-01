@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
 
-    const { users, setUsers,  setLoggedUser } = useContext(DataContext);
+    const { users, setUsers, setLoggedUser } = useContext(DataContext);
 
     const navigate = useNavigate();
 
@@ -59,6 +59,10 @@ const LoginPage = () => {
         const response = await axios.get('http://localhost:8001/Users');
         setUsers(response.data)
     }
+
+    useEffect(() => {
+        fetchUsers();
+    }, [])
 
     const addUser = async () => {
         const response = await axios.post('http://localhost:8001/AddUser', {

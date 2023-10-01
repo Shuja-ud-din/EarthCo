@@ -25,6 +25,7 @@ const customerSchema = new mongoose.Schema({
     description: String,
     contacts: Array,
     adress: Object,
+    userLogin: Object,
     serviceLocations: Array
 })
 
@@ -60,6 +61,7 @@ server.post('/AddCustomer', async (req, res) => {
     customer.description = data.description;
     customer.contacts = data.contacts;
     customer.adress = data.customerAdress;
+    customer.userLogin = data.userLogin;
     customer.serviceLocations = data.serviceLocation;
 
     const doc = customer.save();

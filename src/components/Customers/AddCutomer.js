@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import AdressModal from '../AdressModal';
+import React, { useEffect, useState } from 'react'
+import AdressModal from '../Modals/AdressModal';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -25,6 +25,9 @@ const AddCutomer = () => {
     const [showPop2, setShowPop2] = useState(true);
 
     const [SLadress, setSLadress] = useState({});
+    const [loginState, setLoginState] = useState('dontallow');
+    const [showLogin, setShowLogin] = useState(false);
+    const [loginData, setLoginData] = useState({});
 
     const handleCustomerInfo = (event) => {
         const value = event.target.value;
@@ -56,13 +59,10 @@ const AddCutomer = () => {
         }
     }
 
-    console.log(contacts);
-
     // service Locations
 
     const handleServiceLocation = (event) => {
         const value = event.target.value;
-        // console.log(adress2);
         setSRlocation({
             ...SRlocation,
             adress: adress2,
@@ -87,11 +87,11 @@ const AddCutomer = () => {
         setSLadress({});
     }
 
-    console.log(serviceLocations);
 
     const postCustomer = async () => {
         const response = await axios.post('http://localhost:8001/AddCustomer', {
             ...customerInfo,
+            userLogin: loginData,
             contacts,
             customerAdress,
             serviceLocation: serviceLocArr
@@ -99,12 +99,22 @@ const AddCutomer = () => {
         if (response.status === 200) {
             navigate('/Dashboard/Customers')
         }
-        console.log(response);
+    }
+
+    const addUser = async () => {
+        await axios.post('http://localhost:8001/AddUser', {
+            fullName: customerInfo.customerName,
+            userName: loginData.email,
+            ...loginData
+        })
     }
 
     const handleSubmit = () => {
-        if (contacts[0] !== undefined && serviceLocArr[0] !== undefined) {
+        if (contacts[0] !== undefined && serviceLocArr[0] !== undefined && customerInfo[0] !== undefined) {
             postCustomer();
+        }
+        if (loginData[0] !== undefined) {
+            addUser();
         }
     }
 
@@ -124,8 +134,32 @@ const AddCutomer = () => {
         setServiceLocations(updatedArr)
     }
 
+    const changeLogin = (event) => {
+        setLoginState(event.target.value);
+    }
+
+    useEffect(() => {
+        console.log(loginState);
+        if (loginState === 'allow') {
+            setShowLogin(true)
+        }
+        else {
+            setShowLogin(false)
+        }
+    }, [loginState])
+
+    const handleLoginData = (event) => {
+        const value = event.target.value;
+        setLoginData({
+            ...loginData,
+            [event.target.name]: value
+        })
+    }
+
+
     return (
         <div className="container-fluid">
+            {/* <form onSubmit={(e) => e.preventDefault()}> */}
             <div className="card">
                 <div className="card-header">
                     <h4 className="modal-title" id="#gridSystemModal">Customer Info</h4>
@@ -152,6 +186,37 @@ const AddCutomer = () => {
                         <div className="col-xl-6 ">
                             <label className="form-label">Description<span className="text-danger">*</span></label>
                             <textarea className="form-txtarea form-control" name='description' onChange={handleCustomerInfo} rows="4" id="comment"></textarea>
+                        </div>
+                        <div className='col-xl-6'>
+                            <div className="row">
+                                <label className=" col-form-label col-form-label-lg">Allow User Login</label>
+                                <div className="mb-3 mb-0">
+                                    <form>
+                                        <div className="form-check custom-checkbox form-check-inline">
+                                            <input type="radio" className="form-check-input" onChange={changeLogin} value='dontallow' id="customRadioBox7" name="login" checked={loginState === 'dontallow'} />
+                                            <label className="form-check-label" for="customRadioBox7">Don't Allow</label>
+                                        </div>
+                                        <div className="form-check custom-checkbox form-check-inline">
+                                            <input type="radio" className="form-check-input" value='allow' onChange={changeLogin} id="customRadioBox8" name="login" checked={loginState === 'allow'} />
+                                            <label className="form-check-label" for="customRadioBox8">Allow</label>
+                                        </div>
+                                    </form>
+                                </div>
+                                {showLogin && <>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 text-right col-form-label">Email</label>
+                                        <div class="col-sm-9">
+                                            <input type="email" onChange={handleLoginData} name='email' class="form-control form-control-sm" placeholder="Email" required />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-3 text-right col-form-label">Password</label>
+                                        <div class="col-sm-9">
+                                            <input type='password' onChange={handleLoginData} name='password' class="form-control form-control-sm" placeholder="Password" required />
+                                        </div>
+                                    </div>
+                                </>}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -199,7 +264,7 @@ const AddCutomer = () => {
                                             <table id="empoloyees-tblwrapper" className="table">
                                                 <thead>
                                                     <tr>
-                                                        <th></th>
+                                                        <th>#</th>
                                                         <th>Contact Name</th>
                                                         <th>E-mail</th>
                                                         <th>Phone</th>
@@ -208,11 +273,11 @@ const AddCutomer = () => {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {contacts.map((contact) => {
+                                                    {contacts.map((contact, index) => {
                                                         return (
                                                             <>
                                                                 <tr>
-                                                                    <td></td>
+                                                                    <td>{index + 1}</td>
                                                                     <td>{contact.contactName}</td>
                                                                     <td>{contact.email}</td>
                                                                     <td>{contact.phone}</td>
@@ -286,7 +351,7 @@ const AddCutomer = () => {
                                             <table id="empoloyees-tblwrapper" className="table">
                                                 <thead>
                                                     <tr>
-                                                        <th></th>
+                                                        <th>#</th>
                                                         <th>Name</th>
                                                         <th>Address</th>
                                                         <th>Phone</th>
@@ -295,11 +360,11 @@ const AddCutomer = () => {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {serviceLocations.map((contact) => {
+                                                    {serviceLocations.map((contact, index) => {
                                                         return (
                                                             <>
                                                                 <tr>
-                                                                    <td></td>
+                                                                    <td>{index + 1}</td>
                                                                     <td>{contact.name}</td>
                                                                     <td>{contact.adress}</td>
                                                                     <td>{contact.phone}</td>
@@ -329,7 +394,7 @@ const AddCutomer = () => {
                 </div>
             </form>
 
-            <div className="card">
+            {/* <div className="card">
                 <div className="card-header">
                     <h4 className="modal-title" id="#gridSystemModal">User Login</h4>
                 </div>
@@ -337,22 +402,30 @@ const AddCutomer = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="row">
-
+                                <div className="mb-3 mb-0">
+                                    <label className="col-sm-2 col-form-label col-form-label-lg">Allow User Login</label>
+                                    <div className="form-check custom-checkbox form-check-inline">
+                                        <input type="radio" className="form-check-input" onChange={changeLogin} value='dontallow' id="customRadioBox7" name="login" checked />
+                                        <label className="form-check-label" for="customRadioBox7">Don't Allow</label>
+                                    </div>
+                                    <div className="form-check custom-checkbox form-check-inline">
+                                        <input type="radio" className="form-check-input" value='allow' onChange={changeLogin} id="customRadioBox8" name="login" />
+                                        <label className="form-check-label" for="customRadioBox8">Allow</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className='text-end'>
-                {/* <NavLink to='/Dashboard/Customers'> */}
                 <button className="btn btn-primary me-1" onClick={handleSubmit}>Submit</button>
                 <NavLink to='/Dashboard/Customers'>
                     <button className="btn btn-danger light ms-1">Cancel</button>
                 </NavLink>
-                {/* </NavLink> */}
-                {/* test commit */}
             </div>
+            {/* </form> */}
         </div >
     )
 }

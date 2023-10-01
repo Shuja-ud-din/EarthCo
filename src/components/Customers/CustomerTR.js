@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { CustomerContext } from '../../context/CustomerData'
 
 const CustomerTR = ({ customer, contact, index }) => {
+
+    const { setSelectedCustomer } = useContext(CustomerContext)
+
     return (
         <>
             <tr>
@@ -21,11 +25,13 @@ const CustomerTR = ({ customer, contact, index }) => {
                 <td><span className="text-primary">{contact.email}</span></td>
                 <td>
                     <div className='badgeBox'>
-                        <span className="actionBadge badge-success light border-0">
-                            <span className="material-symbols-outlined">
-                                visibility
+                        <button type="button" onClick={(e) => setSelectedCustomer(customer)} className='dispContents' data-toggle="modal" data-target="#customerShow">
+                            <span className="actionBadge badge-success light border-0">
+                                <span className="material-symbols-outlined">
+                                    visibility
+                                </span>
                             </span>
-                        </span>
+                        </button>
                         <span className="actionBadge badge-danger light border-0">
                             <span className="material-symbols-outlined">
                                 delete

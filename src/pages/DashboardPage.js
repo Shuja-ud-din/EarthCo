@@ -36,6 +36,7 @@ import AddSRform from '../components/ServiceRequest/AddSRform'
 import StaffIndex from '../components/Staff/StaffIndex'
 import StaffList from '../components/Staff/StaffList'
 import AddStaff from '../components/Staff/AddStaff'
+import CustomerData from '../context/CustomerData'
 
 const DashboardPage = () => {
 
@@ -49,7 +50,11 @@ const DashboardPage = () => {
             <div className="content-body" id='contentBody'>
                 <Routes>
                     <Route path='' element={<DashBoard />} />
-                    <Route path='/Customers/*' element={<CustomerIndex />} >
+                    <Route path='/Customers/*' element={
+                        <CustomerData>
+                            <CustomerIndex />
+                        </CustomerData>
+                    } >
                         <Route path='' element={<CustomersTable />} />
                         <Route path='Add-Customer' element={<AddCutomer />} />
                     </Route>

@@ -74,6 +74,10 @@
   position: relative !important;
 }
 
+.dispContents {
+  display: contents;
+}
+
 #menu li a {
   padding: .75rem 1.5rem;
 }
@@ -284,6 +288,10 @@
     width: 17rem !important;
   }
 
+  .header-left {
+    margin-left: 7rem;
+  }
+
   #sideBarDez {
     transform: translateX(-17rem);
   }
@@ -325,4 +333,17 @@
 
 .staffAdress {
   top: -415px;
+}
+
+#customerShow input,
+#customerShow .form-txtarea {
+  background-color: #f0f4fc;
+  color: black;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.longModal {
+  max-height: 80vh;
+  overflow: auto;
 }

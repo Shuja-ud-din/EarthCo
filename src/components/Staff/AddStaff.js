@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import AdressModal from '../AdressModal'
+import AdressModal from '../Modals/AdressModal'
 import TitleBar from '../TitleBar';
 import { Form } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';

@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import CustomerTR from './CustomerTR';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import $ from 'jquery';
 import 'datatables.net';
+import CustomerModal from '../Modals/CustomerModal';
+import { CustomerContext } from '../../context/CustomerData';
 
 const CustomersTable = () => {
+
+    const { selectedCustomer } = useContext(CustomerContext)
+
+    console.log(selectedCustomer);
 
     const [customers, setCustomers] = useState([]);
 
@@ -25,7 +31,7 @@ const CustomersTable = () => {
         if (customers[0] !== undefined) {
             $('#customerTbl').DataTable();
         }
-    }, [customers])
+    }, [customers]);
 
 
     const renderedCustomers = customers.map((customer, index) => {
@@ -69,23 +75,21 @@ const CustomersTable = () => {
                 </div>
             </div>
 
-
-
             {/* #modal */}
 
-            {/* <div className="modal fade" id="deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal fade bd-example-modal-lg" tabindex="-1" id='customerShow' role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-lg">
                     <div className="modal-content">
-                        <div className="modal-body">
-                            ...
+                        <div className="modal-header"><h5 className="modal-title">Customer</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
                         </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Save changes</button>
+
+                        <div className="modal-body longModal">
+                            {selectedCustomer ? <CustomerModal /> : 'Loading Please Wait...'}
                         </div>
                     </div>
                 </div>
-            </div> */}
+            </div>
         </div>
     )
 }

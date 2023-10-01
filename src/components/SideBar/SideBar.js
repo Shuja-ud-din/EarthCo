@@ -148,7 +148,7 @@ const SideBar = () => {
         if (activeIndex === index) {
             activeClass = 'mm-active'
         }
-        if (window.location.pathname === option.path) {
+        if (window.location.pathname.substring(0, 14) === option.path.substring(0, 14)) {
             activeClass = 'mm-active'
         }
         else {
