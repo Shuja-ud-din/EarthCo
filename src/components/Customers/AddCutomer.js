@@ -110,10 +110,10 @@ const AddCutomer = () => {
     }
 
     const handleSubmit = () => {
-        if (contacts[0] !== undefined && serviceLocArr[0] !== undefined && customerInfo[0] !== undefined) {
+        if (contacts[0] !== undefined && serviceLocArr[0] !== undefined) {
             postCustomer();
         }
-        if (loginData[0] !== undefined) {
+        if (loginData.email !== undefined) {
             addUser();
         }
     }
@@ -139,7 +139,6 @@ const AddCutomer = () => {
     }
 
     useEffect(() => {
-        console.log(loginState);
         if (loginState === 'allow') {
             setShowLogin(true)
         }

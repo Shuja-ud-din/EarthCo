@@ -15,8 +15,6 @@ const CustomersTable = () => {
 
     const [customers, setCustomers] = useState([]);
 
-    console.log(customers);
-
     const fetchCustomers = async () => {
         const response = await axios.get('http://localhost:8001/Customers');
         setCustomers(response.data)
