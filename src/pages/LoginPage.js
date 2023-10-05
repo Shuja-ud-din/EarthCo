@@ -147,7 +147,7 @@ const LoginPage = () => {
         <>
             <div className="page-wraper">
                 <div className="browse-job login-style3">
-                    <div className="row bg-white" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
+                    <div className="bg-white" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
 
                         {/* <div className="col-xl-5 col-lg-5 col-md-6 col-sm-12 vh-100 bg-white" style={{ display: 'flex', alignItems: 'center' }}> */}
                         {/* <div id="mCSB_1" className="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style={{ maxHeight: '653px' }} tabIndex="0"> */}
