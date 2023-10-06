@@ -14,9 +14,14 @@ const DataFun = ({ children }) => {
         const response = await axios.get('http://localhost:8001/Users');
         setUsers(response.data)
     }
+    const fetchCustomers = async () => {
+        const response = await axios.get('http://localhost:8001/Customers');
+        setCustomers(response.data)
+    }
 
     useEffect(() => {
         fetchUsers();
+        fetchCustomers();
     }, [])
 
     const [estimates, setEstimates] = useState([
@@ -88,112 +93,7 @@ const DataFun = ({ children }) => {
         }
     ]);
 
-    const [customers, setCustomers] = useState([
-        {
-            customerId: 1,
-            name: 'Sunrise Lane',
-            email: 'mark334@gmail.com',
-            phone: '+91 123 456 7890',
-            fullAdress: 'Joyce Lee',
-            serviceLocations: [
-                'Los Angeles',
-                'Boulder View',
-                'Irvine, CA'
-            ]
-        },
-        {
-            customerId: 2,
-            name: 'Wakeham',
-            email: 'danm@earthcompany.org',
-            phone: '+91 123 456 7890',
-            fullAdress: 'Teresa Brim ',
-            serviceLocations: [
-                'Teresa Brim',
-                'Realty, US'
-            ]
-        },
-        {
-            customerId: 3,
-            name: 'Hillandale Ave',
-            email: 'Jchavis@keystonepacific.com',
-            phone: '+91 123 456 7890',
-            fullAdress: 'Jeremy Chavis',
-            serviceLocations: [
-                'Jeremy Chavis',
-                'Keystone Pacific',
-                'Property Mamagement, US'
-            ]
-        },
-        {
-            customerId: 4,
-            name: 'Crest DeVille',
-            email: 'aspyn@marandassociates.com',
-            phone: '+91 123 456 7890',
-            fullAdress: 'Aspyn Remington',
-            serviceLocations: [
-                'Aspyn Remington',
-                'Newport Pacific, US'
-            ]
-        },
-        {
-            customerId: 5,
-            name: 'Sea Summit',
-            email: 'Devon511586@gmail.com',
-            phone: '+91 123 456 7890',
-            fullAdress: 'Devon',
-            serviceLocations: [
-                'Devon',
-                'Newport Pacific, US'
-            ]
-        },
-        {
-            customerId: 6,
-            name: 'Bella Palermo',
-            email: 'Jsttp@aol.com',
-            phone: '+91 123 456 7890',
-            fullAdress: 'Brian Jacobs',
-            serviceLocations: [
-                'Brian Jacobs',
-                'Jacobs Construction, US'
-            ]
-        },
-        {
-            customerId: 7,
-            name: 'Valmont',
-            email: 'Kaitlyn.Scott@springwisefm.com',
-            phone: '+91 123 456 7890',
-            fullAdress: 'Danny Lemansky',
-            serviceLocations: [
-                'Danny Lemansky',
-                'Park Ave, 433',
-                'Tustin, CA'
-            ]
-        },
-        {
-            customerId: 8,
-            name: 'Promenade',
-            email: 'Mmayer@smes.org',
-            phone: '+91 123 456 7890',
-            fullAdress: 'Danny Lemansky',
-            serviceLocations: [
-                'Danny Lemansky',
-                'Park Ave, 433',
-                'Tustin, US'
-            ]
-        },
-        {
-            customerId: 9,
-            name: 'Highland Park',
-            email: 'ezequiel.rubin@outlook.com',
-            phone: '+91 123 456 7890',
-            fullAdress: 'Danny Lemansky',
-            serviceLocations: [
-                'Danny Lemansky',
-                'Park Ave, 433',
-                'Tustin, US'
-            ]
-        }
-    ]);
+    const [customers, setCustomers] = useState();
 
     const [serviceRequests, setServiceRequest] = useState([
         {

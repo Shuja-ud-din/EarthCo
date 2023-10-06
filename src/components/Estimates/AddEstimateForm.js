@@ -63,8 +63,6 @@ const AddEstimateForm = () => {
         setFiles(updatedArr);
     }
 
-    console.log(files);
-
     const renderItems = itemObj.map((item, index) => {
         return (
             <tr key={index}>
@@ -119,12 +117,6 @@ const AddEstimateForm = () => {
                                         <option>Option 2</option>
                                         <option>Option 3</option>
                                     </Form.Select>
-                                    {/* <select id="inputState" className="default-select form-control wide">
-                                        <option selected>Choose...</option>
-                                        <option>Option 1</option>
-                                        <option>Option 2</option>
-                                        <option>Option 3</option>
-                                    </select> */}
                                 </div>
                                 <div className="mb-3 col-md-9">
                                     <Form.Select aria-label="Default select example" id="inputState" className='bg-white'>
@@ -316,7 +308,6 @@ const AddEstimateForm = () => {
                                         <tr>
                                             <th>#</th>
                                             <th>File Name</th>
-                                            <th>Last Modified Date</th>
                                             <th>Type</th>
                                             <th>Size</th>
                                             <th>Actions</th>
@@ -328,7 +319,6 @@ const AddEstimateForm = () => {
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
                                                     <td><h5>{file.name}</h5></td>
-                                                    <td><span>{file.lastModifiedDate.toLocaleDateString()}</span></td>
                                                     <td>
                                                         <div className="products">
                                                             <div>

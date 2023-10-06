@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from '../../assets/images/logo/earthco_logo.png'
+import smLogo from '../../assets/images/logo/favicon.png'
 import avatar1 from '../../assets/images/avatar/1.jpg'
 import profilePic from '../../assets/images/profile/profile.png'
 import { DataContext } from '../../context/AppData'

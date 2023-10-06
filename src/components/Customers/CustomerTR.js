@@ -1,9 +1,29 @@
 import React, { useContext } from 'react'
 import { CustomerContext } from '../../context/CustomerData'
+import axios from 'axios';
+import { DataContext } from '../../context/AppData';
 
 const CustomerTR = ({ customer, contact, index }) => {
 
-    const { setSelectedCustomer } = useContext(CustomerContext)
+    const { setSelectedCustomer } = useContext(CustomerContext);
+    const { setCustomers } = useContext(DataContext);
+
+    const fetchCustomers = async () => {
+        const response = await axios.get('http://localhost:8001/Customers');
+        setCustomers(response.data);
+    }
+
+
+    const deleteCustomer = async () => {
+        const id = customer._id;
+        await axios.delete(`http://localhost:8001/router/${id}`);
+    }
+
+    const submitDelete = () => {
+        deleteCustomer();
+        fetchCustomers();
+    }
+
 
     return (
         <>
@@ -32,7 +52,7 @@ const CustomerTR = ({ customer, contact, index }) => {
                                 </span>
                             </span>
                         </button>
-                        <span className="actionBadge badge-danger light border-0">
+                        <span className="actionBadge badge-danger light border-0" onClick={submitDelete}>
                             <span className="material-symbols-outlined">
                                 delete
                             </span>

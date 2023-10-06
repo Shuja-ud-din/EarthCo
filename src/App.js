@@ -38,6 +38,7 @@ import AddSRform from './components/ServiceRequest/AddSRform';
 import StaffIndex from './components/Staff/StaffIndex';
 import StaffList from './components/Staff/StaffList';
 import AddStaff from './components/Staff/AddStaff';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
 
@@ -56,7 +57,7 @@ function App() {
               <Route path='' element={<CustomersTable />} />
               <Route path='Add-Customer' element={<AddCutomer />} />
             </Route>
-            <Route path='Staff' element={<StaffIndex />} >
+            <Route path='Staff/*' element={<StaffIndex />} >
               <Route path='' element={<StaffList />} />
               <Route path='Add-Staff' element={<AddStaff />} />
             </Route>
@@ -91,6 +92,7 @@ function App() {
             </Route>
             <Route path='Landscape/PunchList-Report' element={<Landscape />} />
           </Route>
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
         {/* <DataFun>
           <DashboardPage />

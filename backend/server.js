@@ -1,5 +1,6 @@
 const express = require('express')
 const server = express();
+const router = express.Router();
 const mongoose = require('mongoose');
 const cors = require('cors')
 const bodyParser = require('body-parser');
@@ -8,7 +9,10 @@ server.use(bodyParser.json());
 server.use(cors());
 
 const dbConnector = async () => {
-    await mongoose.connect('mongodb://127.0.0.1:27017/EarthCo');
+    await mongoose.connect('mongodb://127.0.0.1:27017/EarthCo', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
 }
 
 const userSchema = new mongoose.Schema({
@@ -68,9 +72,16 @@ server.post('/AddCustomer', async (req, res) => {
     res.json(doc);
 })
 
+router.delete('/:id', async (req, res) => {
+    const id = req.params.id;
+    await Customers.findByIdAndRemove(id);
+})
+
 server.get('/Customers', async (req, res) => {
     const docs = await Customers.find({});
     res.json(docs)
 })
+
+server.use('/router', router);
 
 server.listen(8001)
